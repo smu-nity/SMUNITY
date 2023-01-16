@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -18,7 +19,11 @@ def login(request):
             auth_login(request, user)
             return redirect('home')
         else:
-            return render(request, 'accounts/login.html', {'error':'id or pw is incorrect'})
+            if User.objects.filter(username=username):
+                messages.error(request, '⚠️ 비밀번호를 확인하세요.')
+            else:
+                messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
+            redirect('accounts:login')
     return render(request, 'accounts/login.html')
 
 def register(request):
