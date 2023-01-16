@@ -7,10 +7,6 @@ from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile
 
 
-def home(request):
-    return render(request, 'core/head.html')
-
-
 def agree(request):
     if request.method == "POST":
         username = request.POST['username']
