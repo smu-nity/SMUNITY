@@ -1,3 +1,4 @@
+from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
@@ -10,12 +11,12 @@ def agree(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['id']
-        pw = request.POST['pw']
-        user = auth.authenticate(request, username=username, password=pw)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user:
+            auth_login(request, user)
+            return redirect('home')
         else:
             return render(request, 'accounts/login.html', {'error':'id or pw is incorrect'})
     return render(request, 'accounts/login.html')
@@ -24,7 +25,7 @@ def register(request):
     if request.method == 'POST':
         user = User.object.create_user(
             username=request.POST['id'], password=request.POST['pw'])
-        auth.login(request, user)
+        auth_login(request, user)
         return redirect('')
     return render(request, 'accounts/register.html')
 
