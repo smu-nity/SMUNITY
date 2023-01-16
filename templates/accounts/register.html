@@ -26,6 +26,7 @@
     <div class="white_sec">
     <div class="container">
         <form action="/f_register/" method="post" name='regi_form' onsubmit="return check_up()">
+            {% csrf_token %}
             <div class="regi_box" style="width:400px">
 
                 <label>이름</label>
@@ -80,12 +81,12 @@
                     </select>
 
                 <label>비밀번호</label>
-                <input id="pw1" type="password" name="password">
+                <input id="password1" type="password" name="password1">
                 <div class='regi_guide'>
                     * Please Graduate 사이트의 고유 비밀번호를 설정해주세요
                 </div>
                 <label>비밀번호 재확인</label>
-                <input id="pw2" type="password">
+                <input id="password2" type="password">
             </div>
             <input type='submit' class='regi_btn' value='가입하기'>
         </form>

@@ -43,6 +43,7 @@
             <div class="login_box">
                 <!-- 로그인 폼 -->
                 <form action="/f_login/" method="post" onsubmit="return check_up1()">
+                    {% csrf_token %}
                     <div class="textbox">
                         <label>아이디</label>
                         <input type="text" id="id" name="id" placeholder="ID">
