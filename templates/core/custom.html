@@ -89,8 +89,6 @@
                                 <hr>
                                 <table id="mytable" class="grade_table" style='margin-bottom:3rem;'>
                                     <tr>
-                                        <th class="grade_table_th" style="width:9%">년도</th>
-                                        <th class="grade_table_th" style="width:9%">학기</th>
                                         <th class="grade_table_th" style="width:9%">학수번호</th>
                                         <th class="grade_table_th" style="width:36%">과목명</th>
                                         <th class="grade_table_th" style="width:9%">이수구분</th>
@@ -100,15 +98,17 @@
                                     </tr>
 
                                     <!-- 커스텀 과목 먼저 띄우기 -->
-                                    {% for cg in custom_grade %}
+                                    {% for course in courses %}
                                     <tr style='color : #1ac06d'>
-                                        <td class="grade_table_td">{{ cg.year }}</td>
-                                        <td class="grade_table_td">{{ cg.semester }}</td>
-                                        <td class="grade_table_td">{{ cg.subject_num }}</td>
-                                        <td class="grade_table_td">{{ cg.subject_name }}</td>
-                                        <td class="grade_table_td">{{ cg.classification }}</td>
-                                        <td class="grade_table_td">{{ cg.selection }}</td>
-                                        <td class="grade_table_td">{{ cg.grade | floatformat }}</td>
+                                        <td class="grade_table_td">{{ course.subject.number }}</td>
+                                        <td class="grade_table_td">{{ course.subject.name }}</td>
+                                        <td class="grade_table_td">{{ course.subject.type.name }}</td>
+                                        <td class="grade_table_td">
+                                            {% if course.subject.type.subtype %}
+                                                {{ course.subject.type.subtype }}
+                                            {% endif %}
+                                        </td>
+                                        <td class="grade_table_td">{{ course.subject.credit }}</td>
                                         <td class="grade_table_td" style="border-right :0px">
                                             <button class='del_btn' onclick='del_row_old(this)'>삭제</button>
                                         </td>

@@ -15,9 +15,9 @@ class Type(models.Model):
 
 class Subject(models.Model):
     number = models.CharField(max_length=10)
-    ecampus = models.IntegerField
+    ecampus = models.IntegerField()
     name = models.CharField(max_length=30)
-    credit = models.IntegerField
+    credit = models.IntegerField()
     dept = models.CharField(max_length=30)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
 
