@@ -35,10 +35,11 @@
     <!-- 입력란 -->
     <div class="white_sec">
         <div class="container">
-            <form action="/f_mod_pw/" method="post" name='regi_form' onsubmit="return check_up()">
+            <form method="post" name='regi_form' onsubmit="return check_up()">
+                {% csrf_token %}
                 <div class="regi_box">
                     <label>ID</label>
-                    <input type="text" name="id" value="201911019" style="background-color:rgb(248,249,250);" readonly>
+                    <input type="text" name="id" value="{{ user }}" style="background-color:rgb(248,249,250);" readonly>
                     <label>비밀번호</label>
                     <input id="pw1" type="password" name="password">
                     <label>비밀번호 재확인</label>

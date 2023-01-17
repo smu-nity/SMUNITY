@@ -71,5 +71,6 @@ def register(request):
     context['form'] = form
     return render(request, 'accounts/register.html', context)
 
-def change_pw(request):
-    return render(request, 'accounts/changePW.html')
+def change_pw(request, user):
+    print(user)
+    return render(request, 'accounts/changePW.html', {'user': user})
