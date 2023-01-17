@@ -110,7 +110,7 @@
                                         </td>
                                         <td class="grade_table_td">{{ course.subject.credit }}</td>
                                         <td class="grade_table_td" style="border-right :0px">
-                                            <button class='del_btn' onclick='del_row_old(this)'>삭제</button>
+                                            <a href="{% url 'core:course_delete' course.id  %}" class="delete btn btn-sm btn-outline-secondary">삭제</a>
                                         </td>
                                     </tr>
                                     {% endfor %}
