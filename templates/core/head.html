@@ -39,17 +39,23 @@
     <div class="navbar_logo">
         <a href="/"><img src="static/img/logo.png"></a>
     </div>
+    {% if user.is_authenticated %}
+        <ul class="navbar_menu2">
+            <li>
+                <a href="{% url 'accounts:logout' %}" style="color: white">로그아웃</a>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="navbar_menu2">
+            <li>
+                <a href="{% url 'accounts:login' %}" style="color: white">로그인</a>
+            </li>
 
-    <ul class="navbar_menu2">
-        <li>
-            <a href="{% url 'accounts:login' %}" style="color: white">로그인</a>
-        </li>
-
-        <li>
-            <a href="{% url 'accounts:agree' %}" style="color: white">회원가입</a>
-        </li>
-    </ul>
-
+            <li>
+                <a href="{% url 'accounts:agree' %}" style="color: white">회원가입</a>
+            </li>
+        </ul>
+    {% endif %}
 </header>
 
 

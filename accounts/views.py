@@ -36,7 +36,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             auth_login(request, user)
-            return redirect('home')
+            return redirect('core:mypage')
         if User.objects.filter(username=username):
             messages.error(request, '⚠️ 비밀번호를 확인하세요.')
         else:
@@ -60,7 +60,7 @@ def register(request):
                 user = authenticate(username=username, password=raw_password)
                 Profile.objects.create(user=user, year=year, department=department, name=context['name'])
                 auth_login(request, user)  # 로그인
-                return redirect('home')
+                return redirect('core:mypage')
 
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
             return redirect('accounts:agree')
