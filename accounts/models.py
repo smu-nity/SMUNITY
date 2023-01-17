@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S
+from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES
 
 
 class Year(models.Model):
@@ -15,10 +15,11 @@ class Year(models.Model):
 
 
 class Department(models.Model):
+    college = models.CharField(max_length=20, choices=COLLEGE_CHOICES)
     name = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)
     type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)
     def __str__(self):
-        return self.name
+        return f'[{self.college}] {self.name}'
 
 
 class Profile(models.Model):
