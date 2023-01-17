@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup as bs
+from django.contrib.auth.models import User
+
+from core.models import Course
+from graduations.models import Subject
 
 
 # e-campus 로그인
@@ -55,3 +59,12 @@ def getSBJ_ID(session, year, semester, SBJ_NO):
 
 def changeFormat(url):
     return int(url.split('id=')[1])
+
+
+def createCourse(username, SBJ_list):
+    user = User.objects.get(username=username)
+    Course.objects.filter().delete()
+    for id in SBJ_list:
+        subject = Subject.objects.filter(ecampus=id).first()
+        if subject is not None:
+            Course.objects.create(user=user, subject=subject)
