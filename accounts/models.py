@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
-DEPARTMENT_CHOICES = (("컴퓨터과학전공", "컴퓨터과학전공"), )
-YEAR_CHOICES = (("2019", "19학번"), ("2020", "20학번"), ("2021", "21학번"), ("2022", "22학번"), ("2023", "23학번"))
+from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S
 
 
 class Year(models.Model):
@@ -18,7 +16,7 @@ class Year(models.Model):
 
 class Department(models.Model):
     name = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)
-
+    type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)
     def __str__(self):
         return self.name
 
