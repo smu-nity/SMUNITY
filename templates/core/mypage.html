@@ -53,15 +53,15 @@
                 <table>
                     <tr>
                         <td class="my_box_table_1st_td">이름</td>
-                        <td>최현민</td>
+                        <td>{{ profile.name }}</td>
                     </tr>
                     <tr>
                         <td class="my_box_table_1st_td">학과</td>
-                            <td>컴퓨터과학전공</td>
+                            <td>{{ profile.department }}</td>
                     </tr>
                     <tr>
                         <td class="my_box_table_1st_td">학번</td>
-                        <td>201911019</td>
+                        <td>{{ user.username }}</td>
                     </tr>
                     <tr>
                         <td class="my_box_table_1st_td">고전독서현황</td>
@@ -128,13 +128,15 @@
                             <th class="grade_table_th" style="width:6%; border-right :0px">학점</th>
                         </tr>
                         <!-- 커스텀과목 먼저 보여주고 -->
+                        {% for cg in cg_list %}
                         <tr style='color : rgb(170, 170, 170)'>
-                            <td class="grade_table_td">{{ cg.subject_num }}</td>
-                            <td class="grade_table_td">{{ cg.subject_name }}</td>
-                            <td class="grade_table_td">{{ cg.classification }}</td>
-                            <td class="grade_table_td">{{ cg.selection }}</td>
-                            <td class="grade_table_td" style="border-right :0px">{{ cg.grade | floatformat }}</td>
+                            <td class="grade_table_td">{{ cg.subject.number }}</td>
+                            <td class="grade_table_td">{{ cg.subject.name }}</td>
+                            <td class="grade_table_td">{{ cg.subject.type.name }}</td>
+                            <td class="grade_table_td">{{ cg.subject.dept }}</td>
+                            <td class="grade_table_td" style="border-right :0px">{{ cg.subject.credit }}</td>
                         </tr>
+                        {% endfor %}
                     </table>
 
                     <!-- 전체보기 클릭시 모두 보여준다 -->
