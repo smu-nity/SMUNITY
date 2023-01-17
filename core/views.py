@@ -8,3 +8,5 @@ def mypage(request):
     return render(request, 'core/mypage.html')
 
 
+def custom(request):
+    return render(request, 'core/custom.html')
