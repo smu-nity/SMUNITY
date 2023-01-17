@@ -42,6 +42,9 @@
     {% if user.is_authenticated %}
         <ul class="navbar_menu2">
             <li>
+                <a href="{% url 'core:mypage' %}" style="color: white">마이페이지</a>
+            </li>
+            <li>
                 <a href="{% url 'accounts:logout' %}" style="color: white">로그아웃</a>
             </li>
         </ul>

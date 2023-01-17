@@ -96,7 +96,7 @@
                 <hr style="margin-bottom:0.8rem; margin-top:0.8rem;">
                 <div class="my_box_title">
                     <div><i class="fas fa-key"></i>비밀번호 변경</div>
-                    <button id='b3' class="my_box_mod_btn">변경하기</button>
+                    <button id='b3' class="my_box_mod_btn"><a href="{% url 'accounts:change' user %}">변경하기</a></button>
                 </div>
                 <hr style="margin-bottom:0.8rem; margin-top:0.8rem;">
                 <div class="my_box_title">
@@ -112,7 +112,9 @@
                         <div></div>
                         <div style="margin-left:180px">내 기이수과목</div>
                         <div>
-                            <button id='b5' class="my_box_mod_btn" style="margin-right:1.3rem">커스텀하기</button>
+                            <button id='b5' class="my_box_mod_btn" style="margin-right:1.3rem">
+                                <a href="{% url 'core:custom' %}">커스텀하기</a>
+                            </button>
                             <button id='b4' class="my_box_mod_btn">업데이트</button>
                         </div>
                     </div>
