@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from accounts.models import Department
-from config.settings import TYPE_CHOICES, SUBTYPE_CHOICES_E, SUBTYPE_CHOICES_S, TYPE_NAMES
+from config.settings import TYPE_CHOICES, SUBTYPE_CHOICES_E, SUBTYPE_CHOICES_S, TYPE_NAMES, YEAR_CHOICES, \
+    SEMESTER_CHOICES
 
 
 class Type(models.Model):
@@ -20,6 +21,8 @@ class Subject(models.Model):
     credit = models.IntegerField()
     dept = models.CharField(max_length=30)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
+    year = models.CharField(max_length=4, choices=YEAR_CHOICES)
+    semester = models.CharField(max_length=2, choices=SEMESTER_CHOICES)
 
     def __str__(self):
         return f'[{self.ecampus}] {self.name}'
