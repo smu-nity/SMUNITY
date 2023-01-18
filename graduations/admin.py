@@ -1,5 +1,5 @@
 from django.contrib import admin
-from graduations.models import Subject, Major, Type
+from graduations.models import Subject, Major, Culture
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -8,4 +8,4 @@ class SubjectAdmin(admin.ModelAdmin):
 
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Major)
-admin.site.register(Type)
+admin.site.register(Culture)
