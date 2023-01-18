@@ -18,6 +18,7 @@ def main(year, semester):
     with open(file_path, 'r') as f:
         SBJS = []
         datas = json.load(f)['dsUcsLectLsnPdoc']
+        print(f'{year}-{semester}')
         print(f'데이터: {len(datas)}')
         for data in datas:
             SBJ_NO = data['SBJ_NO']
@@ -30,4 +31,6 @@ def main(year, semester):
                 SBJS.append(SBJ_NO)
 
 if __name__ == '__main__':
-    main('2018', '10')
+    data = [['2018', '10'], ['2018', '11'], ['2018', '20'], ['2018', '21'], ['2019', '10'], ['2019', '11'], ['2019', '20'], ['2019', '21'], ['2020', '10'], ['2020', '11'], ['2020', '20'], ['2020', '21'], ['2021', '10'], ['2021', '11'], ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'], ['2023', '10']]
+    for d in data:
+        main(d[0], d[1])
