@@ -5,7 +5,7 @@ from config.settings import TYPE_CHOICES, SUBTYPE_CHOICES_E, SUBTYPE_CHOICES_S
 
 
 class Subject(models.Model):
-    number = models.CharField(max_length=10)
+    number = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=30)
     credit = models.IntegerField()
     dept = models.CharField(max_length=30)
