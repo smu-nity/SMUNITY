@@ -5,30 +5,19 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 application = get_wsgi_application()
 
 import json
-from crawling import getSBJ_ID, login
-from graduations.models import Subject, Type
-
+from graduations.models import Subject
 
 
 def main(year, semester):
-    epoch = 0
-    type_dic = {'1전선': Type.objects.get(type='1전선'), '1전심': Type.objects.get(type='1전심'), '1교직': Type.objects.get(type='1교직'), '1전필': Type.objects.get(type='1전필'), '일선': Type.objects.get(type='일선'), '교필': Type.objects.get(type='기초'), '교선': Type.objects.get(type='일반')}
-    session = login('201911019', '1q2w3e4r!')
+    print(f'{year}-{semester}')
     file_path = f'dataset/{year}_{semester}.json'
     with open(file_path, 'r') as f:
-        SBJS = []
         datas = json.load(f)['dsUcsLectLsnPdoc']
-        print(f'{year}-{semester}')
-        print(f'데이터: {len(datas)}')
         for data in datas:
             SBJ_NO = data['SBJ_NO']
-            if SBJ_NO not in SBJS:
-                for id in getSBJ_ID(session, 2019, 10, SBJ_NO):
-                    type = data['CMP_DIV_NM']
-                    Subject.objects.create(number=SBJ_NO, ecampus=id, name=data['SBJ_NM'], credit=data['CDT'], dept=data['EST_DEPT_INFO'], type=type_dic[type], year=year, semester=semester)
-                    epoch += 1
-                    print(epoch)
-                SBJS.append(SBJ_NO)
+            if not Subject.objects.filter(number=SBJ_NO):
+                Subject.objects.create(number=SBJ_NO, name=data['SBJ_NM'], credit=data['CDT'], dept=data['EST_DEPT_INFO'], type=data['CMP_DIV_NM'])
+
 
 if __name__ == '__main__':
     data = [['2018', '10'], ['2018', '11'], ['2018', '20'], ['2018', '21'], ['2019', '10'], ['2019', '11'], ['2019', '20'], ['2019', '21'], ['2020', '10'], ['2020', '11'], ['2020', '20'], ['2020', '21'], ['2021', '10'], ['2021', '11'], ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'], ['2023', '10']]
