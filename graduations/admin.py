@@ -3,7 +3,7 @@ from graduations.models import Subject, Major, Culture
 
 
 class SubjectAdmin(admin.ModelAdmin):
-    search_fields = ['number']
+    search_fields = ['number', 'dept']
 
 
 admin.site.register(Subject, SubjectAdmin)
