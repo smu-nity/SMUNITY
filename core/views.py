@@ -67,4 +67,5 @@ def course_update(request):
 
 @login_required
 def result(request):
-    return render(request, 'core/result.html')
+    profile = get_object_or_404(Profile, user=request.user)
+    return render(request, 'core/result.html', {'profile': profile})

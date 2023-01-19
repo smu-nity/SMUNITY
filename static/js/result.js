@@ -1,11 +1,4 @@
 //pie-chart
-$(window).ready(function(){
-    draw(80, '.pie-chart1', '#6188E8');
-    draw(50, '.pie-chart2', '#8b22ff');
-    draw(30, '.pie-chart3','#ff0');
-    typing();
- });
- 
  function draw(max, classname, colorname){
     var i=1;
      var func1 = setInterval(function(){
