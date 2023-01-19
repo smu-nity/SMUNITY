@@ -15,8 +15,8 @@ def home(request):
 def mypage(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    cg_list = Course.objects.filter(user=user)
-    return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'cg_list': cg_list})
+    courses = Course.objects.filter(user=user)
+    return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
 
 
 @login_required
@@ -54,7 +54,10 @@ def course_update(request):
         for _, item in df.iterrows():
             if item[0].isnumeric():
                 subject = Subject.objects.get(number=item[2])
-                Course.objects.create(user=request.user, subject=subject, year=item[0], semester=item[1], credit=item[7], type=item[6], domain=item[19])
+                domain = item[19]
+                if domain == '*':
+                    domain = None
+                Course.objects.create(user=request.user, subject=subject, year=item[0], semester=item[1], credit=item[7], type=item[6], domain=domain)
     except:
         messages.error(request, '⚠️ 엑셀 내용이 다릅니다! 수정하지 않은 엑셀파일을 올려주세요.')
         return redirect('core:mypage')

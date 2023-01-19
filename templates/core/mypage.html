@@ -130,13 +130,17 @@
                             <th class="grade_table_th" style="width:6%; border-right :0px">학점</th>
                         </tr>
                         <!-- 커스텀과목 먼저 보여주고 -->
-                        {% for cg in cg_list %}
+                        {% for course in courses %}
                         <tr style='color : rgb(170, 170, 170)'>
-                            <td class="grade_table_td">{{ cg.subject.number }}</td>
-                            <td class="grade_table_td">{{ cg.subject.name }}</td>
-                            <td class="grade_table_td">{{ cg.subject.type.name }}</td>
-                            <td class="grade_table_td">{{ cg.subject.dept }}</td>
-                            <td class="grade_table_td" style="border-right :0px">{{ cg.subject.credit }}</td>
+                            <td class="grade_table_td">{{ course.subject.number }}</td>
+                            <td class="grade_table_td">{{ course.subject.name }}</td>
+                            <td class="grade_table_td">{{ course.type }}</td>
+                            <td class="grade_table_td">
+                                {% if course.domain  %}
+                                    {{ course.domain }}
+                                {% endif %}
+                            </td>
+                            <td class="grade_table_td" style="border-right :0px">{{ course.credit }}</td>
                         </tr>
                         {% endfor %}
                     </table>
