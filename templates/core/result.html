@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load core_tags %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- 웹 참조-->
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/e8a335040d.js" crossorigin="anonymous"></script>
+    <!-- 웹 폰트 참조-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-219523848-1"></script>
+<!-- 아이콘 참조 -->
+    <link rel= "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Please Graduate</title>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="lcontainer">
+        <div class="rcontainer">
+            <!-- 내 상태 -->
+            <div class="resultbox">
+                <div class="result_name">
+                    내 학점 <a href="/custom.html" title="내 기이수과목 수정"><span style="float: right;"><i class="fa-solid fa-circle-plus"></i></span></a>
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.all }}</div>
+                        <div class="result_content_info">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.subjects_all }}"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.year.all|sub:profile.subjects_all }}" style="color: #e89292;"></div>
+                        <div class="result_content_info" >필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-chart1 pie-chart-css">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent="{{ profile.subjects_all|div:profile.year.all }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 전공 -->
+            <div class="resultbox">
+                <div class="result_name">
+                    전공
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.major }}</div>
+                        <div class="result_content_info test">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.subjects_major }}"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.year.major|sub:profile.subjects_major }}" style="color: #e89292;"></div>
+                        <div class="result_content_info">필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-chart2 pie-chart-css">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent = "{{ profile.subjects_major|div:profile.year.major }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 교필 -->
+            <div class="resultbox">
+                <div class="result_name">
+                    교필
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.culture_e }}</div>
+                        <div class="result_content_info test">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_e }}"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.year.culture_e|sub:profile.subjects_culture_e }}" style="color: #e89292;">0</div>
+                        <div class="result_content_info">필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-chart3 pie-chart-css">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent = "{{ profile.subjects_culture_e|div:profile.year.culture_e }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 교선 -->
+            <div class="resultbox">
+                <div class="result_name">
+                    교선
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.culture_s }}</div>
+                        <div class="result_content_info test">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_s }}"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.year.culture_s|sub:profile.subjects_culture_s }}" style="color: #e89292;"></div>
+                        <div class="result_content_info">필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-chart4 pie-chart-css">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent = "{{ profile.subjects_culture_s|div:profile.year.culture_s }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- 추천 모달-->
+
+    <!-- 전필 -->
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close1">&times;</span>
+            <br>
+            <div style="padding: 1rem; text-align: center;">
+                <!-- 추천과목 -->
+                <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                </div>
+                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전필과목 순으로 추천합니다.</div>
+                <hr>
+                <table class="mytable">
+                    <tr class="myth" style="background-color: #f8f8f8;">
+                        <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                        <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                        <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
+                        <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
+                        <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                        <th style="width:12%">수강순위</th>
+                    </tr>
+                    <tr class="mytr">
+                        <td class="mytd">{{ a.subject_num }}</td>
+                        <td class="mytd">{{ a.subject_name }}</td>
+                        <td class="mytd">{{ a.classification }}</td>
+                        <td class="mytd">{{ a.selection }}</td>
+                        <td class="mytd">{{ a.grade|floatformat }}</td>
+                        <td class="mytd" style="border-right :0px">{{ b }}</td>
+                    </tr>
+                </table>
+                <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
+                    😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
+                </div>
+                <div class="partdiv">
+                    <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
+                    <span style="color:#d32f2f">{{ major_essential.lack }} 학점이 부족합니다</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 전선 -->
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close2">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <!-- 추천과목 -->
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                    </div>
+                    <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전선과목 순으로 추천합니다.</div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
+                            <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                            <th style="width:12%">수강순위</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ a.subject_num }}</td>
+                            <td class="mytd">{{ a.subject_name }}</td>
+                            <td class="mytd">{{ a.classification }}</td>
+                            <td class="mytd">{{ a.selection }}</td>
+                            <td class="mytd">{{ a.grade|floatformat }}</td>
+                            <td class="mytd" style="border-right :0px">{{ b }}</td>
+                        </tr>
+                    </table>
+                    <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
+                        😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
+                    </div>
+                    <div class="partdiv">
+                        <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
+                        <span style="color:#d32f2f">{{ major_selection.lack }} 학점이 부족합니다</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 중필/교필 -->
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close3">&times;</span>
+            <br>
+            <div class="modal_div">
+                <!-- 필수과목 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
+                    </div>
+                    <div class="mydiv">필수과목을 모두 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr" style="color: #d32f2f">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
+                        <span style="color:#d32f2f">필수과목이 부족합니다</span>
+                    </div>
+
+                    <!-- 필수과목 추천 -->
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 필수과목 추천
+                    </div>
+                    <div class="mydiv">
+                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
+                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 중선/교선 -->
+    <div id="myModal4" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close4">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 선택영역 현황
+                    </div>
+                    <div class="mydiv">'선택영역'을 필수로 3개 이상 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable" style="padding-bottom:1rem">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.0}}
+                            </th>
+                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.1}}
+                            </th>
+                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.2}}
+                            </th>
+                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.3}}
+                            </th>
+                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.4}}
+                            </th>
+                            <th style="width:16%">
+                                {{core_selection.standard_cs_part.5}}<br>
+                                <span style="font-size: 1rem;">(융합과창업)</span>
+                            </th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd" style='color:#17a55e; font-weight: bold;'>
+                            <td class="mytd">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
+                        <span style="color:#d32f2f">선택영역이 부족합니다</span>
+                    </div>
+                </div>
+                <!-- 필수과목 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
+                    </div>
+                    <div class="mydiv">필수과목을 모두 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                        <tr class="mytr" style="color: #d32f2f">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
+                        <span style="color:#d32f2f">필수과목이 부족합니다</span>
+                    </div>
+                </div>
+                <!-- 필수과목 추천 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 필수과목 추천
+                    </div>
+                    <div class="mydiv">
+                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
+                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <br><br><br>
+                </div>
+
+                <!-- 추천과목 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                    </div>
+                    <div class="mydiv">
+                        전체 사용자들이 가장 많이 수강했던 교양과목 순으로 추천합니다. (부족한 필수영역을 우선으로 보여줍니다)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
+                            <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                            <th style="width:12%">수강순위</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ a.subject_num }}</td>
+                            <td class="mytd">{{ a.subject_name }}</td>
+                            <td class="mytd">{{ a.classification }}</td>
+                            <td class="mytd">{{ a.selection }}</td>
+                            <td class="mytd">{{ a.grade|floatformat }}</td>
+                            <td class="mytd" style="border-right :0px">{{ b }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <a href="/statistics/" style="color:rgb(164, 26, 55); text-decoration : underline">더 추천받고 싶다면 클릭! 🚗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 균필 -->
+    <div id="myModal9" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close9">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 선택영역 현황
+                    </div>
+                    <div class="mydiv">'선택영역'을 필수로 2개 이상 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable" style="padding-bottom:1rem; width:65%">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc;">{{la_balance.standard_part.0}}</th>
+                            <th style="border-right :1px solid #cccccc;">{{la_balance.standard_part.1}}</th>
+                            <th>{{la_balance.standard_part.2}}</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd" style='color:#17a55e; font-weight: bold;'>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
+                    </div>
+                </div>
+                <!-- 과목 추천 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                    </div>
+                    <div class="mydiv">
+                        듣지 않은 과목 중, 부족한 선택영역의 과목을 추천합니다.
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 기교 -->
+    <div id="myModal5" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close5">&times;</span>
+            <br>
+            <div class="modal_div">
+                <!-- 필수과목 -->
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
+                    </div>
+                    <div class="mydiv">필수과목을 모두 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                        <tr class="mytr" style="color: #d32f2f">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#d32f2f">필수과목이 부족합니다</span>
+                    </div>
+
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 필수과목 추천
+                    </div>
+                    <div class="mydiv">
+                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
+                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+
+                    <!-- 화학과 기교에서는 추가 조건 붙음 !!! -->
+                    <br><br><br>
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 선택과목(A)
+                    </div>
+                    <div class="mydiv">
+                        화학과는 아래 기교 선택과목(A)들 중 한가지를 선택하여 이수하여야합니다.
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                        <tr class="mytr" style="color: #17a55e">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">선택과목(A) 조건을 만족하셨습니다</span>
+                        <span style="color:#d32f2f">선택과목(A)이 부족합니다</span>
+                    </div>
+
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 선택과목(A) 추천
+                    </div>
+                    <div class="mydiv">
+                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
+                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+
+                    <br><br><br>
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 선택과목(B)
+                    </div>
+                    <div class="mydiv">
+                        화학과는 아래 기교 선택과목(B)들 중 한가지를 선택하여 이수하여야합니다.
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                        <tr class="mytr" style="color: #17a55e">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">선택과목(B) 조건을 만족하셨습니다</span>
+                        <span style="color:#d32f2f">선택과목(B)이 부족합니다</span>
+                    </div>
+
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 선택과목(B) 추천
+                    </div>
+                    <div class="mydiv">
+                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
+                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
+                    </div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
+                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
+                            <th style="width:15%">학점</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ q.subject_num }}</td>
+                            <td class="mytd">{{ q.subject_name }}</td>
+                            <td class="mytd">{{ q.classification }}</td>
+                            <td class="mytd">{{ q.selection }}</td>
+                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 영어인증 -->
+    <div id="myModal8" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close8">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i>영어 통과 기준
+                    </div>
+                    <div class="mydiv">통과 기준 중 하나만 만족하면 통과입니다.</div>
+                    <hr>
+                    <table class="mytable">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:14.2%">TOEIC</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">TOEFL</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">TEPS</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">New TEPS</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">OPIc</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">TOEIC Speaking</th>
+                            <th style="border-right :1px solid #cccccc; width:14.2%">초과학기</th>
+                            <th style="width:14.2%">Intensive English</th>
+                        </tr>
+                        <tr class="mytr">
+                            <td class="mytd">{{ english.standard.TOEIC }}점 이상</td>
+                            <td class="mytd">{{ english.standard.TOEFL }}점 이상</td>
+                            <td class="mytd">{{ english.standard.TEPS }}점 이상</td>
+                            <td class="mytd">{{ english.standard.New_TEPS }}점 이상</td>
+                            <td class="mytd">Intermediate {{ english.standard.OPIc }} 이상</td>
+                            <td class="mytd">{{ english.standard.TOEIC_Speaking }}점 이상</td>
+                            <td class="mytd">2학기 이상 면제</td>
+                            <td class="mytd" style="border-right :0px">과목 이수</td>
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        <span style="color:#17a55e">
+                            위 조건을 만족하였습니다
+                            <span style="color:#d32f2f">
+                                위 조건을 만족하지 못했습니다
+                                <br><br>
+                                <span style="font-size:1.2rem;">- 내 점수 : </span>
+                                <span style="font-weight: bold;">{{ english.category }} / {{ english.score }}</span>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+<script type="text/javascript" rel="javascript" src="{% static 'js/result.js' %}"></script>
+<script>
+    function logout() {
+        var back_head = confirm('✋ 정말 로그아웃 하시겠습니까? ✋');
+        if (back_head) {
+            location.href = '/f_logout/';
+        }
+    }
+
+    $(window).ready(function() {
+        draw(Number({{ profile.subjects_all|div:profile.year.all }}), '.pie-chart1', '#6188E8');
+        draw(Number({{ profile.subjects_major|div:profile.year.major }}), '.pie-chart2', '#6188E8');
+        draw(Number({{ profile.subjects_culture_e|div:profile.year.culture_e }}), '.pie-chart3', '#6188E8');
+        draw(Number({{ profile.subjects_culture_s|div:profile.year.culture_s }}), '.pie-chart4', '#6188E8');
+    });
+</script>
+</html>
