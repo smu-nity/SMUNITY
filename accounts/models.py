@@ -18,6 +18,7 @@ class Department(models.Model):
     college = models.CharField(max_length=20, choices=COLLEGE_CHOICES)
     name = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)
     type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)
+    call = models.CharField(max_length=20, null=True, blank=True)
     def __str__(self):
         return f'[{self.college}] {self.name}'
 
