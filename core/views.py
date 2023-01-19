@@ -35,6 +35,7 @@ def course_delete(request, course_id):
     return redirect('core:custom')
 
 # 기이수과목 업로드
+@login_required
 def course_update(request):
     excel = request.FILES['excel']
 
@@ -63,3 +64,7 @@ def course_update(request):
         return redirect('core:mypage')
     messages.success(request, '업데이트성공')
     return redirect('core:mypage')
+
+@login_required
+def result(request):
+    return render(request, 'core/result.html')
