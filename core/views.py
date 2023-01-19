@@ -1,7 +1,7 @@
+import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import get_user_model
 from accounts.models import Profile
 from core.models import Course
 from graduations.models import Subject
@@ -33,3 +33,30 @@ def course_delete(request, course_id):
         return redirect('core:custom', course_id=course.subject.number)
     course.delete()
     return redirect('core:custom')
+
+# 기이수과목 업로드
+def course_update(request):
+    excel = request.FILES['excel']
+
+    # 엑셀파일인지 검사
+    if excel.name[-4:] != 'xlsx':
+        messages.error(request, '⚠️ 잘못된 파일 형식입니다. 확장자가 xlsx인 파일을 올려주세요. ')
+        return redirect('core:mypage')
+
+    # 추가 전 기존 데이터 삭제
+    courses = Course.objects.filter(user=request.user)
+    if courses.exists():
+        courses.delete()
+
+    # 기이수과목 추가
+    try:
+        df = pd.read_excel(excel)
+        for _, item in df.iterrows():
+            if item[0].isnumeric():
+                subject = Subject.objects.get(number=item[2])
+                Course.objects.create(user=request.user, subject=subject, year=item[0], semester=item[1], credit=item[7], type=item[6], domain=item[19])
+    except:
+        messages.error(request, '⚠️ 엑셀 내용이 다릅니다! 수정하지 않은 엑셀파일을 올려주세요.')
+        return redirect('core:mypage')
+    messages.success(request, '업데이트성공')
+    return redirect('core:mypage')
