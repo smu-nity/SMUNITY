@@ -38,9 +38,13 @@ class Profile(models.Model):    # 사용자 프로필
         from core.models import Course
         return Course.objects.filter(user=self.user).aggregate(Sum('credit'))['credit__sum']
 
-    def subjects_major(self):
+    def subjects_major_i(self):
         from core.models import Course
-        return Course.objects.filter(user=self.user, type__in=['1전필', '1전선']).aggregate(Sum('credit'))['credit__sum']
+        return Course.objects.filter(user=self.user, type='1전심').aggregate(Sum('credit'))['credit__sum']
+
+    def subjects_major_s(self):
+        from core.models import Course
+        return Course.objects.filter(user=self.user, type='1전선').aggregate(Sum('credit'))['credit__sum']
 
     def subjects_culture_e(self):
         from core.models import Course

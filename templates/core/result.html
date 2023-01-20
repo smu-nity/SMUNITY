@@ -46,7 +46,7 @@
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
-                            <div class="pie-chart1 pie-chart-css">
+                            <div class="pie-all pie-chart-css">
                                 <div class="pie-chart-inner">
                                     <span class="center percent" percent="{{ profile.subjects_all|div:profile.year.all }}"></span>
                                 </div>
@@ -56,29 +56,59 @@
                 </div>
             </div>
 
-            <!-- 전공 -->
+            <!-- 전심 -->
             <div class="resultbox">
                 <div class="result_name">
-                    전공
+                    전심
                 </div>
                 <div class="result_container">
                     <div class="result_content">
-                        <div class="result_content_number">{{ profile.year.major }}</div>
+                        <div class="result_content_number">{{ profile.year.major_i }}</div>
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_major }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_major_i }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.major|sub:profile.subjects_major }}" style="color: #e89292;"></div>
+                        <div class="result_content_number count" data-count="{{ profile.year.major_i|sub:profile.subjects_major_i }}" style="color: #e89292;"></div>
                         <div class="result_content_info">필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
-                            <div class="pie-chart2 pie-chart-css">
+                            <div class="pie-major-i pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_major|div:profile.year.major }}"></span>
+                                    <span class="center percent" percent = "{{ profile.subjects_major_i|div:profile.year.major_i }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 전선 -->
+            <div class="resultbox">
+                <div class="result_name">
+                    전선
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.major_s }}</div>
+                        <div class="result_content_info test">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.subjects_major_s }}"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ profile.year.major_s|sub:profile.subjects_major_s }}" style="color: #e89292;"></div>
+                        <div class="result_content_info">필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-major-s pie-chart-css">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent = "{{ profile.subjects_major_s|div:profile.year.major_s }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +136,7 @@
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
-                            <div class="pie-chart3 pie-chart-css">
+                            <div class="pie-culture-e pie-chart-css">
                                 <div class="pie-chart-inner">
                                     <span class="center percent" percent = "{{ profile.subjects_culture_e|div:profile.year.culture_e }}"></span>
                                 </div>
@@ -136,7 +166,7 @@
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
-                            <div class="pie-chart4 pie-chart-css">
+                            <div class="pie-culture-s pie-chart-css">
                                 <div class="pie-chart-inner">
                                     <span class="center percent" percent = "{{ profile.subjects_culture_s|div:profile.year.culture_s }}"></span>
                                 </div>
@@ -702,18 +732,12 @@
 </body>
 <script type="text/javascript" rel="javascript" src="{% static 'js/result.js' %}"></script>
 <script>
-    function logout() {
-        var back_head = confirm('✋ 정말 로그아웃 하시겠습니까? ✋');
-        if (back_head) {
-            location.href = '/f_logout/';
-        }
-    }
-
     $(window).ready(function() {
-        draw(Number({{ profile.subjects_all|div:profile.year.all }}), '.pie-chart1', '#6188E8');
-        draw(Number({{ profile.subjects_major|div:profile.year.major }}), '.pie-chart2', '#6188E8');
-        draw(Number({{ profile.subjects_culture_e|div:profile.year.culture_e }}), '.pie-chart3', '#6188E8');
-        draw(Number({{ profile.subjects_culture_s|div:profile.year.culture_s }}), '.pie-chart4', '#6188E8');
+        draw(Number({{ profile.subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
+        draw(Number({{ profile.subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
+        draw(Number({{ profile.subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
+        draw(Number({{ profile.subjects_culture_e|div:profile.year.culture_e }}), '.pie-culture-e', '#6188E8');
+        draw(Number({{ profile.subjects_culture_s|div:profile.year.culture_s }}), '.pie-culture-s', '#6188E8');
     });
 </script>
 </html>
