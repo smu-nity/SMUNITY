@@ -37,7 +37,7 @@
                         <div class="result_content_info">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_all }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_all|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
@@ -67,7 +67,7 @@
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_major_i }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_major_i|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
@@ -97,7 +97,7 @@
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_major_s }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_major_s|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
@@ -127,7 +127,7 @@
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_e }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_e|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
@@ -157,7 +157,7 @@
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_s }}"></div>
+                        <div class="result_content_number count" data-count="{{ profile.subjects_culture_s|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
