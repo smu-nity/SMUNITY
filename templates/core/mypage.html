@@ -10,7 +10,6 @@
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/e8a335040d.js" crossorigin="anonymous"></script>
-    <script src="static/js/includeHTML.js"></script>
     <!-- 웹 폰트 참조-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
@@ -113,7 +112,7 @@
                         <div style="margin-left:180px">내 기이수과목</div>
                         <div>
                             <button id='b5' class="my_box_mod_btn" style="margin-right:1.3rem">
-                                <a href="{% url 'core:custom' %}">커스텀하기</a>
+                                커스텀하기
                             </button>
                             <button id='b4' class="my_box_mod_btn">업데이트</button>
                         </div>
@@ -123,6 +122,8 @@
                     <!-- 커스텀 + 7개까지만 보여준다. -->
                     <table id="short_table" class="grade_table" style="margin-top:2rem;">
                         <tr>
+                            <th class="grade_table_th" style="width:10%">년도</th>
+                            <th class="grade_table_th" style="width:10%">학기</th>
                             <th class="grade_table_th" style="width:10%">학수번호</th>
                             <th class="grade_table_th" style="width:40%">과목명</th>
                             <th class="grade_table_th" style="width:10%">이수구분</th>
@@ -132,6 +133,8 @@
                         <!-- 커스텀과목 먼저 보여주고 -->
                         {% for course in courses %}
                         <tr style='color : rgb(170, 170, 170)'>
+                            <td class="grade_table_td">{{ course.year }}</td>
+                            <td class="grade_table_td">{{ course.semester }}</td>
                             <td class="grade_table_td">{{ course.subject.number }}</td>
                             <td class="grade_table_td">{{ course.subject.name }}</td>
                             <td class="grade_table_td">{{ course.type }}</td>
@@ -342,7 +345,7 @@
                     <span style="font-size :1.5 rem; font-weight: bold; color : rgb(164, 26, 55)">'커스텀 기능'</span> 으로 원하는 과목을 추가해서 검사해보세요!
                 </p>
             </div>
-            <button onclick="location.href='/custom/'" class='login_btn' style="margin:1rem 0 2rem 0;">커스텀 시작</button>
+            <button onclick=location.href="{% url 'core:custom' %}" class='login_btn' style="margin:1rem 0 2rem 0;">커스텀 시작</button>
         </div>
     </div>
 

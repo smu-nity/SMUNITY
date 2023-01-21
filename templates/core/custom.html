@@ -89,6 +89,8 @@
                                 <hr>
                                 <table id="mytable" class="grade_table" style='margin-bottom:3rem;'>
                                     <tr>
+                                        <th class="grade_table_th" style="width:10%">년도</th>
+                                        <th class="grade_table_th" style="width:10%">학기</th>
                                         <th class="grade_table_th" style="width:9%">학수번호</th>
                                         <th class="grade_table_th" style="width:36%">과목명</th>
                                         <th class="grade_table_th" style="width:9%">이수구분</th>
@@ -100,12 +102,14 @@
                                     <!-- 커스텀 과목 먼저 띄우기 -->
                                     {% for course in courses %}
                                     <tr style='color : #1ac06d'>
+                                        <td class="grade_table_td">{{ course.year }}</td>
+                                        <td class="grade_table_td">{{ course.semester }}</td>
                                         <td class="grade_table_td">{{ course.subject.number }}</td>
                                         <td class="grade_table_td">{{ course.subject.name }}</td>
-                                        <td class="grade_table_td">{{ course.subject.type.name }}</td>
+                                        <td class="grade_table_td">{{ course.subject.type }}</td>
                                         <td class="grade_table_td">
-                                            {% if course.subject.type.subtype %}
-                                                {{ course.subject.type.subtype }}
+                                            {% if course.domain  %}
+                                                {{ course.domain }}
                                             {% endif %}
                                         </td>
                                         <td class="grade_table_td">{{ course.subject.credit }}</td>

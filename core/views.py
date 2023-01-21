@@ -15,13 +15,13 @@ def home(request):
 def mypage(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    courses = Course.objects.filter(user=user)
+    courses = Course.objects.filter(user=user).order_by('-pk')
     return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
 
 
 @login_required
 def custom(request):
-    courses = Course.objects.filter(user=request.user)
+    courses = Course.objects.filter(user=request.user).order_by('-pk')
     context = {'courses':courses}
     return render(request, 'core/custom.html', context)
 
