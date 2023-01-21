@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import Profile
 from core.models import Course
-from graduations.models import Subject
+from graduations.models import Subject, Major
 
 
 def home(request):
@@ -69,4 +69,6 @@ def course_update(request):
 @login_required
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
+    print(Major.objects.filter(department=profile.department, type='1전심'))
+    print(Course.objects.filter(user=request.user, type='1전심'))
     return render(request, 'core/result.html', {'profile': profile})
