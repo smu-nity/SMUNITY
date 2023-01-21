@@ -12,6 +12,7 @@ class Course(models.Model):     # 기이수과목 테이블
     credit = models.IntegerField()              # 학점
     type = models.CharField(max_length=3)       # 이수 구분
     domain = models.CharField(max_length=20, null=True, blank=True) # 교양 영역명
+    custom = models.BooleanField(default=False)                     # 커스텀 유무
 
     def __str__(self):
         return f'[{self.user}] {self.subject}'

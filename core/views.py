@@ -15,22 +15,23 @@ def home(request):
 def mypage(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    courses = Course.objects.filter(user=user)
+    courses = Course.objects.filter(user=user).order_by('-pk')
     return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
 
 
 @login_required
 def custom(request):
-    courses = Course.objects.filter(user=request.user)
-    context = {'courses':courses}
+    courses = Course.objects.filter(user=request.user, custom=False).order_by('-pk')
+    customs = Course.objects.filter(user=request.user, custom=True).order_by('-pk')
+    context = {'courses': courses, 'customs': customs}
     return render(request, 'core/custom.html', context)
 
 @login_required
 def course_delete(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
-    if request.user != course.user:
-        messages.error(request, '삭제권한이 없습니다')
-        return redirect('core:custom', course_id=course.subject.number)
+    if request.user != course.user or not course.custom:
+        messages.error(request, '삭제권한이 없습니다.')
+        return redirect('core:custom')
     course.delete()
     return redirect('core:custom')
 
