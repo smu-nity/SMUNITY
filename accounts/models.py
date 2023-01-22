@@ -9,7 +9,7 @@ class Year(models.Model):   # 학년도 테이블
     major_i = models.IntegerField()     # 전심
     major_s = models.IntegerField()     # 전선
     culture_e = models.IntegerField()   # 교필
-    culture_s = models.IntegerField()   # 교선
+    culture = models.IntegerField()     # 교양 전체
     all = models.IntegerField()         # 전체
 
     def __str__(self):
@@ -50,6 +50,6 @@ class Profile(models.Model):    # 사용자 프로필
         from core.models import Course
         return Course.objects.filter(user=self.user, type='교필').aggregate(Sum('credit'))['credit__sum']
 
-    def subjects_culture_s(self):
+    def subjects_culture(self):
         from core.models import Course
-        return Course.objects.filter(user=self.user, type='교선').aggregate(Sum('credit'))['credit__sum']
+        return Course.objects.filter(user=self.user, type__in=['교필', '교선']).aggregate(Sum('credit'))['credit__sum']
