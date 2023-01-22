@@ -69,6 +69,10 @@ def course_update(request):
 @login_required
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
-    print(Major.objects.filter(department=profile.department, type='1전심'))
-    print(Course.objects.filter(user=request.user, type='1전심'))
-    return render(request, 'core/result.html', {'profile': profile})
+    print(Course.objects.filter(user=request.user, type='1전심').values('subject'))
+    print(Course.objects.filter(user=request.user, type='1전선').values('subject'))
+
+    context = {
+        'profile': profile, 'major_i': Major.objects.filter(department=profile.department, type='1전심'),
+        'major_s': Major.objects.filter(department=profile.department, type='1전선')}
+    return render(request, 'core/result.html', context)

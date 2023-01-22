@@ -23,7 +23,6 @@
 
 <body>
     {% include 'navbar.html' %}
-
     <div class="lcontainer">
         <div class="rcontainer">
             <!-- 내 상태 -->
@@ -188,32 +187,36 @@
                 <!-- 추천과목 -->
                 <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
                 </div>
-                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전필과목 순으로 추천합니다.</div>
+                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
                 <hr>
+                {% if major_i %}
                 <table class="mytable">
                     <tr class="myth" style="background-color: #f8f8f8;">
                         <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
                         <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
                         <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
-                        <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
                         <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                        <th style="width:12%">수강순위</th>
                     </tr>
+                    {% for major in major_i %}
                     <tr class="mytr">
-                        <td class="mytd">{{ a.subject_num }}</td>
-                        <td class="mytd">{{ a.subject_name }}</td>
-                        <td class="mytd">{{ a.classification }}</td>
-                        <td class="mytd">{{ a.selection }}</td>
-                        <td class="mytd">{{ a.grade|floatformat }}</td>
-                        <td class="mytd" style="border-right :0px">{{ b }}</td>
+                        <td class="mytd">{{ major.subject.number }}</td>
+                        <td class="mytd">{{ major.subject.name }}</td>
+                        <td class="mytd">{{ major.type }}</td>
+                        <td class="mytd">{{ major.subject.credit }}</td>
                     </tr>
+                    {% endfor %}
                 </table>
+                {% else %}
                 <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
-                    😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
+                    😱 죄송합니다... 아직 참조할 수 있는 데이터가 부족합니다.
                 </div>
+                {% endif %}
                 <div class="partdiv">
-                    <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
-                    <span style="color:#d32f2f">{{ major_essential.lack }} 학점이 부족합니다</span>
+                    {% if profile.subjects_major_i|div:profile.year.major_i == 100 %}
+                        <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
+                    {% else %}
+                        <span style="color:#d32f2f">{{ profile.year.major_i|sub:profile.subjects_major_i }} 학점이 부족합니다</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -224,38 +227,40 @@
         <div class="modal-content">
             <span class="close" id="close-major-s">&times;</span>
             <br>
-            <div class="modal_div">
-                <div class="p_div">
-                    <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
-                    </div>
-                    <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전선과목 순으로 추천합니다.</div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
-                            <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                            <th style="width:12%">수강순위</th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd">{{ a.subject_num }}</td>
-                            <td class="mytd">{{ a.subject_name }}</td>
-                            <td class="mytd">{{ a.classification }}</td>
-                            <td class="mytd">{{ a.selection }}</td>
-                            <td class="mytd">{{ a.grade|floatformat }}</td>
-                            <td class="mytd" style="border-right :0px">{{ b }}</td>
-                        </tr>
-                    </table>
-                    <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
-                        😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
-                    </div>
-                    <div class="partdiv">
+            <div style="padding: 1rem; text-align: center;">
+                <!-- 추천과목 -->
+                <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                </div>
+                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
+                <hr>
+                {% if major_s %}
+                <table class="mytable">
+                    <tr class="myth" style="background-color: #f8f8f8;">
+                        <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                        <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                        <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
+                        <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                    </tr>
+                    {% for major in major_s %}
+                    <tr class="mytr">
+                        <td class="mytd">{{ major.subject.number }}</td>
+                        <td class="mytd">{{ major.subject.name }}</td>
+                        <td class="mytd">{{ major.type }}</td>
+                        <td class="mytd">{{ major.subject.credit }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
+                    😱 죄송합니다... 아직 참조할 수 있는 데이터가 부족합니다.
+                </div>
+                {% endif %}
+                <div class="partdiv">
+                    {% if profile.subjects_major_s|div:profile.year.major_s == 100 %}
                         <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
-                        <span style="color:#d32f2f">{{ major_selection.lack }} 학점이 부족합니다</span>
-                    </div>
+                    {% else %}
+                        <span style="color:#d32f2f">{{ profile.year.major_s|sub:profile.subjects_major_s }} 학점이 부족합니다</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
