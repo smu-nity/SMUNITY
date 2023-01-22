@@ -23,13 +23,12 @@
 
 <body>
     {% include 'navbar.html' %}
-
     <div class="lcontainer">
         <div class="rcontainer">
             <!-- 내 상태 -->
             <div class="resultbox">
                 <div class="result_name">
-                    내 학점 <a href="/custom.html" title="내 기이수과목 수정"><span style="float: right;"><i class="fa-solid fa-circle-plus"></i></span></a>
+                    내 학점 <a href="{% url 'core:custom' %}" title="내 기이수과목 수정"><span style="float: right;"><i class="fa-solid fa-circle-plus"></i></span></a>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -59,7 +58,7 @@
             <!-- 전심 -->
             <div class="resultbox">
                 <div class="result_name">
-                    전심
+                    전심<button class="rbutton" style="float: right;" id="btn-major-i">Recommend</button>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -89,7 +88,7 @@
             <!-- 전선 -->
             <div class="resultbox">
                 <div class="result_name">
-                    전선
+                    전선<button class="rbutton" style="float: right;" id="btn-major-s">Recommend</button>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -119,7 +118,7 @@
             <!-- 교필 -->
             <div class="resultbox">
                 <div class="result_name">
-                    교필
+                    교필<button class="rbutton" style="float: right;" id="btn-culture-e">Recommend</button>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -149,7 +148,7 @@
             <!-- 교선 -->
             <div class="resultbox">
                 <div class="result_name">
-                    교선
+                    교선<button class="rbutton" style="float: right;" id="btn-culture-s">Recommend</button>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -179,92 +178,98 @@
 
     <!-- 추천 모달-->
 
-    <!-- 전필 -->
-    <div id="myModal1" class="modal">
+    <!-- 전심 -->
+    <div id="modal-major-i" class="modal">
         <div class="modal-content">
-            <span class="close" id="close1">&times;</span>
+            <span class="close" id="close-major-i">&times;</span>
             <br>
             <div style="padding: 1rem; text-align: center;">
                 <!-- 추천과목 -->
                 <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
                 </div>
-                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전필과목 순으로 추천합니다.</div>
+                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
                 <hr>
+                {% if major_i %}
                 <table class="mytable">
                     <tr class="myth" style="background-color: #f8f8f8;">
                         <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
                         <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
                         <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
-                        <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
                         <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                        <th style="width:12%">수강순위</th>
                     </tr>
+                    {% for major in major_i %}
                     <tr class="mytr">
-                        <td class="mytd">{{ a.subject_num }}</td>
-                        <td class="mytd">{{ a.subject_name }}</td>
-                        <td class="mytd">{{ a.classification }}</td>
-                        <td class="mytd">{{ a.selection }}</td>
-                        <td class="mytd">{{ a.grade|floatformat }}</td>
-                        <td class="mytd" style="border-right :0px">{{ b }}</td>
+                        <td class="mytd">{{ major.subject.number }}</td>
+                        <td class="mytd">{{ major.subject.name }}</td>
+                        <td class="mytd">{{ major.type }}</td>
+                        <td class="mytd">{{ major.subject.credit }}</td>
                     </tr>
+                    {% endfor %}
                 </table>
+                {% else %}
                 <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
-                    😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
+                    😱 죄송합니다... 아직 참조할 수 있는 데이터가 부족합니다.
                 </div>
+                {% endif %}
                 <div class="partdiv">
-                    <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
-                    <span style="color:#d32f2f">{{ major_essential.lack }} 학점이 부족합니다</span>
+                    {% if profile.subjects_major_i|div:profile.year.major_i == 100 %}
+                        <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
+                    {% else %}
+                        <span style="color:#d32f2f">{{ profile.year.major_i|sub:profile.subjects_major_i }} 학점이 부족합니다</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 전선 -->
-    <div id="myModal2" class="modal">
+    <div id="modal-major-s" class="modal">
         <div class="modal-content">
-            <span class="close" id="close2">&times;</span>
+            <span class="close" id="close-major-s">&times;</span>
             <br>
-            <div class="modal_div">
-                <div class="p_div">
-                    <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
-                    </div>
-                    <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전선과목 순으로 추천합니다.</div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
-                            <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                            <th style="width:12%">수강순위</th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd">{{ a.subject_num }}</td>
-                            <td class="mytd">{{ a.subject_name }}</td>
-                            <td class="mytd">{{ a.classification }}</td>
-                            <td class="mytd">{{ a.selection }}</td>
-                            <td class="mytd">{{ a.grade|floatformat }}</td>
-                            <td class="mytd" style="border-right :0px">{{ b }}</td>
-                        </tr>
-                    </table>
-                    <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
-                        😱 죄송합니다... 아직 참조할 수 있는 '{{user_info.major}}'의 데이터가 부족합니다...
-                    </div>
-                    <div class="partdiv">
+            <div style="padding: 1rem; text-align: center;">
+                <!-- 추천과목 -->
+                <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                </div>
+                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
+                <hr>
+                {% if major_s %}
+                <table class="mytable">
+                    <tr class="myth" style="background-color: #f8f8f8;">
+                        <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                        <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                        <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
+                        <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                    </tr>
+                    {% for major in major_s %}
+                    <tr class="mytr">
+                        <td class="mytd">{{ major.subject.number }}</td>
+                        <td class="mytd">{{ major.subject.name }}</td>
+                        <td class="mytd">{{ major.type }}</td>
+                        <td class="mytd">{{ major.subject.credit }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <div style="color:#888888; margin-top:4rem; margin-bottom:2rem;font-size:1.5rem;">
+                    😱 죄송합니다... 아직 참조할 수 있는 데이터가 부족합니다.
+                </div>
+                {% endif %}
+                <div class="partdiv">
+                    {% if profile.subjects_major_s|div:profile.year.major_s == 100 %}
                         <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
-                        <span style="color:#d32f2f">{{ major_selection.lack }} 학점이 부족합니다</span>
-                    </div>
+                    {% else %}
+                        <span style="color:#d32f2f">{{ profile.year.major_s|sub:profile.subjects_major_s }} 학점이 부족합니다</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 중필/교필 -->
-    <div id="myModal3" class="modal">
+    <!-- 교필 -->
+    <div id="modal-culture-e" class="modal">
         <div class="modal-content">
-            <span class="close" id="close3">&times;</span>
+            <span class="close" id="close-culture-e">&times;</span>
             <br>
             <div class="modal_div">
                 <!-- 필수과목 -->
@@ -323,10 +328,10 @@
         </div>
     </div>
 
-    <!-- 중선/교선 -->
-    <div id="myModal4" class="modal">
+    <!-- 교선 -->
+    <div id="modal-culture-e" class="modal">
         <div class="modal-content">
-            <span class="close" id="close4">&times;</span>
+            <span class="close" id="close-culture-e">&times;</span>
             <br>
             <div class="modal_div">
                 <div class="p_div">
@@ -731,6 +736,7 @@
     {% include 'footer.html' %}
 </body>
 <script type="text/javascript" rel="javascript" src="{% static 'js/result.js' %}"></script>
+<script type="text/javascript" rel="javascript" src="{% static 'js/modal.js' %}"></script>
 <script>
     $(window).ready(function() {
         draw(Number({{ profile.subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
@@ -739,5 +745,30 @@
         draw(Number({{ profile.subjects_culture_e|div:profile.year.culture_e }}), '.pie-culture-e', '#6188E8');
         draw(Number({{ profile.subjects_culture_s|div:profile.year.culture_s }}), '.pie-culture-s', '#6188E8');
     });
+
+    var modal1 = document.getElementById("modal-major-i");
+    var modal2 = document.getElementById("modal-major-s");
+    var modal3 = document.getElementById("modal-culture-e");
+    var modal4 = document.getElementById("modal-culture-e");
+
+    var btn1 = document.getElementById("btn-major-i");
+    var btn2 = document.getElementById("btn-major-s");
+    var btn3 = document.getElementById("btn-culture-e");
+    var btn4 = document.getElementById("btn-culture-s");
+
+    var span1 = document.getElementById("close-major-i");
+    var span2 = document.getElementById("close-major-s");
+    var span3 = document.getElementById("close-culture-e");
+    var span4 = document.getElementById("close-culture-s");
+
+    Btnclick(btn1, modal1);
+    Btnclick(btn2, modal2);
+    Btnclick(btn3, modal3);
+    Btnclick(btn4, modal4);
+
+    Spanclick(span1, modal1);
+    Spanclick(span2, modal2);
+    Spanclick(span3, modal3);
+    Spanclick(span4, modal4);
 </script>
 </html>
