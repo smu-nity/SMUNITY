@@ -33,11 +33,11 @@
                 <div class="result_container">
                     <div class="result_content">
                         <div class="result_content_number">{{ profile.year.all }}</div>
-                        <div class="result_content_info">총 기준 학점</div>
+                        <div class="result_content_info">기준 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.subjects_all|zero_filter }}"></div>
-                        <div class="result_content_info">총 이수 학점</div>
+                        <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.year.all|sub:profile.subjects_all }}" style="color: #e89292;"></div>
@@ -63,11 +63,11 @@
                 <div class="result_container">
                     <div class="result_content">
                         <div class="result_content_number">{{ profile.year.major_i }}</div>
-                        <div class="result_content_info test">총 기준 학점</div>
+                        <div class="result_content_info test">기준 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.subjects_major_i|zero_filter }}"></div>
-                        <div class="result_content_info">총 이수 학점</div>
+                        <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.year.major_i|sub:profile.subjects_major_i }}" style="color: #e89292;"></div>
@@ -93,11 +93,11 @@
                 <div class="result_container">
                     <div class="result_content">
                         <div class="result_content_number">{{ profile.year.major_s }}</div>
-                        <div class="result_content_info test">총 기준 학점</div>
+                        <div class="result_content_info test">기준 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.subjects_major_s|zero_filter }}"></div>
-                        <div class="result_content_info">총 이수 학점</div>
+                        <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="result_content_number count" data-count="{{ profile.year.major_s|sub:profile.subjects_major_s }}" style="color: #e89292;"></div>
@@ -186,18 +186,18 @@
                         <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count">1개</div>
+                        <div class="result_content_number count">{{ profile.subjects_culture_e.cnt }}개</div>
                         <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" style="color: #e89292;">1개</div>
+                        <div class="result_content_number count" style="color: #e89292;">{{ 2|sub:profile.subjects_culture_e.cnt }}개</div>
                         <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture-e pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "50"></span>
+                                    <span class="center percent" percent = "{{ profile.subjects_culture_e.cnt|div:2 }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -332,68 +332,6 @@
             <span class="close" id="close-culture-b">&times;</span>
             <br>
             <div class="modal_div">
-                <!-- 필수과목 -->
-                <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
-                    </div>
-                    <div class="mydiv">필수과목을 모두 이수해야 졸업요건을 충족합니다.</div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
-                            <th style="width:15%">학점</th>
-                        </tr>
-                        <tr class="mytr" style="color: #d32f2f">
-                            <td class="mytd">{{ q.subject_num }}</td>
-                            <td class="mytd">{{ q.subject_name }}</td>
-                            <td class="mytd">{{ q.classification }}</td>
-                            <td class="mytd">{{ q.selection }}</td>
-                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
-                        </tr>
-                    </table>
-                    <div class="partdiv">
-                        <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
-                        <span style="color:#d32f2f">필수과목이 부족합니다</span>
-                    </div>
-
-                    <!-- 필수과목 추천 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 필수과목 추천
-                    </div>
-                    <div class="mydiv">
-                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
-                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
-                    </div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
-                            <th style="width:15%">학점</th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd">{{ q.subject_num }}</td>
-                            <td class="mytd">{{ q.subject_name }}</td>
-                            <td class="mytd">{{ q.classification }}</td>
-                            <td class="mytd">{{ q.selection }}</td>
-                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 상명핵심역량교양 -->
-    <div id="modal-culture-e" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-culture-e">&times;</span>
-            <br>
-            <div class="modal_div">
                 <div class="p_div">
                     <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 선택영역 현황
                     </div>
@@ -511,6 +449,49 @@
                     </table>
                     <div class="partdiv">
                         <a href="/statistics/" style="color:rgb(164, 26, 55); text-decoration : underline">더 추천받고 싶다면 클릭! 🚗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상명핵심역량교양 -->
+    <div id="modal-culture-e" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-culture-e">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i>선택영역 현황
+                    </div>
+                    <div class="mydiv">'선택영역'을 필수로 3개 이상 이수해야 졸업요건을 충족합니다.</div>
+                    <hr>
+                    <table class="mytable" style="padding-bottom:1rem">
+                        <tr class="myth" style="background-color: #f8f8f8;">
+                            <th style="border-right :1px solid #cccccc; width:16%">창의적문제해결역량/융복합역량
+                            </th>
+                            <th style="border-right :1px solid #cccccc; width:16%">다양성존중역량/윤리실천역량
+                            </th>
+                        </tr>
+                        <tr class="mytr">
+                            {% if profile.subjects_culture_e.culture_e1 %}
+                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
+                            {% else %}
+                                <td class="mytd">미이수</td>
+                            {% endif %}
+                            {% if profile.subjects_culture_e.culture_e2 %}
+                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
+                            {% else %}
+                                <td class="mytd">미이수</td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                    <div class="partdiv">
+                        {% if profile.subjects_culture_e.cnt == 2 %}
+                            <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
+                        {% else %}
+                            <span style="color:#d32f2f">선택영역이 부족합니다</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -803,7 +784,7 @@
         draw(Number({{ profile.subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
         draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
         draw(Number(75), '.pie-culture-b', '#6188E8');
-        draw(Number(50), '.pie-culture-e', '#6188E8');
+        draw(Number({{ profile.subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
         draw(Number(66), '.pie-culture-s', '#6188E8');
     });
 
