@@ -342,18 +342,19 @@
                         <tr class="myth" style="background-color: #f8f8f8;">
                             <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
                             <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
                             <th style="width:15%">학점</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">개설 학기</th>
+                            <th style="border-right :1px solid #cccccc; width:15%">이수 여부</th>
                         </tr>
+                        {% for culture in culture_b %}
                         <tr class="mytr">
-                        <tr class="mytr" style="color: #d32f2f">
-                            <td class="mytd">{{ q.subject_num }}</td>
-                            <td class="mytd">{{ q.subject_name }}</td>
-                            <td class="mytd">{{ q.classification }}</td>
-                            <td class="mytd">{{ q.selection }}</td>
-                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
+                            <td class="mytd">{{ culture.number|linebreaks }}</td>
+                            <td class="mytd">{{ culture.name|linebreaks }}</td>
+                            <td class="mytd">{{ culture.credit }}</td>
+                            <td class="mytd">{{ culture.semester }}</td>
+                            <td class="mytd">이수</td>
                         </tr>
+                        {% endfor %}
                     </table>
                     <div class="partdiv">
                         <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>

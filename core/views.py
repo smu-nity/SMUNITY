@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import Profile
+from config.settings import CULTURES_1, CULTURES_2
 from core.models import Course
 from graduations.models import Subject, Major
 
@@ -70,7 +71,11 @@ def course_update(request):
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
     courses = Course.objects.filter(user=request.user)
+
+    culture_b = CULTURES_1
+    if int(profile.year.year) > 2019:
+        culture_b = CULTURES_2
     context = {
         'profile': profile, 'major_i': Major.objects.filter(department=profile.department, type='1전심').exclude(subject_id__in=courses.values_list('subject', flat=True)),
-        'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True))}
+        'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True)), 'culture_b': culture_b}
     return render(request, 'core/result.html', context)
