@@ -71,6 +71,12 @@ def register(request):
     context['form'] = form
     return render(request, 'accounts/register.html', context)
 
-def change_pw(request, user):
-    print(user)
-    return render(request, 'accounts/changePW.html', {'user': user})
+def change_pw(request):
+    if request.method == "POST":
+        user = request.user
+        if request.POST["password1"] == request.POST["password2"]:
+            user.set_password(request.POST["password1"])
+            user.save()
+        else:
+            messages.error("비밀번호 불일치")
+    return redirect('core:mypage')
