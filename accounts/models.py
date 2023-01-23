@@ -1,16 +1,18 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Q
+from django.shortcuts import get_object_or_404
+
 from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES
 
 
 class Year(models.Model):   # 학년도 테이블
     year = models.CharField(max_length=4, choices=YEAR_CHOICES)     # 학번
-    major_i = models.IntegerField()     # 전심
-    major_s = models.IntegerField()     # 전선
-    culture_e = models.IntegerField()   # 교필
-    culture_s = models.IntegerField()   # 교선
-    all = models.IntegerField()         # 전체
+    major_i = models.IntegerField()         # 전심
+    major_s = models.IntegerField()         # 전선
+    culture = models.IntegerField()         # 교양 전체
+    culture_cnt = models.IntegerField()     # 기초교양 개수
+    all = models.IntegerField()             # 전체
 
     def __str__(self):
         return self.year
@@ -46,10 +48,33 @@ class Profile(models.Model):    # 사용자 프로필
         from core.models import Course
         return Course.objects.filter(user=self.user, type='1전선').aggregate(Sum('credit'))['credit__sum']
 
+    def subjects_culture(self):
+        from core.models import Course
+        return Course.objects.filter(user=self.user, type__in=['교필', '교선']).aggregate(Sum('credit'))['credit__sum']
+
     def subjects_culture_e(self):
         from core.models import Course
-        return Course.objects.filter(user=self.user, type='교필').aggregate(Sum('credit'))['credit__sum']
+        culture_e1 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='창의적문제해결역량')|Q(domain__contains='융복합역량')))
+        culture_e2 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='다양성존중역량')|Q(domain__contains='윤리실천역량')))
+        cnt = 0
+        if culture_e1:
+            cnt += 1
+        if culture_e2:
+            cnt += 1
+        context = {'cnt': cnt, 'culture_e1': culture_e1, 'culture_e2': culture_e2}
+        return context
 
     def subjects_culture_s(self):
         from core.models import Course
-        return Course.objects.filter(user=self.user, type='교선').aggregate(Sum('credit'))['credit__sum']
+        cnt = 0
+        cultures = []
+        types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
+        types.remove(self.department.type)
+
+        for type in types:
+            subjects = Course.objects.filter(user=self.user, domain__contains=type)
+            cultures.append({'type': type, 'subjects': subjects})
+            if subjects:
+                cnt += 1
+        context = {'cnt': cnt, 'cultures': cultures}
+        return context
