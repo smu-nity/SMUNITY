@@ -216,11 +216,11 @@
                         <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count">2개</div>
+                        <div class="result_content_number count">{{ profile.subjects_culture_s.cnt }}개</div>
                         <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" style="color: #e89292;">1개</div>
+                        <div class="result_content_number count" style="color: #e89292;">{{ 3|sub:profile.subjects_culture_s.cnt }}개</div>
                         <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
@@ -511,26 +511,22 @@
                     <hr>
                     <table class="mytable" style="padding-bottom:1rem">
                         <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:16%">창의적문제해결역량/융복합역량
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">다양성존중역량/윤리실천역량
-                            </th>
+                            {% for culture in profile.subjects_culture_s.cultures %}
+                            <th style="border-right :1px solid #cccccc; width:16%">{{ culture.type }}</th>
+                            {% endfor %}
                         </tr>
                         <tr class="mytr">
-                            {% if profile.subjects_culture_e.culture_e1 %}
-                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
-                            {% else %}
-                                <td class="mytd">미이수</td>
-                            {% endif %}
-                            {% if profile.subjects_culture_e.culture_e2 %}
-                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
-                            {% else %}
-                                <td class="mytd">미이수</td>
-                            {% endif %}
+                            {% for culture in profile.subjects_culture_s.cultures %}
+                                {% if culture.subjects %}
+                                    <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
+                                {% else %}
+                                    <td class="mytd">미이수</td>
+                                {% endif %}
+                            {% endfor %}
                         </tr>
                     </table>
                     <div class="partdiv">
-                        {% if profile.subjects_culture_e.cnt == 2 %}
+                        {% if profile.subjects_culture_e.cnt >= 3 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
                             <span style="color:#d32f2f">선택영역이 부족합니다</span>
@@ -772,7 +768,7 @@
         draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
         draw(Number(75), '.pie-culture-b', '#6188E8');
         draw(Number({{ profile.subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
-        draw(Number(66), '.pie-culture-s', '#6188E8');
+        draw(Number({{ profile.subjects_culture_s.cnt|div:3 }}), '.pie-culture-s', '#6188E8');
     });
 
     var modal1 = document.getElementById("modal-major-i");
