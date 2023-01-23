@@ -332,39 +332,6 @@
             <span class="close" id="close-culture-b">&times;</span>
             <br>
             <div class="modal_div">
-                <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 선택영역 현황
-                    </div>
-                    <div class="mydiv">'선택영역'을 필수로 3개 이상 이수해야 졸업요건을 충족합니다.</div>
-                    <hr>
-                    <table class="mytable" style="padding-bottom:1rem">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.0}}
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.1}}
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.2}}
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.3}}
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">{{core_selection.standard_cs_part.4}}
-                            </th>
-                            <th style="width:16%">
-                                {{core_selection.standard_cs_part.5}}<br>
-                                <span style="font-size: 1rem;">(융합과창업)</span>
-                            </th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd" style='color:#17a55e; font-weight: bold;'>
-                            <td class="mytd">
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="partdiv">
-                        <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
-                        <span style="color:#d32f2f">선택영역이 부족합니다</span>
-                    </div>
-                </div>
                 <!-- 필수과목 -->
                 <div class="p_div">
                     <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
@@ -391,64 +358,6 @@
                     <div class="partdiv">
                         <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
                         <span style="color:#d32f2f">필수과목이 부족합니다</span>
-                    </div>
-                </div>
-                <!-- 필수과목 추천 -->
-                <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 필수과목 추천
-                    </div>
-                    <div class="mydiv">
-                        최근 1년의 강의목록 중 동일 과목으로 추천합니다.<br>
-                        (다른 과목이 추천될 때 : 과목명이 변경된 것입니다. / 과목이 추천되지 않을 때 : 더 이상 열리지 않는 과목입니다.)
-                    </div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:15%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:15%">선택영역</th>
-                            <th style="width:15%">학점</th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd">{{ q.subject_num }}</td>
-                            <td class="mytd">{{ q.subject_name }}</td>
-                            <td class="mytd">{{ q.classification }}</td>
-                            <td class="mytd">{{ q.selection }}</td>
-                            <td class="mytd" style="border-right :0px">{{ q.grade|floatformat }}</td>
-                        </tr>
-                    </table>
-                    <br><br><br>
-                </div>
-
-                <!-- 추천과목 -->
-                <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
-                    </div>
-                    <div class="mydiv">
-                        전체 사용자들이 가장 많이 수강했던 교양과목 순으로 추천합니다. (부족한 필수영역을 우선으로 보여줍니다)
-                    </div>
-                    <hr>
-                    <table class="mytable">
-                        <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
-                            <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                            <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
-                            <th style="border-right :1px solid #cccccc; width:12%">선택영역</th>
-                            <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                            <th style="width:12%">수강순위</th>
-                        </tr>
-                        <tr class="mytr">
-                            <td class="mytd">{{ a.subject_num }}</td>
-                            <td class="mytd">{{ a.subject_name }}</td>
-                            <td class="mytd">{{ a.classification }}</td>
-                            <td class="mytd">{{ a.selection }}</td>
-                            <td class="mytd">{{ a.grade|floatformat }}</td>
-                            <td class="mytd" style="border-right :0px">{{ b }}</td>
-                        </tr>
-                    </table>
-                    <div class="partdiv">
-                        <a href="/statistics/" style="color:rgb(164, 26, 55); text-decoration : underline">더 추천받고 싶다면 클릭! 🚗</a>
                     </div>
                 </div>
             </div>
