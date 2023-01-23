@@ -156,11 +156,11 @@
                         <div class="result_content_info test">기준 과목</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="3개"></div>
+                        <div class="result_content_number count">3개</div>
                         <div class="result_content_info">이수 과목</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="1개" style="color: #e89292;"></div>
+                        <div class="result_content_number count" style="color: #e89292;">1개</div>
                         <div class="result_content_info">필요 과목</div>
                     </div>
                     <div class="result_content">
@@ -178,26 +178,26 @@
             <!-- 상명핵심역량교양 -->
             <div class="resultbox">
                 <div class="result_name">
-                    상명핵심역량교양<button class="rbutton" style="float: right;" id="btn-culture-s">Recommend</button>
+                    상명핵심역량교양<button class="rbutton" style="float: right;" id="btn-culture-e">Recommend</button>
                 </div>
                 <div class="result_container">
                     <div class="result_content">
-                        <div class="result_content_number">{{ profile.year.culture }}</div>
-                        <div class="result_content_info test">총 기준 학점</div>
+                        <div class="result_content_number">2개</div>
+                        <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_culture|zero_filter }}"></div>
-                        <div class="result_content_info">총 이수 학점</div>
+                        <div class="result_content_number count">1개</div>
+                        <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.culture|sub:profile.subjects_culture }}" style="color: #e89292;"></div>
-                        <div class="result_content_info">필요 학점</div>
+                        <div class="result_content_number count" style="color: #e89292;">1개</div>
+                        <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
-                            <div class="pie-culture-s pie-chart-css">
+                            <div class="pie-culture-e pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_culture|div:profile.year.culture }}"></span>
+                                    <span class="center percent" percent = "50"></span>
                                 </div>
                             </div>
                         </div>
@@ -212,22 +212,22 @@
                 </div>
                 <div class="result_container">
                     <div class="result_content">
-                        <div class="result_content_number">{{ profile.year.culture }}</div>
-                        <div class="result_content_info test">총 기준 학점</div>
+                        <div class="result_content_number">3개</div>
+                        <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_culture|zero_filter }}"></div>
-                        <div class="result_content_info">총 이수 학점</div>
+                        <div class="result_content_number count">2개</div>
+                        <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.culture|sub:profile.subjects_culture }}" style="color: #e89292;"></div>
-                        <div class="result_content_info">필요 학점</div>
+                        <div class="result_content_number count" style="color: #e89292;">1개</div>
+                        <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture-s pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_culture|div:profile.year.culture }}"></span>
+                                    <span class="center percent" percent = "66"></span>
                                 </div>
                             </div>
                         </div>
@@ -326,10 +326,10 @@
         </div>
     </div>
 
-    <!-- 교필 -->
-    <div id="modal-culture-e" class="modal">
+    <!-- 기초교양 -->
+    <div id="modal-culture-b" class="modal">
         <div class="modal-content">
-            <span class="close" id="close-culture-e">&times;</span>
+            <span class="close" id="close-culture-b">&times;</span>
             <br>
             <div class="modal_div">
                 <!-- 필수과목 -->
@@ -388,7 +388,7 @@
         </div>
     </div>
 
-    <!-- 교선 -->
+    <!-- 상명핵심역량교양 -->
     <div id="modal-culture-e" class="modal">
         <div class="modal-content">
             <span class="close" id="close-culture-e">&times;</span>
@@ -517,10 +517,10 @@
         </div>
     </div>
 
-    <!-- 균필 -->
-    <div id="myModal9" class="modal">
+    <!-- 균형교양 -->
+    <div id="modal-culture-s" class="modal">
         <div class="modal-content">
-            <span class="close" id="close9">&times;</span>
+            <span class="close" id="close-culture-s">&times;</span>
             <br>
             <div class="modal_div">
                 <div class="p_div">
@@ -572,7 +572,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- 기교 -->
     <div id="myModal5" class="modal">
@@ -803,33 +802,39 @@
         draw(Number({{ profile.subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
         draw(Number({{ profile.subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
         draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
-        draw(Number({{ profile.subjects_culture_e|div:profile.year.culture_e }}), '.pie-culture-e', '#6188E8');
-        draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture-b', '#6188E8');
+        draw(Number(75), '.pie-culture-b', '#6188E8');
+        draw(Number(50), '.pie-culture-e', '#6188E8');
+        draw(Number(66), '.pie-culture-s', '#6188E8');
     });
 
     var modal1 = document.getElementById("modal-major-i");
     var modal2 = document.getElementById("modal-major-s");
-    var modal3 = document.getElementById("modal-culture-e");
-    var modal4 = document.getElementById("modal-culture-b");
+    var modal3 = document.getElementById("modal-culture-b");
+    var modal4 = document.getElementById("modal-culture-e");
+    var modal5 = document.getElementById("modal-culture-s");
 
     var btn1 = document.getElementById("btn-major-i");
     var btn2 = document.getElementById("btn-major-s");
-    var btn3 = document.getElementById("btn-culture-e");
-    var btn4 = document.getElementById("btn-culture-b");
+    var btn3 = document.getElementById("btn-culture-b");
+    var btn4 = document.getElementById("btn-culture-e");
+    var btn5 = document.getElementById("btn-culture-s");
 
     var span1 = document.getElementById("close-major-i");
     var span2 = document.getElementById("close-major-s");
-    var span3 = document.getElementById("close-culture-e");
-    var span4 = document.getElementById("close-culture-b");
+    var span3 = document.getElementById("close-culture-b");
+    var span4 = document.getElementById("close-culture-e");
+    var span5 = document.getElementById("close-culture-s");
 
     Btnclick(btn1, modal1);
     Btnclick(btn2, modal2);
     Btnclick(btn3, modal3);
     Btnclick(btn4, modal4);
+    Btnclick(btn5, modal5);
 
     Spanclick(span1, modal1);
     Spanclick(span2, modal2);
     Spanclick(span3, modal3);
     Spanclick(span4, modal4);
+    Spanclick(span5, modal5);
 </script>
 </html>
