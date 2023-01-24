@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
@@ -81,4 +81,18 @@ def change_pw(request):
             user.save()
         else:
             messages.error("⚠️ 비밀번호가 일치하지 않습니다.")
+    return redirect('core:mypage')
+
+
+def update(request):
+    if request.method == "POST":
+        password = request.POST["password"]
+        context = information(ecampus(request.user.username, password))
+        if context:
+            department = Department.objects.filter(name=context['department'])
+            if department:
+                Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
+                return redirect('core:mypage')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+        messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
