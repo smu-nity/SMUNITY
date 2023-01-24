@@ -34,9 +34,6 @@
         <div class="go_result_box">
             <button onclick="go_result()" class="go_result_btn">졸업요건 검사하기</button>
         </div>
-        <div class="go_result_box">
-            <button onclick="go_en_result()" class="go_result_btn">공학인증 검사하기</button>
-        </div>
     </div>
 </div>
 
@@ -62,37 +59,11 @@
                         <td class="my_box_table_1st_td">학번</td>
                         <td>{{ user.username }}</td>
                     </tr>
-                    <tr>
-                        <td class="my_box_table_1st_td">고전독서현황</td>
-                        <td>
-                                서양 - 3권 /
-                                동양 - 5권
-                                <br>
-                                동서양 - 2권 /
-                                과학사상 - 3권
-                        </td>
-                    </tr>
                 </table>
             </div>
 
             <!-- 비번 / 영어 수정 / 회원 탈퇴 -->
             <div class="my_box">
-                <div class="my_box_title">
-                    <div><i class="fas fa-book"></i>전공상태 및 영어인증</div>
-                    <button id='b2' class="my_box_mod_btn">수정하기</button>
-                </div>
-                <hr style="margin-bottom:0.8rem;">
-                <table>
-                    <tr>
-                        <td class="my_box_table_1st_td">전공상태</td>
-                        <td>심화전공</td>
-                    </tr>
-                    <tr>
-                        <td class="my_box_table_1st_td">영어인증</td>
-                        <td>해당사항없음</td>
-                    </tr>
-                </table>
-                <hr style="margin-bottom:0.8rem; margin-top:0.8rem;">
                 <div class="my_box_title">
                     <div><i class="fas fa-key"></i>비밀번호 변경</div>
                     <button id='b3' class="my_box_mod_btn">변경하기</button>
@@ -586,7 +557,6 @@
 
     // 모달 켜는 버튼 id
     var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
-    var b2 = document.getElementById("b2");     // 2. 영어+전공상태 수정
     var b3 = document.getElementById("b3");     // 3. 비번 변경
     var b4 = document.getElementById("b4");     // 4. 기이수성적 업로드
     var b5 = document.getElementById("b5");     // 5. 커스텀
@@ -594,7 +564,6 @@
 
     // 모달 id
     var m1 = document.getElementById('m1');
-    var m2 = document.getElementById('m2');
     var m3 = document.getElementById('m3');
     var m4 = document.getElementById('m4');
     var m5 = document.getElementById('m5');
@@ -610,7 +579,6 @@
 
     // 모달 키는 함수 호출
     Btnclick(b1, m1);
-    Btnclick(b2, m2);
     Btnclick(b3, m3);
     Btnclick(b4, m4);
     Btnclick(b5, m5);
