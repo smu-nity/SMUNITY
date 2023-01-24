@@ -31,4 +31,4 @@ class Culture(models.Model):    # 교양 과목 테이블
     subdomain = models.CharField(max_length=20, choices=SUBTYPE_CHOICES_E+SUBTYPE_CHOICES_S)    # 세부 영역명
 
     def __str__(self):
-        return f'[{self.type}] {self.subject}'
+        return f'[{self.type} - {self.subdomain}] {self.subject}'

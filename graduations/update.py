@@ -3,7 +3,7 @@ import os
 import json
 from django.core.wsgi import get_wsgi_application
 
-from config.settings import SUBTYPE_CHOICES_S
+from config.settings import SUBTYPE_CHOICES_S, SUBTYPE_CHOICES_E
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 application = get_wsgi_application()
@@ -26,6 +26,22 @@ def subjects(year, semester):
 def major(dept, subjects, type):
     for subject in subjects:
         Major.objects.create(department=dept, subject=subject, type=type)
+
+
+# 상명핵심역량교양 과목 업데이트 스크립트
+def culture_e():
+    dic = {
+        '창의적문제해결역량': ['HALF7023', 'HALF9326', 'HALR1040', 'HALR1046', 'HALR1230'],
+        '융복합역량': ['HALF9037', 'HALF9320', 'HALF9374', 'HALF9378', 'HALR1235'],
+        '다양성존중역량': ['HALF0122', 'HALF9340', 'HALF9343', 'HALF9360', 'HALR1041'],
+        '윤리실천역량': ['HALF9238', 'HALF9280', 'HALF9379', 'HALF9404', 'HALR1038']
+    }
+    types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_E))
+    for type in types:
+        numbers = dic[type]
+        for number in numbers:
+            subject = Subject.objects.get(number=number)
+            Culture.objects.create(subject=subject, type='교필', domain='핵심', subdomain=type)
 
 
 # 균형교양 과목 업데이트 스크립트
@@ -56,5 +72,5 @@ if __name__ == '__main__':
     # dept, subjects = Department.objects.get(name='컴퓨터과학전공'), Subject.objects.filter(number__in=numbers)
     # major(dept, subjects, '1전심')
 
-    culture_s()
+    culture_e()
 
