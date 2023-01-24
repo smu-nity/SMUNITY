@@ -138,7 +138,10 @@ YEAR_CHOICES = (("커스텀", "커스텀"), ("2017", "17학번"), ("2018", "18�
 TYPE_CHOICES = (("1전선", "1전선"), ("1전심", "1전심"), ("교선", "교선"), ("교필", "교필"), ("1교직", "1교직"), ("1전필", "1전필"),  ("일선", "일선"))
 SUBTYPE_CHOICES_E = (("창의적문제해결역량", "창의적문제해결역량"), ("융복합역량", "융복합역량"), ("다양성존중역량", "다양성존중역량"), ("윤리실천역량", "윤리실천역량"))
 SUBTYPE_CHOICES_S = (("인문", "인문"), ("사회", "사회"), ("자연", "자연"), ("공학", "공학"), ("예술", "예술"))
-
+CULTURES_1 = [{'number': 'HALR1032', 'name': '사고와표현', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1050\nHALR1231', 'name': 'EnglishFoundations\n기초수학', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1238\nHALR1239', 'name': '컴퓨팅사고와데이터의이해\n알고리즘과게임콘텐츠', 'credit': 2, 'semester': '1 | 2'}, {'number': '학과별 상이', 'name': '교양과인성', 'credit': 1, 'semester': '1, 2'}]
+CULTURES_2 = [{'number': 'HALR1032', 'name': '사고와표현', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1050\nHALR1231', 'name': 'EnglishFoundations\n기초수학', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1238', 'name': '컴퓨팅사고와데이터의이해', 'credit': 2, 'semester': '1'}, {'number': 'HALR1239', 'name': '알고리즘과게임콘텐츠', 'credit': 2, 'semester': '2'}, {'number': '학과별 상이', 'name': '교양과인성', 'credit': 1, 'semester': '1, 2'}]
+CULTURES_DIC1 = [['사고와표현'], ['English', '영어', '수학', '미적분학'], ['컴퓨팅사고', '알고리즘'], ['교양과인성']]
+CULTURES_DIC2 = [['사고와표현'], ['English', '영어', '수학', '미적분학'], ['컴퓨팅사고'], ['알고리즘'], ['교양과인성']]
 
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
