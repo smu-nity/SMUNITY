@@ -2,6 +2,7 @@ import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.hashers import check_password
 from accounts.models import Profile
 from core.models import Course
 from graduations.models import Subject, Major
@@ -74,3 +75,12 @@ def result(request):
         'profile': profile, 'major_i': Major.objects.filter(department=profile.department, type='1전심').exclude(subject_id__in=courses.values_list('subject', flat=True)),
         'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True))}
     return render(request, 'core/result.html', context)
+
+def member_del(request):
+    if request.method == "POST":
+        pw_del = request.POST["pw_del"]
+        user = request.user
+        if check_password(pw_del, user.password):
+            user.delete()
+            return redirect('/')
+    return render(request, 'accounts/mypage.html')
