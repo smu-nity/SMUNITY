@@ -416,6 +416,47 @@
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
                             <span style="color:#d32f2f">선택영역이 부족합니다</span>
+                            <br><br>
+                            {% if not subjects_culture_e.culture_e1 %}
+                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>창의적문제해결역량/융복합역량 추천과목</div>
+                            <table class="mytable">
+                                <tr class="myth" style="background-color: #f8f8f8;">
+                                    <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                                    <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                                    <th style="border-right :1px solid #cccccc; width:12%">영역</th>
+                                    <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                                </tr>
+                                {% for culture in subjects_culture_e.subject_e1 %}
+                                <tr class="mytr">
+                                    <td class="mytd">{{ culture.subject.number }}</td>
+                                    <td class="mytd">{{ culture.subject.name }}</td>
+                                    <td class="mytd">{{ culture.subdomain }}</td>
+                                    <td class="mytd">{{ culture.subject.credit }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            {% endif %}
+
+                            {% if not subjects_culture_e.culture_e2 %}
+                                <br>
+                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>다양성존중역량/윤리실천역량 추천과목</div>
+                            <table class="mytable">
+                                <tr class="myth" style="background-color: #f8f8f8;">
+                                    <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                                    <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                                    <th style="border-right :1px solid #cccccc; width:12%">영역</th>
+                                    <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                                </tr>
+                                {% for culture in subjects_culture_e.subject_e2 %}
+                                <tr class="mytr">
+                                    <td class="mytd">{{ culture.subject.number }}</td>
+                                    <td class="mytd">{{ culture.subject.name }}</td>
+                                    <td class="mytd">{{ culture.subdomain }}</td>
+                                    <td class="mytd">{{ culture.subject.credit }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

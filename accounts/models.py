@@ -52,14 +52,17 @@ class Profile(models.Model):    # 사용자 프로필
 
     def subjects_culture_e(self):
         from core.models import Course
+        from graduations.models import Culture
         culture_e1 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='창의적문제해결역량')|Q(domain__contains='융복합역량')))
         culture_e2 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='다양성존중역량')|Q(domain__contains='윤리실천역량')))
+        subject_e1 = Culture.objects.filter(Q(subdomain__contains='창의적문제해결역량')|Q(subdomain__contains='융복합역량'))
+        subject_e2 = Culture.objects.filter(Q(subdomain__contains='다양성존중역량')|Q(subdomain__contains='윤리실천역량'))
         cnt = 0
         if culture_e1:
             cnt += 1
         if culture_e2:
             cnt += 1
-        context = {'cnt': cnt, 'culture_e1': culture_e1, 'culture_e2': culture_e2}
+        context = {'cnt': cnt, 'culture_e1': culture_e1, 'culture_e2': culture_e2, 'subject_e1': subject_e1, 'subject_e2': subject_e2}
         return context
 
     def subjects_culture_s(self):
