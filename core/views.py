@@ -16,7 +16,7 @@ def home(request):
 @login_required
 def mypage(request):
     user = request.user
-    profile = Profile.objects.get(user=user)
+    profile = get_object_or_404(Profile, user=user)
     courses = Course.objects.filter(user=user).order_by('-pk')
     return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
 
