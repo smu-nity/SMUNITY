@@ -36,18 +36,18 @@
                         <div class="result_content_info">기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_all|zero_filter }}"></div>
+                        <div class="result_content_number count" data-count="{{ subjects_all|zero_filter }}"></div>
                         <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.all|sub:profile.subjects_all }}" style="color: #e89292;"></div>
+                        <div class="result_content_number count" data-count="{{ profile.year.all|sub:subjects_all }}" style="color: #e89292;"></div>
                         <div class="result_content_info" >필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-all pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent="{{ profile.subjects_all|div:profile.year.all }}"></span>
+                                    <span class="center percent" percent="{{ subjects_all|div:profile.year.all }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -66,18 +66,18 @@
                         <div class="result_content_info test">기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_major_i|zero_filter }}"></div>
+                        <div class="result_content_number count" data-count="{{ subjects_major_i|zero_filter }}"></div>
                         <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.major_i|sub:profile.subjects_major_i }}" style="color: #e89292;"></div>
+                        <div class="result_content_number count" data-count="{{ profile.year.major_i|sub:subjects_major_i }}" style="color: #e89292;"></div>
                         <div class="result_content_info">필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-major-i pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_major_i|div:profile.year.major_i }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_major_i|div:profile.year.major_i }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -96,18 +96,18 @@
                         <div class="result_content_info test">기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_major_s|zero_filter }}"></div>
+                        <div class="result_content_number count" data-count="{{ subjects_major_s|zero_filter }}"></div>
                         <div class="result_content_info">이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.major_s|sub:profile.subjects_major_s }}" style="color: #e89292;"></div>
+                        <div class="result_content_number count" data-count="{{ profile.year.major_s|sub:subjects_major_s }}" style="color: #e89292;"></div>
                         <div class="result_content_info">필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-major-s pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_major_s|div:profile.year.major_s }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_major_s|div:profile.year.major_s }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -126,18 +126,18 @@
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.subjects_culture|zero_filter }}"></div>
+                        <div class="result_content_number count" data-count="{{ subjects_culture|zero_filter }}"></div>
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ profile.year.culture|sub:profile.subjects_culture }}" style="color: #e89292;"></div>
+                        <div class="result_content_number count" data-count="{{ profile.year.culture|sub:subjects_culture }}" style="color: #e89292;"></div>
                         <div class="result_content_info">필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_culture|div:profile.year.culture }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_culture|div:profile.year.culture }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -186,18 +186,18 @@
                         <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count">{{ profile.subjects_culture_e.cnt }}개</div>
+                        <div class="result_content_number count">{{ subjects_culture_e.cnt }}개</div>
                         <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" style="color: #e89292;">{{ 2|sub:profile.subjects_culture_e.cnt }}개</div>
+                        <div class="result_content_number count" style="color: #e89292;">{{ 2|sub:subjects_culture_e.cnt }}개</div>
                         <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture-e pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_culture_e.cnt|div:2 }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_culture_e.cnt|div:2 }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -216,18 +216,18 @@
                         <div class="result_content_info test">기준 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count">{{ profile.subjects_culture_s.cnt }}개</div>
+                        <div class="result_content_number count">{{ subjects_culture_s.cnt }}개</div>
                         <div class="result_content_info">이수 영역</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" style="color: #e89292;">{{ 3|sub:profile.subjects_culture_s.cnt }}개</div>
+                        <div class="result_content_number count" style="color: #e89292;">{{ 3|sub:subjects_culture_s.cnt }}개</div>
                         <div class="result_content_info">필요 영역</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture-s pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ profile.subjects_culture_s.cnt|div:3 }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_culture_s.cnt|div:3 }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -276,10 +276,10 @@
                 </div>
                 {% endif %}
                 <div class="partdiv">
-                    {% if profile.subjects_major_i|div:profile.year.major_i == 100 %}
+                    {% if subjects_major_i|div:profile.year.major_i == 100 %}
                         <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
                     {% else %}
-                        <span style="color:#d32f2f">{{ profile.year.major_i|sub:profile.subjects_major_i }} 학점이 부족합니다</span>
+                        <span style="color:#d32f2f">{{ profile.year.major_i|sub:subjects_major_i }} 학점이 부족합니다</span>
                     {% endif %}
                 </div>
             </div>
@@ -324,10 +324,10 @@
                 </div>
                 {% endif %}
                 <div class="partdiv">
-                    {% if profile.subjects_major_s|div:profile.year.major_s == 100 %}
+                    {% if subjects_major_s|div:profile.year.major_s == 100 %}
                         <span style="color:#17a55e"> 기준 학점을 만족했습니다. </span>
                     {% else %}
-                        <span style="color:#d32f2f">{{ profile.year.major_s|sub:profile.subjects_major_s }} 학점이 부족합니다</span>
+                        <span style="color:#d32f2f">{{ profile.year.major_s|sub:subjects_major_s }} 학점이 부족합니다</span>
                     {% endif %}
                 </div>
             </div>
@@ -399,12 +399,12 @@
                             </th>
                         </tr>
                         <tr class="mytr">
-                            {% if profile.subjects_culture_e.culture_e1 %}
+                            {% if subjects_culture_e.culture_e1 %}
                                 <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
                             {% else %}
                                 <td class="mytd">미이수</td>
                             {% endif %}
-                            {% if profile.subjects_culture_e.culture_e2 %}
+                            {% if subjects_culture_e.culture_e2 %}
                                 <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
                             {% else %}
                                 <td class="mytd">미이수</td>
@@ -412,7 +412,7 @@
                         </tr>
                     </table>
                     <div class="partdiv">
-                        {% if profile.subjects_culture_e.cnt == 2 %}
+                        {% if subjects_culture_e.cnt == 2 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
                             <span style="color:#d32f2f">선택영역이 부족합니다</span>
@@ -436,12 +436,12 @@
                     <hr>
                     <table class="mytable" style="padding-bottom:1rem">
                         <tr class="myth" style="background-color: #f8f8f8;">
-                            {% for culture in profile.subjects_culture_s.cultures %}
+                            {% for culture in subjects_culture_s.cultures %}
                             <th style="border-right :1px solid #cccccc; width:16%">{{ culture.type }}</th>
                             {% endfor %}
                         </tr>
                         <tr class="mytr">
-                            {% for culture in profile.subjects_culture_s.cultures %}
+                            {% for culture in subjects_culture_s.cultures %}
                                 {% if culture.subjects %}
                                     <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
                                 {% else %}
@@ -451,7 +451,7 @@
                         </tr>
                     </table>
                     <div class="partdiv">
-                        {% if profile.subjects_culture_s.cnt >= 3 %}
+                        {% if subjects_culture_s.cnt >= 3 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
                             <span style="color:#d32f2f">선택영역이 부족합니다</span>
@@ -687,13 +687,13 @@
 <script type="text/javascript" rel="javascript" src="{% static 'js/modal.js' %}"></script>
 <script>
     $(window).ready(function() {
-        draw(Number({{ profile.subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
-        draw(Number({{ profile.subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
-        draw(Number({{ profile.subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
-        draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
+        draw(Number({{ subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
+        draw(Number({{ subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
+        draw(Number({{ subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
+        draw(Number({{ subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
         draw(Number({{ culture_cnt|div:profile.year.culture_cnt }}), '.pie-culture-b', '#6188E8');
-        draw(Number({{ profile.subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
-        draw(Number({{ profile.subjects_culture_s.cnt|div:3 }}), '.pie-culture-s', '#6188E8');
+        draw(Number({{ subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
+        draw(Number({{ subjects_culture_s.cnt|div:3 }}), '.pie-culture-s', '#6188E8');
     });
 
     var modal1 = document.getElementById("modal-major-i");
