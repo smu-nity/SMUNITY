@@ -152,22 +152,22 @@
                 </div>
                 <div class="result_container">
                     <div class="result_content">
-                        <div class="result_content_number">4개</div>
+                        <div class="result_content_number">{{ profile.year.culture_cnt }}개</div>
                         <div class="result_content_info test">기준 과목</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count">3개</div>
+                        <div class="result_content_number count">{{ culture_cnt }}개</div>
                         <div class="result_content_info">이수 과목</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count" style="color: #e89292;">1개</div>
+                        <div class="result_content_number count" style="color: #e89292;">{{ profile.year.culture_cnt|sub:culture_cnt }}개</div>
                         <div class="result_content_info">필요 과목</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-culture-b pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "75"></span>
+                                    <span class="center percent" percent = "{{ culture_cnt|div:profile.year.culture_cnt }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -352,13 +352,20 @@
                             <td class="mytd">{{ culture.name|linebreaks }}</td>
                             <td class="mytd">{{ culture.credit }}</td>
                             <td class="mytd">{{ culture.semester }}</td>
-                            <td class="mytd">이수</td>
+                            {% if culture.course %}
+                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
+                            {% else %}
+                                <td class="mytd">미이수</td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>
                     <div class="partdiv">
-                        <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
-                        <span style="color:#d32f2f">필수과목이 부족합니다</span>
+                        {% if culture_cnt == profile.year.culture_cnt %}
+                            <span style="color:#17a55e">필수과목 조건을 만족하셨습니다</span>
+                        {% else %}
+                            <span style="color:#d32f2f">필수과목이 부족합니다</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -676,7 +683,7 @@
         draw(Number({{ profile.subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
         draw(Number({{ profile.subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
         draw(Number({{ profile.subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
-        draw(Number(75), '.pie-culture-b', '#6188E8');
+        draw(Number({{ culture_cnt|div:profile.year.culture_cnt }}), '.pie-culture-b', '#6188E8');
         draw(Number({{ profile.subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
         draw(Number({{ profile.subjects_culture_s.cnt|div:3 }}), '.pie-culture-s', '#6188E8');
     });
