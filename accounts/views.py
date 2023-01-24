@@ -80,5 +80,5 @@ def change_pw(request):
             user.set_password(request.POST["password1"])
             user.save()
         else:
-            messages.error("비밀번호 불일치")
+            messages.error("⚠️ 비밀번호가 일치하지 않습니다.")
     return redirect('core:mypage')

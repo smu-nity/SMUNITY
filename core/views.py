@@ -104,5 +104,6 @@ def member_del(request):
         user = request.user
         if check_password(pw_del, user.password):
             user.delete()
-            return redirect('/')
-    return render(request, 'accounts/mypage.html')
+            return redirect('home')
+    messages.error(request, '⚠️ 비밀번호가 일치하지 않습니다.')
+    return redirect('core:mypage')
