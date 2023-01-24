@@ -282,12 +282,13 @@
             <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">비밀번호 변경</div>
             <hr style="width:80%; margin-top:1.3rem;">
             <!-- 폼 -->
-            <form action="/f_mod_pw/" method="post" name='form3' onsubmit="return check_up3()">
+            <form action="{% url 'accounts:change' %}" method="post" name='form3' onsubmit="return check_up3()">
+                {% csrf_token %}
                 <div class="regi_box">
                     <label>새 비밀번호</label>
-                    <input id="pw1" type="password" name="password">
+                    <input id="pw1" type="password" name="password1">
                     <label>비밀번호 재확인</label>
-                    <input id="pw2" type="password">
+                    <input id="pw2" type="password" name="password2">
                 </div>
                 <input type='submit' class='login_btn' value='변경하기' style="margin:2.5rem 0 2rem 0;">
             </form>

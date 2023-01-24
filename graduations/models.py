@@ -18,6 +18,8 @@ class Subject(models.Model):    # 과목 테이블
 class Major(models.Model):      # 전공 과목 테이블
     department = models.ForeignKey(Department, on_delete=models.CASCADE)    # 학과
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)          # 과목
+    grade = models.CharField(max_length=3)                                  # 학년
+    semester = models.CharField(max_length=3)                               # 학기
     type = models.CharField(max_length=3, choices=(('1전선', '1전선'), ('1전심', '1전심')))  # 이수구분
 
     def __str__(self):
@@ -27,8 +29,8 @@ class Major(models.Model):      # 전공 과목 테이블
 class Culture(models.Model):    # 교양 과목 테이블
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)                     # 과목
     type = models.CharField(max_length=2, choices=(('교필', '교필'), ('교선', '교선')))     # 이수구분
-    domain = models.CharField(max_length=2, choices=(('핵심', '핵심'), ('기초', '기초'), ('균형', '균형'), ('일반', '일반')))  # 영역명
+    domain = models.CharField(max_length=2, choices=(('핵심', '핵심'), ('균형', '균형')))   # 영역명
     subdomain = models.CharField(max_length=20, choices=SUBTYPE_CHOICES_E+SUBTYPE_CHOICES_S)    # 세부 영역명
 
     def __str__(self):
-        return f'[{self.type}] {self.subject}'
+        return f'[{self.type} - {self.subdomain}] {self.subject}'

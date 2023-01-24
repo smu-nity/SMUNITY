@@ -1,9 +1,11 @@
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
 from accounts.models import Profile
+from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2, SUBTYPE_CHOICES_S
 from core.models import Course
 from graduations.models import Subject, Major
 
@@ -15,7 +17,7 @@ def home(request):
 @login_required
 def mypage(request):
     user = request.user
-    profile = Profile.objects.get(user=user)
+    profile = get_object_or_404(Profile, user=user)
     courses = Course.objects.filter(user=user).order_by('-pk')
     return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
 
@@ -71,9 +73,29 @@ def course_update(request):
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
     courses = Course.objects.filter(user=request.user)
+
+    culture_b = CULTURES_1
+    culture_dic = CULTURES_DIC1
+    if int(profile.year.year) > 2019:
+        culture_b = CULTURES_2
+        culture_dic = CULTURES_DIC2
+
+    cnt = 0
+    for culture, dics in zip(culture_b, culture_dic):
+        q = Q()
+        for key in dics:
+            q |= Q(domain__contains=key)
+        course = Course.objects.filter(q)
+        culture['course'] = course
+        if course:
+            cnt += 1
+
     context = {
         'profile': profile, 'major_i': Major.objects.filter(department=profile.department, type='1전심').exclude(subject_id__in=courses.values_list('subject', flat=True)),
-        'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True))}
+        'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True)), 'culture_b': culture_b, 'culture_cnt': cnt,
+        'subjects_all': profile.subjects_all(), 'subjects_major_i': profile.subjects_major_i(), 'subjects_major_s': profile.subjects_major_s(), 'subjects_culture': profile.subjects_culture,
+        'subjects_culture_e': profile.subjects_culture_e(), 'subjects_culture_s': profile.subjects_culture_s()
+    }
     return render(request, 'core/result.html', context)
 
 def member_del(request):
