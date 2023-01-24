@@ -72,7 +72,7 @@ class Profile(models.Model):    # 사용자 프로필
         types.remove(self.department.type)
 
         for type in types:
-            subjects = Course.objects.filter(user=self.user, domain__contains=type)
+            subjects = Course.objects.filter(Q(user=self.user)&Q(domain__contains=type)&Q(domain__contains='균형'))
             cultures.append({'type': type, 'subjects': subjects})
             if subjects:
                 cnt += 1

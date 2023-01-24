@@ -227,7 +227,7 @@
                         <div class="pie-chart">
                             <div class="pie-culture-s pie-chart-css">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "66"></span>
+                                    <span class="center percent" percent = "{{ profile.subjects_culture_s.cnt|div:3 }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -247,11 +247,13 @@
                 <!-- 추천과목 -->
                 <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
                 </div>
-                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
+                <div class="mydiv">전공 심화 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                 <hr>
                 {% if major_i %}
                 <table class="mytable">
                     <tr class="myth" style="background-color: #f8f8f8;">
+                        <th style="border-right :1px solid #cccccc; width:12%">학년</th>
+                        <th style="border-right :1px solid #cccccc; width:12%">학기</th>
                         <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
                         <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
                         <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
@@ -259,6 +261,8 @@
                     </tr>
                     {% for major in major_i %}
                     <tr class="mytr">
+                        <td class="mytd">{{ major.grade }}</td>
+                        <td class="mytd">{{ major.semester }}</td>
                         <td class="mytd">{{ major.subject.number }}</td>
                         <td class="mytd">{{ major.subject.name }}</td>
                         <td class="mytd">{{ major.type }}</td>
@@ -291,11 +295,13 @@
                 <!-- 추천과목 -->
                 <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
                 </div>
-                <div class="mydiv">같은 학과 사용자들이 가장 많이 수강했던 전심과목 순으로 추천합니다.</div>
+                <div class="mydiv">전공 선택 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                 <hr>
                 {% if major_s %}
                 <table class="mytable">
                     <tr class="myth" style="background-color: #f8f8f8;">
+                        <th style="border-right :1px solid #cccccc; width:12%">학년</th>
+                        <th style="border-right :1px solid #cccccc; width:12%">학기</th>
                         <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
                         <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
                         <th style="border-right :1px solid #cccccc; width:16%">이수구분</th>
@@ -303,6 +309,8 @@
                     </tr>
                     {% for major in major_s %}
                     <tr class="mytr">
+                        <td class="mytd">{{ major.grade }}</td>
+                        <td class="mytd">{{ major.semester }}</td>
                         <td class="mytd">{{ major.subject.number }}</td>
                         <td class="mytd">{{ major.subject.name }}</td>
                         <td class="mytd">{{ major.type }}</td>
@@ -334,9 +342,9 @@
             <div class="modal_div">
                 <!-- 필수과목 -->
                 <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 필수과목 목록
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 기초교양 과목 목록
                     </div>
-                    <div class="mydiv">필수과목을 모두 이수해야 졸업요건을 충족합니다.</div>
+                    <div class="mydiv">기초교양 과목을 모두 이수해야 졸업요건을 충족합니다.</div>
                     <hr>
                     <table class="mytable">
                         <tr class="myth" style="background-color: #f8f8f8;">
@@ -379,9 +387,9 @@
             <br>
             <div class="modal_div">
                 <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i>선택영역 현황
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 상명핵심역량교양 영역 현황
                     </div>
-                    <div class="mydiv">'선택영역'을 필수로 3개 이상 이수해야 졸업요건을 충족합니다.</div>
+                    <div class="mydiv">'상명핵심역량교양'의 모든 영역을 이수해야 졸업요건을 충족합니다.</div>
                     <hr>
                     <table class="mytable" style="padding-bottom:1rem">
                         <tr class="myth" style="background-color: #f8f8f8;">
@@ -422,9 +430,9 @@
             <br>
             <div class="modal_div">
                 <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i>선택영역 현황
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 균형교양 영역 현황
                     </div>
-                    <div class="mydiv">'선택영역'을 필수로 3개 이상 이수해야 졸업요건을 충족합니다.</div>
+                    <div class="mydiv">'균형교양' 중 영역 3개 이상 이수해야 졸업요건을 충족합니다.</div>
                     <hr>
                     <table class="mytable" style="padding-bottom:1rem">
                         <tr class="myth" style="background-color: #f8f8f8;">
@@ -443,7 +451,7 @@
                         </tr>
                     </table>
                     <div class="partdiv">
-                        {% if profile.subjects_culture_e.cnt >= 3 %}
+                        {% if profile.subjects_culture_s.cnt >= 3 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
                             <span style="color:#d32f2f">선택영역이 부족합니다</span>
