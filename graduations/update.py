@@ -3,6 +3,7 @@ import os
 import json
 from django.core.wsgi import get_wsgi_application
 
+from accounts.models import Department
 from config.settings import SUBTYPE_CHOICES_S, SUBTYPE_CHOICES_E
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
@@ -66,11 +67,11 @@ if __name__ == '__main__':
     # for d in data:
     #     subjects(d[0], d[1])
 
-    # numbers = ['HASW0001', 'HAEA9225', 'HAEA9237', 'HAFL7001', 'HAEA0001', 'HAEA0017', 'HAEA0027', 'HAEA9236',
-    #            'HAEA9241', 'HAFL0002', 'HAEA0005', 'HAEA9239', 'HAEA9243', 'HAEA0020', 'HAEA9229', 'HAEA9240']  # 1전선
-    # numbers = ['HAEA0004', 'HAEA0008', 'HAEA0012', 'HAEZ0003']  # 1전심
-    # dept, subjects = Department.objects.get(name='컴퓨터과학전공'), Subject.objects.filter(number__in=numbers)
-    # major(dept, subjects, '1전심')
+    numbers = ['HASW0001', 'HAEA9225', 'HAEA9237', 'HAFL7001', 'HAEA0001', 'HAEA0017', 'HAEA0027', 'HAEA9236',
+               'HAEA9241', 'HAFL0002', 'HAEA0005', 'HAEA9239', 'HAEA9243', 'HAEA0020', 'HAEA9229', 'HAEA9240']  # 1전선
+    numbers = ['HAEA0004', 'HAEA0008', 'HAEA0012', 'HAEZ0003']  # 1전심
+    dept, subjects = Department.objects.get(name='컴퓨터과학전공'), Subject.objects.filter(number__in=numbers)
+    major(dept, subjects, '1전심')
 
     culture_e()
 

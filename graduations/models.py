@@ -18,6 +18,8 @@ class Subject(models.Model):    # 과목 테이블
 class Major(models.Model):      # 전공 과목 테이블
     department = models.ForeignKey(Department, on_delete=models.CASCADE)    # 학과
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)          # 과목
+    grade = models.CharField(max_length=3)                                  # 학년
+    semester = models.CharField(max_length=3)                               # 학기
     type = models.CharField(max_length=3, choices=(('1전선', '1전선'), ('1전심', '1전심')))  # 이수구분
 
     def __str__(self):
