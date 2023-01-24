@@ -362,10 +362,11 @@
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
 
-            <form action="/f_delete_account/" method="post" name='form6' onsubmit="return check_up6()">
+            <form action="{% url 'core:member_del' %}" method="POST" name='form6' onsubmit="return check_up6()">
+                {% csrf_token %}
                 <div class="regi_box">
                     <label style="text-align: center;">아이디</label>
-                    <input type="text" name="student_id" placeholder='{{ request.session.id }}'
+                    <input type="text" name="student_id" placeholder='{{ user.username }}'
                         style="background-color:rgb(248,249,250);" disabled>
                     <label style="text-align: center;">비밀번호</label>
                     <input type="password" id="pw6" name="pw" placeholder="PASSWORD">

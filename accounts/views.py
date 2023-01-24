@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile
@@ -70,6 +71,7 @@ def register(request):
     form = UserForm()
     context['form'] = form
     return render(request, 'accounts/register.html', context)
+
 
 def change_pw(request):
     if request.method == "POST":
