@@ -62,12 +62,10 @@ def register(request):
                 Profile.objects.create(user=user, year=year, department=department, name=context['name'])
                 auth_login(request, user)  # 로그인
                 return redirect('core:mypage')
-
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
             return redirect('accounts:agree')
-        messages.error(request, '⚠️ 비밀번호가 동일하지 않습니다.')
+        messages.error(request, form.errors['password2'][0])
         return redirect('accounts:register')
-
     form = UserForm()
     context['form'] = form
     return render(request, 'accounts/register.html', context)
