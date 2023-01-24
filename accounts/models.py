@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from django.shortcuts import get_object_or_404
-
 from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES
 
 
@@ -67,7 +65,7 @@ class Profile(models.Model):    # 사용자 프로필
     def subjects_culture_s(self):
         from core.models import Course
         cnt = 0
-        cultures = []
+        cultures, subs = [], []
         types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
         types.remove(self.department.type)
 
@@ -76,5 +74,8 @@ class Profile(models.Model):    # 사용자 프로필
             cultures.append({'type': type, 'subjects': subjects})
             if subjects:
                 cnt += 1
-        context = {'cnt': cnt, 'cultures': cultures}
+            else:
+                from graduations.models import Culture
+                subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
+        context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context

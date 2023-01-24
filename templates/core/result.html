@@ -454,7 +454,28 @@
                         {% if subjects_culture_s.cnt >= 3 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
-                            <span style="color:#d32f2f">선택영역이 부족합니다</span>
+                            <span style="color:#d32f2f">선택영역이 부족합니다</span><br>
+
+                            {% for subject in subjects_culture_s.subjects %}
+                                <br>
+                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>{{ subject.type }} 추천과목</div>
+                            <table class="mytable">
+                                <tr class="myth" style="background-color: #f8f8f8;">
+                                    <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
+                                    <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
+                                    <th style="border-right :1px solid #cccccc; width:12%">영역</th>
+                                    <th style="border-right :1px solid #cccccc; width:8%">학점</th>
+                                </tr>
+                                {% for culture in subject.cultures %}
+                                <tr class="mytr">
+                                    <td class="mytd">{{ culture.subject.number }}</td>
+                                    <td class="mytd">{{ culture.subject.name }}</td>
+                                    <td class="mytd">{{ culture.subdomain }}</td>
+                                    <td class="mytd">{{ culture.subject.credit }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            {% endfor %}
                         {% endif %}
                     </div>
                 </div>
