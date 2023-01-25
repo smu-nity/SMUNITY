@@ -35,15 +35,15 @@
     <!-- 입력란 -->
     <div class="white_sec">
         <div class="container">
-            <form method="post" name='regi_form' onsubmit="return check_up()">
+            <form action="{% url 'accounts:change' %}" method="post" name='regi_form' onsubmit="return check_up()">
                 {% csrf_token %}
                 <div class="regi_box">
                     <label>ID</label>
-                    <input type="text" name="id" value="{{ user }}" style="background-color:rgb(248,249,250);" readonly>
+                    <input type="text" name="id" value="{{ username }}" style="background-color:rgb(248,249,250);" readonly>
                     <label>비밀번호</label>
-                    <input id="pw1" type="password" name="password">
+                    <input id="pw1" type="password" name="password1">
                     <label>비밀번호 재확인</label>
-                    <input id="pw2" type="password">
+                    <input id="pw2" type="password" name="password2">
                 </div>
                 <input type='submit' class='regi_btn' value='변경하기'>
             </form>
