@@ -74,6 +74,8 @@ def register(request):
 def change_pw(request):
     if request.method == "POST":
         user = request.user
+        if not user.is_authenticated:
+            user = get_object_or_404(User, username=request.POST["id"])
         if request.POST["password1"] == request.POST["password2"]:
             user.set_password(request.POST["password1"])
             user.save()
@@ -96,12 +98,12 @@ def update(request):
     return redirect('core:mypage')
 
 def find_pw(request):
-    # if request.method == "POST":
-    #     # ecampus 존재하면
-    #     username = request.POST["id"]
-    #     password = request.POST["password1"]
-    #     context = information(ecampus(username, password))
-    #     if context:
-    #         return render(request, 'accounts/changePW.html')
-    return redirect()
-
+    if request.method == "POST":
+        # ecampus 존재하면
+        username = request.POST["id"]
+        password = request.POST["password1"]
+        context = information(ecampus(username, password))
+        if context:
+            return render(request, 'accounts/changePW.html', {'username': username})
+    messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
+    return redirect('accounts:login')
