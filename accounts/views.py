@@ -94,3 +94,14 @@ def update(request):
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
+
+def find_pw(request):
+    if request.method == "POST":
+        # ecampus 존재하면
+        username = request.POST["id"]
+        password = request.POST["password1"]
+        context = information(ecampus(username, password))
+        if context:
+            return render(request, 'accounts/changePW.html')
+    return redirect()
+
