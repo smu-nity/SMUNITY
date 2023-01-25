@@ -96,12 +96,12 @@ def update(request):
     return redirect('core:mypage')
 
 def find_pw(request):
-    if request.method == "POST":
-        # ecampus 존재하면
-        username = request.POST["id"]
-        password = request.POST["password1"]
-        context = information(ecampus(username, password))
-        if context:
-            return render(request, 'accounts/changePW.html')
+    # if request.method == "POST":
+    #     # ecampus 존재하면
+    #     username = request.POST["id"]
+    #     password = request.POST["password1"]
+    #     context = information(ecampus(username, password))
+    #     if context:
+    #         return render(request, 'accounts/changePW.html')
     return redirect()
 
