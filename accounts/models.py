@@ -26,8 +26,8 @@ class Department(models.Model):     # 학과 테이블
 
 
 class Profile(models.Model):    # 사용자 프로필
-    user = models.ForeignKey(User, on_delete=models.CASCADE)    # 장고 유저
-    year = models.ForeignKey(Year, on_delete=models.CASCADE)    # 학번
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)    # 장고 유저
+    year = models.ForeignKey(Year, on_delete=models.CASCADE)                # 학번
     department = models.ForeignKey(Department, on_delete=models.CASCADE)    # 학과
     name = models.CharField(max_length=10)  # 본명
 
