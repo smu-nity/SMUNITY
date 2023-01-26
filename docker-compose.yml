@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    build: ./nginx
+    build: ./nginx/nginx
     volumes:
       - static_volume:/usr/src/app/static
       - ./data/certbot/conf:/etc/letsencrypt
