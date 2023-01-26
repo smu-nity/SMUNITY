@@ -153,7 +153,7 @@ function toType( obj ) {
 var
 	version = "3.6.0",
 
-	// Define a local copy of jQuery
+	// Define a nginx_local copy of jQuery
 	jQuery = function( selector, context ) {
 
 		// The jQuery object is actually just the init constructor 'enhanced'
@@ -5550,7 +5550,7 @@ jQuery.event = {
 			// Utilize native event to ensure correct state for checkable inputs
 			setup: function( data ) {
 
-				// For mutual compressibility with _default, replace `this` access with a local var.
+				// For mutual compressibility with _default, replace `this` access with a nginx_local var.
 				// `|| data` is dead code meant only to preserve the variable through minification.
 				var el = this || data;
 
@@ -5567,7 +5567,7 @@ jQuery.event = {
 			},
 			trigger: function( data ) {
 
-				// For mutual compressibility with _default, replace `this` access with a local var.
+				// For mutual compressibility with _default, replace `this` access with a nginx_local var.
 				// `|| data` is dead code meant only to preserve the variable through minification.
 				var el = this || data;
 
@@ -9012,7 +9012,7 @@ var
 	rantiCache = /([?&])_=[^&]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
 
-	// #7653, #8125, #8152: local protocol detection
+	// #7653, #8125, #8152: nginx_local protocol detection
 	rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
 	rnoContent = /^(?:GET|HEAD)$/,
 	rprotocol = /^\/\//,
