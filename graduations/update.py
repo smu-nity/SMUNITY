@@ -38,13 +38,13 @@ def major(dept, subjects):
 # 학년도 업데이트 스크립트
 def year():
     datas = [
-        {'year': '2017', 'major_i': 15, 'major_s': 45, 'culture': 36, 'culture_cnt': 4, 'all': 130},
-        {'year': '2018', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 4, 'all': 130},
-        {'year': '2019', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 4, 'all': 130},
-        {'year': '2020', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 5, 'all': 130},
-        {'year': '2021', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 5, 'all': 130},
-        {'year': '2022', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 5, 'all': 130},
-        {'year': '2023', 'major_i': 15, 'major_s': 60, 'culture': 33, 'culture_cnt': 5, 'all': 130}
+        {'year': '2017', 'major_i': 15, 'major_s': 45, 'culture': 36, 'culture_cnt': 3, 'all': 130},
+        {'year': '2018', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 3, 'all': 130},
+        {'year': '2019', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 3, 'all': 130},
+        {'year': '2020', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 4, 'all': 130},
+        {'year': '2021', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 4, 'all': 130},
+        {'year': '2022', 'major_i': 15, 'major_s': 45, 'culture': 33, 'culture_cnt': 4, 'all': 130},
+        {'year': '2023', 'major_i': 15, 'major_s': 60, 'culture': 33, 'culture_cnt': 4, 'all': 130}
     ]
     for data in datas:
         Year.objects.create(year=data['year'], major_i=data['major_i'], major_s=data['major_s'], culture=data['culture'], culture_cnt=data['culture_cnt'], all=data['all'])
@@ -62,10 +62,11 @@ def departments():
 # 상명핵심역량교양 과목 업데이트 스크립트
 def culture_e():
     dic = {
-        '창의적문제해결역량': ['HALF7023', 'HALF9326', 'HALR1040', 'HALR1046', 'HALR1230'],
-        '융복합역량': ['HALF9037', 'HALF9320', 'HALF9374', 'HALF9378', 'HALR1235'],
-        '다양성존중역량': ['HALF0122', 'HALF9340', 'HALF9343', 'HALF9360', 'HALR1041'],
-        '윤리실천역량': ['HALF9238', 'HALF9280', 'HALF9379', 'HALF9404', 'HALR1038']
+        '전문지식탐구역량': ['HALF9398', 'HALF9408', 'HALF9425', 'HALF9426'],
+        '창의적문제해결역량': ['HALF9427', 'HALF9428', 'HALR1040', 'HALR1230'],
+        '융복합역량': ['HALF9429', 'HALF9430', 'HALF9431', 'HALF9432'],
+        '다양성존중역량': ['HALF9433', 'HALF9434', 'HALF9435', 'HALF9436'],
+        '윤리실천역량': ['HALF9404', 'HALF9437', 'HALF9438', 'HALR1038']
     }
     types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_E))
     for type in types:
@@ -81,11 +82,11 @@ def culture_e():
 # 균형교양 과목 업데이트 스크립트
 def culture_s():
     dic = {
-        '인문': ['HALF0102', 'HALF0202', 'HALF0302', 'HALF9013', 'HALF9014', 'HALF9015', 'HALF9302', 'HALF9305', 'HALF9338', 'HALF9358'],
-        '사회': ['HALF0447', 'HALF4033', 'HALF5013', 'HALF9030', 'HALF9031', 'HALF9245', 'HALF9266'], # HALF9421
-        '자연': ['HALF0502', 'HALF0537', 'HALF9041', 'HALF9239', 'HALF9252', 'HALF9321', 'HALF9362', 'HALF9403'],
-        '공학': ['HALF6024', 'HALF9319', 'HALF9329', 'HALF9405', 'HALF9420'],
-        '예술': ['HALF0601', 'HALF0628', 'HALF6071', 'HALF6072', 'HALF9061', 'HALF9356']
+        '인문': ['HALF0102', 'HALF0122', 'HALF0202', 'HALF0302', 'HALF9013', 'HALF9014', 'HALF9015', 'HALF9302', 'HALF9305', 'HALF9338', 'HALF9358', 'HALF9374', 'HALF9439'],
+        '사회': ['HALF0447', 'HALF4033', 'HALF5013', 'HALF9030', 'HALF9031', 'HALF9037', 'HALF9245', 'HALF9266', 'HALF9280', 'HALF9320', 'HALF9326', 'HALF9343', 'HALF9379', 'HALF9421', 'HALF9440', 'HALR1041', 'HALR1235'],
+        '자연': ['HALF0502', 'HALF0537', 'HALF9041', 'HALF9239', 'HALF9252', 'HALF9321', 'HALF9362', 'HALF9378', 'HALF9403'],
+        '공학': ['HALF6024', 'HALF9319', 'HALF9329', 'HALF9405', 'HALF9420', 'HALF9441'],
+        '예술': ['HALF0601', 'HALF0628', 'HALF6071', 'HALF6072', 'HALF7023', 'HALF9061', 'HALF9356']
     }
     types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
     for type in types:
@@ -124,6 +125,7 @@ def subjects_all():
             ['2018', '20'], ['2018', '21'], ['2019', '10'], ['2019', '11'], ['2019', '20'], ['2019', '21'],
             ['2020', '10'], ['2020', '11'], ['2020', '20'], ['2020', '21'], ['2021', '10'], ['2021', '11'],
             ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'], ['2023', '10']]
+    data.reverse()
     for d in data:
         subjects(d[0], d[1])
 
