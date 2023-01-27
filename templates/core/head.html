@@ -1,77 +1,49 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
+{% block css %}
     <link rel="stylesheet" href="{% static 'css/head.css' %}">
-    <!-- 웹 참조-->
-    <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/e8a335040d.js" crossorigin="anonymous"></script>
-    <script src="static/js/includeHTML.js"></script>
-    <!-- 웹 폰트 참조-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-219523848-1"></script>
+{% endblock %}
 
-    <title>Please Graduate</title>
-</head>
+{% block main_area %}
+    <header class="header">
 
+    <div class="navbar_logo">
+        <a href="/"><img src="static/img/deer1.png"></a>
+    </div>
 
-<body>
-
-<!-- 로고 / 메뉴바-->
-<header class="header">
-
-    <ul class="navbar_menu1">
-        <li>
-            <a href='/statistics/' style="color: white">꿀교양찾기</a>
-        </li>
-
+    <ul class="navbar_menu">
         <li>
             <a href='https://forms.gle/f2vUqVg9wQFneBLf7' target="_blank" style="color: white">피드백하기</a>
         </li>
+
+    <!--            {% if request.session.id %}-->
+        <li>
+            <a href='/mypage/' style="color: white">마이페이지</a>
+        </li>
+    <!--            {% endif %}-->
+
+        <li>
+            <!-- 로그인 세션 활용 -->
+    <!--                {% if not request.session.id %}-->
+    <!--                <a href='/login/'>로그인</a>-->
+<!--            {% else %}-->
+            <a href='javascript:logout()' style="color: white">로그아웃</a>
+    <!--                {% endif %}-->
+        </li>
     </ul>
 
-    <div class="navbar_logo">
-        <a href="/"><img src="static/img/logo.png"></a>
-    </div>
-    {% if user.is_authenticated %}
-        <ul class="navbar_menu2">
-            <li>
-                <a href="{% url 'core:mypage' %}" style="color: white">마이페이지</a>
-            </li>
-            <li>
-                <a href="{% url 'accounts:logout' %}" style="color: white">로그아웃</a>
-            </li>
-        </ul>
-    {% else %}
-        <ul class="navbar_menu2">
-            <li>
-                <a href="{% url 'accounts:login' %}" style="color: white">로그인</a>
-            </li>
-
-            <li>
-                <a href="{% url 'accounts:agree' %}" style="color: white">회원가입</a>
-            </li>
-        </ul>
-    {% endif %}
 </header>
 
-
-<div class="bg_wrapper">
+    <div class="bg_wrapper">
     <!-- 메인 -->
     <header class="main_bg">
         <!-- 소개 문구 -->
-        <div class="bg_text_btn" style="margin-top: 250px;">
-            <div class="bg_small_text fadein_text">
-                간편한 졸업요건 검사 사이트
+        <div class="bg_text_btn">
+            <div class="bg_small_text fadein_text" style="letter-spacing:1px;">
+                상명대 졸업요건 검사 사이트
             </div>
-            <div class="bg_big_text fadein_text">
-                Please Graduate
+            <div class="bg_big_text fadein_text" style="letter-spacing:8px;">
+                SMUNITY
             </div>
             <div class="bg_btn">
                 <button class="bg_btn_style" onclick="location.href='/mypage/'">검사하기</button>
@@ -81,59 +53,16 @@
         <!-- 방문자 + 검사횟수 -->
         <div class="num_visit">
             <div>
-                <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : 322
+                <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : 322 명
             </div>
             <div style="margin-top:0.4rem;">
-                <i class="fas fa-mouse" style="margin-right:0.1rem;"></i>&nbsp;&nbsp;총 방문자 수 : 35213
+                <i class="fas fa-mouse" style="margin-right:0.1rem;"></i>&nbsp;&nbsp;총 방문자 수 : 35213 명
             </div>
             <div style="margin-top:0.4rem;">
-                <i class="fas fa-user"></i>&nbsp;&nbsp;총 회원 수 : 6392
+                <i class="fas fa-user"></i>&nbsp;&nbsp;총 회원 수 : 6392 명
             </div>
         </div>
     </header>
 
 </div>
-
-
-</body>
-
-<script>
-    includeHTML();
-    function logout() {
-        var back_head = confirm('✋ 정말 로그아웃 하시겠습니까? ✋');
-        if (back_head) {
-            location.href = '/f_logout/';
-        }
-    }
-
-    // 쿠키 여부에 따라 모달창 렌더링
-    var unlook_cookie = document.cookie.match('(^|;) ?' + 'is_unlook_0821' + '=([^;]*)(;|$)');
-    if (unlook_cookie == null) {
-        document.getElementById('myModal').style.display = 'block';
-    }
-
-    // 모달 창 끄기 + 다시 보지 않음 쿠키 설정
-    var Spanclick_set_cookie = function (x, y) {
-        x.onclick = function () {
-            y.style.display = "none";
-            var chk = document.getElementById('unlook');
-            // 체크하고 누르면 쿠키 생성
-            if (chk.checked) {
-                var date = new Date();
-                date.setTime(date.getTime() + 60 * 24 * 60 * 60 * 1000);
-                document.cookie = 'is_unlook_0821' + '=' + 'unlook' + ';expires=' + date.toUTCString() + ';path=/';
-            }
-        }
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    var modal = document.getElementById('myModal');
-    var span = document.getElementsByClassName("close")[0];
-
-    Spanclick_set_cookie(span, modal);
-</script>
-</html>
+{% endblock %}
