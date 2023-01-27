@@ -1,6 +1,8 @@
 # 장고 환경
 import os
 import json
+import requests
+from bs4 import BeautifulSoup as bs
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
@@ -24,15 +26,19 @@ def subjects(year, semester):
 
 
 # 전공 과목 업데이트 스크립트
-def major(dept, subjects):
-    for subject in subjects:
-        numbers = subject['numbers']
-        for number in numbers:
-            try:
-                sub = Subject.objects.get(number=number)
-                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
-            except:
-                print(number)
+def major(dept, url):
+    request = requests.get(url)
+    source = request.text
+    soup = bs(source, "html.parser")
+    datas = soup.find_all('tr')[1:]
+    for data in datas:
+        subject, number = data.find_all('td')[:4], subject[3].text
+        try:
+            sub = Subject.objects.get(number=number)
+            Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
+                                 type=subject[2].text)
+        except:
+            print(number)
 
 
 # 학년도 업데이트 스크립트
@@ -117,6 +123,34 @@ def major_computer_science():
         {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAEA0026', 'HAEA9231']},
     ]
     major(dept, subjects)
+
+
+# 융합공과대학 전공 업데이트 스크립트
+def majors():
+    departments = [
+        {'dept': Department.objects.get(name='컴퓨터과학전공'),
+         'url': 'https://cs.smu.ac.kr/cs/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03005'},
+        {'dept': Department.objects.get(name='전기공학전공'),
+         'url': 'https://electric.smu.ac.kr/electric/admissions/curriculum.do?&srYear=2023&srShyr=all&srSust=03208'},
+        {'dept': Department.objects.get(name='지능IOT융합전공'),
+         'url': 'https://www.smu.ac.kr/aiot/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03209'},
+        {'dept': Department.objects.get(name='게임전공'),
+         'url': 'https://game.smu.ac.kr/game01/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03006'},
+        {'dept': Department.objects.get(name='애니메이션전공'),
+         'url': 'https://animation.smu.ac.kr/animation/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03007'},
+        {'dept': Department.objects.get(name=''),
+         'url': ''},
+        {'dept': Department.objects.get(name=''),
+         'url': ''},
+        {'dept': Department.objects.get(name=''),
+         'url': ''},
+        {'dept': Department.objects.get(name=''),
+         'url': ''},
+        {'dept': Department.objects.get(name=''),
+         'url': ''}
+    ]
+    for department in departments:
+        major(department['dept'], department['url'])
 
 
 # 전체 업데이트 스크립트 (17학년도 ~ 22학년도)
