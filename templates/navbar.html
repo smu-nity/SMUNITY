@@ -1,0 +1,28 @@
+{% load static %}
+<nav class="navbar">
+    <div class="navbar_logo">
+        <a href="{% url 'home' %}" ><img src="{% static 'img/deerlogo.png' %}"></a>
+    </div>
+
+    <ul class="navbar_menu">
+        <li>
+            <a href='https://forms.gle/f2vUqVg9wQFneBLf7' target="_blank">피드백하기</a>
+        </li>
+        <li>
+            <a href="{% url 'core:mypage' %}">마이페이지</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+            <a href="{% url 'accounts:logout' %}">로그아웃</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'accounts:login' %}">로그인</a>
+        </li>
+
+        <li>
+            <a href="{% url 'accounts:agree' %}">회원가입</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
