@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES
+from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
 
 
 class Year(models.Model):   # 학년도 테이블
@@ -52,17 +52,20 @@ class Profile(models.Model):    # 사용자 프로필
 
     def subjects_culture_e(self):
         from core.models import Course
-        from graduations.models import Culture
-        culture_e1 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='창의적문제해결역량')|Q(domain__contains='융복합역량')))
-        culture_e2 = Course.objects.filter(Q(user=self.user)&(Q(domain__contains='다양성존중역량')|Q(domain__contains='윤리실천역량')))
-        subject_e1 = Culture.objects.filter(Q(subdomain__contains='창의적문제해결역량')|Q(subdomain__contains='융복합역량'))
-        subject_e2 = Culture.objects.filter(Q(subdomain__contains='다양성존중역량')|Q(subdomain__contains='윤리실천역량'))
         cnt = 0
-        if culture_e1:
-            cnt += 1
-        if culture_e2:
-            cnt += 1
-        context = {'cnt': cnt, 'culture_e1': culture_e1, 'culture_e2': culture_e2, 'subject_e1': subject_e1, 'subject_e2': subject_e2}
+        cultures, subs = [], []
+        types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_E))
+
+        for type in types:
+            subjects = Course.objects.filter(Q(user=self.user) & Q(domain__contains=type))
+            cultures.append({'type': type, 'subjects': subjects})
+            if subjects:
+                cnt += 1
+            else:
+                from graduations.models import Culture
+                subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
+        context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
+        print(context)
         return context
 
     def subjects_culture_s(self):

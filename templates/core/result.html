@@ -387,59 +387,35 @@
             <br>
             <div class="modal_div">
                 <div class="p_div">
-                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 상명핵심역량교양 영역 현황
+                    <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 균형교양 영역 현황
                     </div>
-                    <div class="mydiv">'상명핵심역량교양'의 모든 영역을 이수해야 졸업요건을 충족합니다.</div>
+                    <div class="mydiv">'균형교양' 중 영역 3개 이상 이수해야 졸업요건을 충족합니다.</div>
                     <hr>
                     <table class="mytable" style="padding-bottom:1rem">
                         <tr class="myth" style="background-color: #f8f8f8;">
-                            <th style="border-right :1px solid #cccccc; width:16%">창의적문제해결역량/융복합역량
-                            </th>
-                            <th style="border-right :1px solid #cccccc; width:16%">다양성존중역량/윤리실천역량
-                            </th>
+                            {% for culture in subjects_culture_e.cultures %}
+                            <th style="border-right :1px solid #cccccc; width:16%">{{ culture.type }}</th>
+                            {% endfor %}
                         </tr>
                         <tr class="mytr">
-                            {% if subjects_culture_e.culture_e1 %}
-                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
-                            {% else %}
-                                <td class="mytd">미이수</td>
-                            {% endif %}
-                            {% if subjects_culture_e.culture_e2 %}
-                                <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
-                            {% else %}
-                                <td class="mytd">미이수</td>
-                            {% endif %}
+                            {% for culture in subjects_culture_e.cultures %}
+                                {% if culture.subjects %}
+                                    <td class="mytd" style='color:#17a55e; font-weight: bold;'>이수</td>
+                                {% else %}
+                                    <td class="mytd">미이수</td>
+                                {% endif %}
+                            {% endfor %}
                         </tr>
                     </table>
                     <div class="partdiv">
-                        {% if subjects_culture_e.cnt == 2 %}
+                        {% if subjects_culture_e.cnt >= 2 %}
                             <span style="color:#17a55e">선택영역 조건을 만족하셨습니다</span>
                         {% else %}
-                            <span style="color:#d32f2f">선택영역이 부족합니다</span>
-                            <br><br>
-                            {% if not subjects_culture_e.culture_e1 %}
-                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>창의적문제해결역량/융복합역량 추천과목</div>
-                            <table class="mytable">
-                                <tr class="myth" style="background-color: #f8f8f8;">
-                                    <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
-                                    <th style="border-right :1px solid #cccccc; width:40%">과목명</th>
-                                    <th style="border-right :1px solid #cccccc; width:12%">영역</th>
-                                    <th style="border-right :1px solid #cccccc; width:8%">학점</th>
-                                </tr>
-                                {% for culture in subjects_culture_e.subject_e1 %}
-                                <tr class="mytr">
-                                    <td class="mytd">{{ culture.subject.number }}</td>
-                                    <td class="mytd">{{ culture.subject.name }}</td>
-                                    <td class="mytd">{{ culture.subdomain }}</td>
-                                    <td class="mytd">{{ culture.subject.credit }}</td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                            {% endif %}
+                            <span style="color:#d32f2f">선택영역이 부족합니다</span><br>
 
-                            {% if not subjects_culture_e.culture_e2 %}
+                            {% for subject in subjects_culture_e.subjects %}
                                 <br>
-                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>다양성존중역량/윤리실천역량 추천과목</div>
+                            <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> {{ subject.type }} 추천과목</div>
                             <table class="mytable">
                                 <tr class="myth" style="background-color: #f8f8f8;">
                                     <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>
@@ -447,7 +423,7 @@
                                     <th style="border-right :1px solid #cccccc; width:12%">영역</th>
                                     <th style="border-right :1px solid #cccccc; width:8%">학점</th>
                                 </tr>
-                                {% for culture in subjects_culture_e.subject_e2 %}
+                                {% for culture in subject.cultures %}
                                 <tr class="mytr">
                                     <td class="mytd">{{ culture.subject.number }}</td>
                                     <td class="mytd">{{ culture.subject.name }}</td>
@@ -456,7 +432,7 @@
                                 </tr>
                                 {% endfor %}
                             </table>
-                            {% endif %}
+                            {% endfor %}
                         {% endif %}
                     </div>
                 </div>
