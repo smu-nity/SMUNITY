@@ -1,68 +1,77 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 {% load static %}
-{% block css %}
+<head>
+    <title>smunity</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/head.css' %}">
-{% endblock %}
+</head>
 
-{% block main_area %}
+<body>
+    <!-- 로고 / 메뉴바-->
     <header class="header">
-
-    <div class="navbar_logo">
-        <a href="/"><img src="static/img/deer1.png"></a>
-    </div>
-
-    <ul class="navbar_menu">
-        <li>
-            <a href='https://forms.gle/f2vUqVg9wQFneBLf7' target="_blank" style="color: white">피드백하기</a>
-        </li>
-
-    <!--            {% if request.session.id %}-->
-        <li>
-            <a href='/mypage/' style="color: white">마이페이지</a>
-        </li>
-    <!--            {% endif %}-->
-
-        <li>
-            <!-- 로그인 세션 활용 -->
-    <!--                {% if not request.session.id %}-->
-    <!--                <a href='/login/'>로그인</a>-->
-<!--            {% else %}-->
-            <a href='javascript:logout()' style="color: white">로그아웃</a>
-    <!--                {% endif %}-->
-        </li>
-    </ul>
-
-</header>
-
-    <div class="bg_wrapper">
-    <!-- 메인 -->
-    <header class="main_bg">
-        <!-- 소개 문구 -->
-        <div class="bg_text_btn">
-            <div class="bg_small_text fadein_text" style="letter-spacing:1px;">
-                상명대 졸업요건 검사 사이트
-            </div>
-            <div class="bg_big_text fadein_text" style="letter-spacing:8px;">
-                SMUNITY
-            </div>
-            <div class="bg_btn">
-                <button class="bg_btn_style" onclick="location.href='/mypage/'">검사하기</button>
-            </div>
+        <div class="navbar_logo">
+            <a href="{% url 'home' %}" ><img src="{% static 'img/logo.png' %}"></a>
         </div>
 
-        <!-- 방문자 + 검사횟수 -->
-        <div class="num_visit">
-            <div>
-                <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : 322 명
-            </div>
-            <div style="margin-top:0.4rem;">
-                <i class="fas fa-mouse" style="margin-right:0.1rem;"></i>&nbsp;&nbsp;총 방문자 수 : 35213 명
-            </div>
-            <div style="margin-top:0.4rem;">
-                <i class="fas fa-user"></i>&nbsp;&nbsp;총 회원 수 : 6392 명
-            </div>
-        </div>
+        <ul class="navbar_menu">
+            <li>
+                <a href='https://forms.gle/f2vUqVg9wQFneBLf7' target="_blank" style="color: white">피드백하기</a>
+            </li>
+            <li>
+                <a href="{% url 'core:mypage' %}" style="color: white">마이페이지</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'accounts:logout' %}" style="color: white">로그아웃</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'accounts:login' %}" style="color: white">로그인</a>
+            </li>
+
+            <li>
+                <a href="{% url 'accounts:agree' %}" style="color: white">회원가입</a>
+            </li>
+            {% endif %}
+        </ul>
     </header>
 
-</div>
-{% endblock %}
+    <div class="bg_wrapper">
+        <!-- 메인 -->
+        <header class="main_bg">
+            <!-- 소개 문구 -->
+            <div class="bg_text_btn">
+                <div class="bg_small_text fadein_text" style="letter-spacing:1px;">
+                    상명대 졸업요건 검사 사이트
+                </div>
+                <div class="bg_big_text fadein_text" style="letter-spacing:8px;">
+                    SMUNITY
+                </div>
+                <div class="bg_btn">
+                    <button class="bg_btn_style" onclick="location.href={% url 'core:mypage' %}">검사하기</button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    {% include 'footer.html'%}
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/e8a335040d.js" crossorigin="anonymous"></script>
+    <!-- 예외처리 -->
+    {% if messages %}
+    {% for m in messages %}
+    {% if m.tags == 'error' %}
+    <script>
+        alert('{{ m }}');
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
