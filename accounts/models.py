@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from config.settings import YEAR_CHOICES, DEPARTMENT_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
+from config.settings import YEAR_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
 
 
 class Year(models.Model):   # 학년도 테이블
@@ -18,7 +18,7 @@ class Year(models.Model):   # 학년도 테이블
 
 class Department(models.Model):     # 학과 테이블
     college = models.CharField(max_length=20, choices=COLLEGE_CHOICES)  # 소속 단과대
-    name = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)  # 학과 이름
+    name = models.CharField(max_length=20)  # 학과 이름
     type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)    # 균교 타입
     call = models.CharField(max_length=20, null=True, blank=True)       # 학과 사무실 전화번호
     def __str__(self):
