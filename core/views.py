@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
 from accounts.models import Profile
-from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2, SUBTYPE_CHOICES_S
+from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
 
@@ -19,7 +19,7 @@ def mypage(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)
     courses = Course.objects.filter(user=user).order_by('-pk')
-    return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses})
+    return render(request, 'core/mypage.html', {'user': user, 'profile': profile, 'courses': courses, 'short': courses[:5]})
 
 
 @login_required
@@ -33,7 +33,7 @@ def custom(request):
 def course_delete(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     if request.user != course.user or not course.custom:
-        messages.error(request, '삭제권한이 없습니다.')
+        messages.error(request, '⚠️삭제권한이 없습니다.')
         return redirect('core:custom')
     course.delete()
     return redirect('core:custom')
@@ -66,7 +66,7 @@ def course_update(request):
     except:
         messages.error(request, '⚠️ 엑셀 내용이 다릅니다! 수정하지 않은 엑셀파일을 올려주세요.')
         return redirect('core:mypage')
-    messages.success(request, '업데이트성공')
+    messages.error(request, '기이수과목이 업데이트 되었습니다.')
     return redirect('core:mypage')
 
 @login_required
@@ -104,6 +104,7 @@ def member_del(request):
         user = request.user
         if check_password(pw_del, user.password):
             user.delete()
+            messages.error(request, '회원 탈퇴 되었습니다.')
             return redirect('home')
     messages.error(request, '⚠️ 비밀번호가 일치하지 않습니다.')
     return redirect('core:mypage')

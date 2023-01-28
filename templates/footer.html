@@ -1,30 +1,12 @@
 <!--footer-->
 <footer class="footer">
-    <ul class="footer_list">
-        <li>
-            - Contact -
-        </li>
-        <li>
-            Email :
-        </li>
-        <li>
-            GitHub :
-        </li>
-    </ul>
-    <h2 class="copyright">Copyright
-        <i class="far fa-copyright"></i>
-        2021 PleaseGraduate team
-    </h2>
+    <div class="copyright">
+        <h4>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=choihm9903@naver.com" style="color: grey;">Email</a> | <a href="https://github.com/hyunmin0317/smunity" style="color: grey;">Github</a>
+        </h4>
+        <h4>Copyright
+            <i class="far fa-copyright"></i>
+            2023 Smunity
+        </h4>
+    </div>
 </footer>
-
-<!-- 예외처리 -->
-{% if messages %}
-{% for m in messages %}
-<!-- 로그인 오류 / 기타오류 발생시 -->
-{% if m.tags == 'error' %}
-<script>
-    alert('{{ m }}');
-</script>
-{% endif %}
-{% endfor %}
-{% endif %}

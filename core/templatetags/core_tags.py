@@ -26,3 +26,12 @@ def zero_filter(a):
     if a:
         return a
     return 0
+
+@register.filter
+def plus(a, b):
+    A, B = a, b
+    if not a:
+        A = 0
+    if not b:
+        B = 0
+    return A + B

@@ -34,6 +34,9 @@ class Profile(models.Model):    # 사용자 프로필
     def __str__(self):
         return f'[{self.year}] {self.user} {self.name} - {self.department}'
 
+    def tostring(self):
+        return f'{self.user.username} {self.name}'
+
     def subjects_all(self):
         from core.models import Course
         return Course.objects.filter(user=self.user).aggregate(Sum('credit'))['credit__sum']
@@ -65,7 +68,6 @@ class Profile(models.Model):    # 사용자 프로필
                 from graduations.models import Culture
                 subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
-        print(context)
         return context
 
     def subjects_culture_s(self):
