@@ -87,3 +87,10 @@ class Profile(models.Model):    # 사용자 프로필
                 subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context
+
+class LoginHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # 장고 유저
+    login_datetime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.login_datetime}'
