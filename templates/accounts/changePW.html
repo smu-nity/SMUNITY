@@ -1,37 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/changePW.css' %}">
-    <link rel="icon" href="static/img/favicon.ico">
-    <!-- 웹 참조-->
-    <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/e8a335040d.js" crossorigin="anonymous"></script>
-    <script src="static/js/includeHTML.js"></script>
-    <!-- 웹 폰트 참조-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-219523848-1"></script>
-    <title>Please Graduate</title>
-</head>
-<body>
-    {% include 'navbar.html' %}
-
-    <div class="gray_sec">
-        <div class="container">
-            <div style="font-size:4rem;">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div style="font-size:2rem; font-weight:bold;">비밀번호 변경</div>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+{% block main_area %}
+    <div class="navbar-img">
+        <img class="navbar-img-image" src="{% static 'img/main.jpg' %}"  style="width: 100%; height: 300px; object-fit:cover"/>
+        <div class="navbar-img__text">
+            <span class="navbar-img__text--title">
+                <div style="font-size:4rem;">
+                    <img src="{% static 'img/logo.png' %}" style="width:100px; height:100px;">
+                </div>
+            </span>
+            <div class="big_title">비밀번호 변경</div>
         </div>
     </div>
-
     <!-- 입력란 -->
     <div class="white_sec">
         <div class="container">
@@ -49,18 +33,9 @@
             </form>
         </div>
     </div>
-
-    {% include 'footer.html' %}
-</body>
+{% endblock %}
+{% block js %}
 <script>
-    includeHTML();
-    function logout() {
-        var back_head = confirm('✋ 정말 로그아웃 하시겠습니까? ✋');
-        if (back_head) {
-            location.href = '/f_logout/';
-        }
-    }
-
     function check_up(){
         if(!document.getElementById('pw1').value){
             alert('😢 비밀번호를 입력해주세요.') ;
@@ -75,4 +50,4 @@
         return true;
     }
 </script>
-</html>
+{% endblock %}

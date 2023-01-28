@@ -27,7 +27,9 @@ def agree(request):
             return redirect('accounts:agree')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
         return redirect('accounts:agree')
-    return render(request, 'accounts/agree.html')
+    departments = Department.objects.all()
+    dept_num = departments.count()
+    return render(request, 'accounts/agree.html', {'departments': departments, 'dept_num': dept_num})
 
 
 def login(request):
@@ -104,6 +106,9 @@ def find_pw(request):
         # ecampus 존재하면
         username = request.POST["id"]
         password = request.POST["password1"]
+        if not User.objects.filter(username=username):
+            messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
+            return redirect('accounts:login')
         context = information(ecampus(username, password))
         if context:
             return render(request, 'accounts/changePW.html', {'username': username})
