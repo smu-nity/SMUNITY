@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
-from accounts.models import Year, Department, Profile
+from accounts.models import Year, Department, Profile, LoginHistory
 
 
 def agree(request):
@@ -39,6 +39,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             auth_login(request, user)
+            LoginHistory.objects.create(user=user)
             return redirect('core:mypage')
         if User.objects.filter(username=username):
             messages.error(request, '⚠️ 비밀번호를 확인하세요.')
