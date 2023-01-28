@@ -8,7 +8,7 @@ class Subject(models.Model):    # 과목 테이블
     number = models.CharField(max_length=10, unique=True)       # 학수번호
     name = models.CharField(max_length=30)  # 이름
     credit = models.IntegerField()          # 학점
-    dept = models.CharField(max_length=50)  # 개설학부
+    dept = models.CharField(max_length=100)  # 개설학부
     type = models.CharField(max_length=3, choices=TYPE_CHOICES) # 이수구분
 
     def __str__(self):
