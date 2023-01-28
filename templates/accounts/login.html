@@ -11,14 +11,14 @@
             <div class="login_logo">
                 <img id="login_logo" src="{% static 'img/deericon.png' %}" >
             </div>
-            <form method="post" onsubmit="return check_up1();">
+            <form onsubmit="return check_up1();" method="post" action="{% url 'accounts:login' %}">
                 {% csrf_token %}
                 <h1>로그인</h1>
                 <span class="login_gray">학번과 스뮤니티 비밀번호를 입력해 주세요.</span>
                 <div class="content">
                     <div class="regi_box">
-                        <input type="text" name="id" placeholder='학번'>
-                        <input type="password" name="password1" placeholder="비밀번호">
+                        <input type="text" name="username" id="id" placeholder='학번'>
+                        <input type="password" name="password" id="pw" placeholder="비밀번호">
                     </div>
                     <a id="b2" class="link">비밀번호를 잊어버리셨나요?</a>
                 </div>
@@ -73,7 +73,7 @@
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
             <!-- 폼 -->
-            <form action="{% url 'accounts:find' %}" method="post" name='form2' onsubmit="return check_up2()">
+            <form onsubmit="return check_up2();" method="post" action="{% url 'accounts:find' %}" name='form2' >
                 {% csrf_token %}
                 <div class="regi_box">
                     <label>학번</label>
@@ -97,7 +97,7 @@
     // ID/비번 안치면 빠꾸
     function check_up1() {
         if (!document.getElementById('pw').value || !document.getElementById('id').value) {
-            alert('⚠️ ID/PW를 입력해주세요.');
+            alert('⚠️ 학번과 비밀번호를 입력해주세요.');
             return false;
         }
         pop_modal();
@@ -105,10 +105,11 @@
     }
     function check_up2() {
         if (!document.getElementById('pw2').value || !document.getElementById('id2').value) {
-            alert('⚠️ ID/PW를 입력해주세요.');
+            alert('⚠️ 학번과 이캠퍼스 비밀번호를 입력해주세요.');
             form2.pw2.focus();
             return false;
         }
+        document.getElementById('m2').style.display = "none"
         pop_modal();
         return true;
     }
