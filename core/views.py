@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
 from accounts.models import Profile
-from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2, SUBTYPE_CHOICES_S
+from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
 
