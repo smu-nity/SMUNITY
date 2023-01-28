@@ -114,7 +114,7 @@ input[type="button"]
 }
 
 .footer_list {
-    list-style: none;   
+    list-style: none;
     color: lightgrey;
     letter-spacing: 2px;
 
@@ -126,11 +126,10 @@ input[type="button"]
     margin-left: 130px;
 }
 .copyright {
+    margin: 50px 10px 50px 5px;
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: grey;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 .info_btn {
@@ -151,7 +150,7 @@ input[type="button"]
     bottom: 35px;
     cursor: pointer;
     border-radius: 100%;
-    display:block; 
+    display:block;
     padding:10px;
 }
 
