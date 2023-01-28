@@ -152,11 +152,11 @@
             <form action="{% url 'accounts:update' %}" method="post" name='form1' onsubmit="return check_up1()">
                 {% csrf_token %}
                 <div class="regi_box">
-                    <label>아이디</label>
-                    <input type="text" placeholder='{{ user }}'
+                    <label>학번</label>
+                    <input type="text" value="{{ user.username }}"
                         style="background-color:rgb(248,249,250);" disabled>
-                    <label>비밀번호</label>
-                    <input type="password" id="pw" name="password" placeholder="PASSWORD">
+                    <label>이캠퍼스 비밀번호</label>
+                    <input type="password" id="pw" name="password" placeholder="이캠퍼스 비밀번호">
                 </div>
                 <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
             </form>
@@ -249,11 +249,11 @@
             <form action="{% url 'core:member_del' %}" method="POST" name='form6' onsubmit="return check_up6()">
                 {% csrf_token %}
                 <div class="regi_box">
-                    <label>아이디</label>
+                    <label>학번</label>
                     <input type="text" name="student_id" placeholder='{{ user.username }}'
                         style="background-color:rgb(248,249,250);" disabled>
                     <label>비밀번호</label>
-                    <input type="password" id="pw6" name="pw_del" placeholder="PASSWORD">
+                    <input type="password" id="pw6" name="pw_del" placeholder="비밀번호">
                 </div>
                 <input type='submit' class='go_result_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
             </form>
@@ -332,7 +332,7 @@
             form6.pw6.focus();
             return false;
         }
-        var con = confirm('정말 탈퇴하실건가요?')
+        var con = confirm('😢정말 탈퇴하실건가요?')
         if(con){
             pop_modal();
             return true;
