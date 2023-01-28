@@ -68,34 +68,6 @@ input[type="button"]
     box-sizing: border-box;
 }
 
-.navbar_logo img {
-    width: 80px;
-    height: 72px;
-    position: absolute;
-    top: 68%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-.navbar_menu {
-    display: inline-block;
-    font-size: 20px;
-    list-style: none;
-    padding-top: 1pc;
-    padding-right: 4pc;
-    margin: 0;
-}
-
-.navbar_menu li {
-    margin-left: 3pc;
-    font-size: 19px;
-    padding: 8px 16px;
-    float: left;
-    cursor: pointer;
-}
-
-.navbar_menu li a:hover,
 .regi_find_pwd a:hover
 {
     font-weight: bold;
@@ -241,68 +213,3 @@ input[type="button"]
     from { opacity:0;}
     to {opacity:1;}
 }
-
-
-
-
-/* ---------------------------------( ref footer )---------------------------------------- */
-
-
-.footer {
-    font-size: 0.7rem;
-    background-color:#313131;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    color: gray;
-    padding: 2rem;
-}
-
-.footer_list {
-    list-style: none;
-    color: lightgrey;
-    letter-spacing: 2px;
-
-    border-right: 0.1px solid lightgray;
-}
-.footer_list li {
-    margin: 10px 150px 5px;
-    text-align: center;
-    margin-left: 130px;
-}
-.copyright {
-    text-align: center;
-    font-size: 0.7rem;
-    color: grey;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
-.info_btn {
-    display: none;
-    z-index: 1;
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    background-color: rgba(0, 0, 0, 0.3);
-    font-size: 35px;
-    line-height: 36px;
-    text-align: center;
-    color: #FFF;
-    top: auto;
-    left: auto;
-    right: 30px;
-    bottom: 35px;
-    cursor: pointer;
-    border-radius: 100%;
-    display:block;
-    padding:10px;
-}
-
-.info_btn:hover {
-    background-color: rgba(164, 26, 56, 0.829);
-  }
-
-
