@@ -62,7 +62,9 @@ def course_update(request):
                 domain = item[19]
                 if domain == '*':
                     domain = None
-                Course.objects.create(user=request.user, subject=subject, year=item[0], semester=item[1], credit=item[7], type=item[6], domain=domain)
+                if item[9] != 'F':
+                    if not Course.objects.filter(user=request.user, subject=subject):
+                        Course.objects.create(user=request.user, subject=subject, year=item[0], semester=item[1], credit=item[7], type=item[6], domain=domain)
     except:
         messages.error(request, '⚠️ 엑셀 내용이 다릅니다! 수정하지 않은 엑셀파일을 올려주세요.')
         return redirect('core:mypage')
