@@ -276,7 +276,7 @@
                 <br>
                 <div style="padding: 1rem; text-align: center;">
                     <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공 심화 추천과목
                     </div>
                     <div class="mydiv">전공 심화 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                     <hr>
@@ -323,7 +323,7 @@
                 <br>
                 <div style="padding: 1rem; text-align: center;">
                     <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 추천과목
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공 선택 추천과목
                     </div>
                     <div class="mydiv">전공 선택 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                     <hr>
@@ -420,9 +420,9 @@
                 <br>
                 <div class="modal_div">
                     <div class="p_div">
-                        <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 균형교양 영역 현황
+                        <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 상명핵심역량교양 영역 현황
                         </div>
-                        <div class="mydiv">'상명핵심역량교양' 중 영역 2개 이상 이수해야 졸업요건을 충족합니다.</div>
+                        <div class="mydiv">상명핵심역량교양 중 영역 2개 이상 이수해야 졸업요건을 충족합니다.</div>
                         <hr>
                         <table class="mytable" style="padding-bottom:1rem">
                             <tr class="myth" style="background-color: #f8f8f8;">
@@ -481,7 +481,7 @@
                     <div class="p_div">
                         <div style="font-size : 1.5rem;"><i class="fas fa-check-circle"></i> 균형교양 영역 현황
                         </div>
-                        <div class="mydiv">'균형교양' 중 영역 3개 이상 이수해야 졸업요건을 충족합니다.</div>
+                        <div class="mydiv">균형교양 중 영역 3개 이상 이수해야 졸업요건을 충족합니다.</div>
                         <hr>
                         <table class="mytable" style="padding-bottom:1rem">
                             <tr class="myth" style="background-color: #f8f8f8;">
@@ -507,7 +507,7 @@
 
                                 {% for subject in subjects_culture_s.subjects %}
                                     <br>
-                                <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i>{{ subject.type }} 추천과목</div>
+                                <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> {{ subject.type }} 추천과목</div>
                                 <table class="mytable">
                                     <tr class="myth" style="background-color: #f8f8f8;">
                                         <th style="border-right :1px solid #cccccc; width:12%">학수번호</th>

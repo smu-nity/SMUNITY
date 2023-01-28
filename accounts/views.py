@@ -13,7 +13,7 @@ def agree(request):
         username = request.POST['username']
         password = request.POST['password']
         if User.objects.filter(username=username).exists():     # 학번 중복 검사
-            messages.error(request, '⚠️ 이미 가입된 학번입니다!')
+            messages.error(request, '⚠️ 이미 가입된 학번입니다.')
             return redirect('accounts:agree')
 
         context = information(ecampus(username, password))
@@ -79,6 +79,7 @@ def change_pw(request):
         if request.POST["password1"] == request.POST["password2"]:
             user.set_password(request.POST["password1"])
             user.save()
+            messages.error(request, '비밀번호가 변경되었습니다.')
         else:
             messages.error("⚠️ 비밀번호가 일치하지 않습니다.")
     return redirect('core:mypage')
@@ -92,6 +93,7 @@ def update(request):
             department = Department.objects.filter(name=context['department'])
             if department:
                 Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
+                messages.error(request, '회원 정보가 업데이트 되었습니다.')
                 return redirect('core:mypage')
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')

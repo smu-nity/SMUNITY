@@ -3,6 +3,7 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
 {% block main_area %}
@@ -144,20 +145,20 @@
                 내 정보 업데이트
             </div>
             <div style="margin-top:0.5rem; font-size:0.9rem; color:rgb(199, 199, 199)">
-                대양휴머니티칼리지에 로그인하여 이름,학과,고전독서현황을 업데이트합니다. (세종대학교 포털 ID/PW와 동일)
+                이캠퍼스에 로그인하여 이름, 학과 정보를 업데이트합니다. (상명대학교 포털 ID/PW와 동일)
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
             <!-- 폼 -->
             <form action="{% url 'accounts:update' %}" method="post" name='form1' onsubmit="return check_up1()">
                 {% csrf_token %}
                 <div class="regi_box">
-                    <label style="text-align: center;">아이디</label>
+                    <label>아이디</label>
                     <input type="text" placeholder='{{ user }}'
                         style="background-color:rgb(248,249,250);" disabled>
-                    <label style="text-align: center;">비밀번호</label>
+                    <label>비밀번호</label>
                     <input type="password" id="pw" name="password" placeholder="PASSWORD">
                 </div>
-                <input type='submit' class='login_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
             </form>
         </div>
     </div>
@@ -177,7 +178,7 @@
                     <label>비밀번호 재확인</label>
                     <input id="pw2" type="password" name="password2">
                 </div>
-                <input type='submit' class='login_btn' value='변경하기' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='go_result_btn' value='변경하기' style="margin:2.5rem 0 2rem 0;">
             </form>
         </div>
     </div>
@@ -192,17 +193,13 @@
 
             <hr style="width:80%; margin-top:1.3rem;">
             <div style="margin:0 auto; margin-top:1.5rem; margin-bottom:2.5rem; text-align: left; width:65%">
-                <p>
-                    1. 학사정보시스템(sjpt) 사이트에 로그인합니다.
-                    (링크 :
-                    <a class="link_site" target="_blank"
-                        href="https://portal.sejong.ac.kr/jsp/login/loginSSL.jsp?rtUrl=sjpt.sejong.ac.kr">sjpt</a>)
-                </p>
-                <p>2. 왼쪽 메뉴바에서 수업/성적 -> 성적 및 강의평가 -> 기이수성적조회 로 이동합니다.</p>
-                <p>3. 성적엑셀다운로드 버튼을 클릭해 다운로드한 후, 해당 엑셀파일을 업로드합니다.</p>
-                <p><span class="caution_info">※ 다운로드받은 파일을 수정하지 않고 그대로 업로드해야합니다.</span></p>
-                <p><span class="caution_info">※ 저장 시 성적 중 학점이 F, NP인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
-                <p><span class="caution_info">※ 사용자가 업로드하는 기이수성적 엑셀파일은 따로 저장되지 않습니다.</span></p>
+                <p>1. 학과사무실에 연락합니다.</p>
+                <p>&nbsp;&nbsp; - 학과사무실 전화번호: <b><a href="tel:{{ profile.department.call }}">{{ profile.department.call }}</a></b> ({{ profile.department.name }})</p>
+                <p>2. <b>‘성적사항 엑셀파일’</b> 송부를 요청합니다.</p>
+                <p>3. 메일로 송부된 <b>‘성적사항 엑셀 파일’</b>을 다운로드한 후, 해당 파일을 업로드합니다.</p>
+                <p style="margin-top:2rem;><span class="caution_info">※ 저장 시 성적 중 학점이 F, NP인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
+                <p><span class="caution_info">※ 사용자가 업로드하는 성적사항 엑셀파일은 따로 저장되지 않습니다.</span></p>
+                <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드 받을 수 있도록 현재 협의 중입니다.</span></p>
             </div>
 
             <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()" enctype="multipart/form-data">
@@ -213,7 +210,7 @@
                     </label>
                     <span class="filename">파일을 선택해주세요.</span>
                 </div>
-                <input type='submit' class='login_btn' value='업로드' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='go_result_btn' value='업로드' style="margin:2.5rem 0 2rem 0;">
             </form>
         </div>
     </div>
@@ -245,20 +242,20 @@
                 회원 탈퇴
             </div>
             <div style="margin-top:0.5rem; font-size:0.9rem; color:rgb(199, 199, 199)">
-                비밀번호를 입력하여 Please Graduate에서 탈퇴합니다. 회원 정보 및 기이수과목 데이터가 모두 삭제됩니다.
+                스뮤니티에서 탈퇴합니다. (회원 정보 모두 삭제)
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
 
             <form action="{% url 'core:member_del' %}" method="POST" name='form6' onsubmit="return check_up6()">
                 {% csrf_token %}
                 <div class="regi_box">
-                    <label style="text-align: center;">아이디</label>
+                    <label>아이디</label>
                     <input type="text" name="student_id" placeholder='{{ user.username }}'
                         style="background-color:rgb(248,249,250);" disabled>
-                    <label style="text-align: center;">비밀번호</label>
+                    <label>비밀번호</label>
                     <input type="password" id="pw6" name="pw_del" placeholder="PASSWORD">
                 </div>
-                <input type='submit' class='login_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='go_result_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
             </form>
         </div>
     </div>
