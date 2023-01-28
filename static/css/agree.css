@@ -26,7 +26,7 @@
     margin-left:2rem;
     margin:2rem;
     font-weight:normal;
-    font-size:0.9rem;
+    font-size:0.85rem;
     text-align:left;
 }
 
@@ -110,4 +110,37 @@
 .info_agree{
     padding-top:1rem;
     text-align:right;
+}
+
+
+input[type=radio] + label {
+    display:inline-block;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000000;
+    cursor:pointer;
+}
+
+input[type=radio]:checked + label {
+    background-image: url('../img/checker-on.svg');
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=checkbox] + label {
+    display:inline-block;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000000;
+    cursor:pointer;
+}
+
+input[type=checkbox]:checked + label {
+    background-image: url('../img/checker-on.svg');
+}
+
+input[type=checkbox] {
+    display: none;
 }

@@ -104,6 +104,9 @@ def find_pw(request):
         # ecampus 존재하면
         username = request.POST["id"]
         password = request.POST["password1"]
+        if not User.objects.filter(username=username):
+            messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
+            return redirect('accounts:login')
         context = information(ecampus(username, password))
         if context:
             return render(request, 'accounts/changePW.html', {'username': username})
