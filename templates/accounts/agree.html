@@ -98,11 +98,11 @@
                     <!-- 추천과목 -->
                     <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 검사대상표
                     </div>
-                    <div class="mydiv">아래 표에 해당하는 학과-학번만 회원가입이 가능합니다.</div>
+                    <div class="mydiv">아래 표에 해당하는 학과만 회원가입 가능합니다.</div>
                     <hr>
 
                     <div class='target_num_div'>
-                        현재 총 <span class='target_color_span'>{{ dep_num }}</span>개 학과/전공 검사 가능
+                        현재 총 <span class='target_color_span'>{{ dept_num }}</span>개 학과 검사 가능
                     </div>
 
                     <table class="target_table">
@@ -110,17 +110,13 @@
                             <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과/전공</th>
                             <th class="target_table_th">학번</th>
                         </tr>
-                        {% for dep, year in target %}
+                        {% for department in departments %}
                         <tr>
-                            <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ dep }}</td>
-                            <td class="target_table_td" >{{ year }}</td>
+                            <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ department.name }}</td>
+                            <td class="target_table_td" >23, 22, 21, 20, 19, 18, 17</td>
                         </tr>
                         {% endfor %}
                     </table>
-
-                    <div class='target_caution_div'>
-                        ※ 전공이 정해지지 않은 학부 소속 1학년은 회원가입시 희망전공을 선택합니다.
-                    </div>
                 </div>
             </div>
         </div>
