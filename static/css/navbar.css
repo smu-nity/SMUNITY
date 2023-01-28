@@ -1,0 +1,27 @@
+.navbar-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-img-image {
+    position: relative;
+    filter: brightness(50%);
+}
+
+.navbar-img__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    color: white;
+}
+
+.navbar-img__text--title {
+    font-size: 50px;
+    margin: 20px;
+}
+
+.navbar-img__text--subtitle {
+    font-weight: 300;
+}
