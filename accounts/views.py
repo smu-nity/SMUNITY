@@ -18,8 +18,11 @@ def agree(request):
 
         context = information(ecampus(username, password))
         if context:
-            if Year.objects.filter(year=username[:4]) and Department.objects.filter(name=context['department']):
-                context['id'] = username
+            name = context['department']
+            if name == '융합전자공학전공':
+                name = '지능IOT융합전공'
+            if Year.objects.filter(year=username[:4]) and Department.objects.filter(name=name):
+                context['id'], context['department'] = username, name
                 request.session['context'] = context
                 return redirect('accounts:register')
 
