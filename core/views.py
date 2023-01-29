@@ -13,6 +13,9 @@ from graduations.models import Subject, Major
 def home(request):
     return render(request, 'core/head.html')
 
+def team(request):
+    return render(request, 'core/team.html')
+
 
 @login_required
 def mypage(request):
