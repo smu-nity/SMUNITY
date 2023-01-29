@@ -41,4 +41,14 @@
 </body>
 {% block js %}
 {% endblock %}
+{% if user.is_authenticated %}
+<script>
+    function logout() {
+        var back_head = confirm('정말 로그아웃 하시겠습니까?');
+        if (back_head) {
+            location.href = '{% url 'accounts:logout' %}';
+        }
+    };
+</script>
+{% endif %}
 </html>
