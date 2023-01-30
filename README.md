@@ -4,9 +4,9 @@
 
 ---
 
-## :computer: 프로젝트 소개
+## :globe_with_meridians: Website URL
 
-* ### 상명대학교 졸업요건 검사 및 커뮤티니 웹 사이트
+* ### https://smunity.co.kr/
 
 ## ⚒️기술 스택
 
