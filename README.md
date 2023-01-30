@@ -6,7 +6,7 @@
 
 ## :globe_with_meridians: Website URL
 
-* ### https://smunity.co.kr/
+* ### https://smunity.co.kr
 
 ## ⚒️기술 스택
 
