@@ -67,7 +67,8 @@
                         <div><i class="fas fa-graduation-cap"></i>내 기이수과목</div>
                         <div>
 {#                            <button id='b5' class="my_box_mod_btn" style="margin-right:1.3rem">커스텀하기</button>#}
-                            <button id='b4' class="my_box_mod_btn">업데이트</button>
+                            <!-- <button id='b4' class="my_box_mod_btn">업데이트</button> -->
+                            <button class="my_box_mod_btn" onclick="under_maintenance()">업데이트</button>
                         </div>
                     </div>
                     <hr>
@@ -461,6 +462,10 @@
                 box.classList.toggle('active');
             });
         }
+    }
+
+    function under_maintenance(){
+        alert("죄송합니다. 서비스 잠정 중단 상태입니다.")
     }
     </script>
 {% endblock %}

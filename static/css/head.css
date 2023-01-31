@@ -213,3 +213,61 @@ input[type="button"]
     from { opacity:0;}
     to {opacity:1;}
 }
+
+/* 공지사항 모달 */
+
+.modal {
+    display: block; /* Block by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    margin: 5% auto;
+    padding: 5rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 1280px;
+    height: auto;
+}
+
+.modal_div {
+    padding: 1rem;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.modal_div_content {
+    padding: 1rem;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    line-height: 40px;
+    font-size: 25px;
+}
+
+.caution{
+    color: red;
+}
+
+.last{
+    font-size: 20px;
+    color: gray;
+}
