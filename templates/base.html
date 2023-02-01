@@ -39,6 +39,13 @@
     {% endfor %}
     {% endif %}
 </body>
+<script>
+        //모달 끄기
+        function modal_close(e){
+    var target = document.getElementById(e.getAttribute('close')).getAttribute('id');
+    document.getElementById(target).style.display = "none";
+    }
+</script>
 {% block js %}
 {% endblock %}
 {% if user.is_authenticated %}
