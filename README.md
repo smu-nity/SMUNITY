@@ -4,7 +4,7 @@
 
 ---
 
-## :globe_with_meridians: Website URL
+## :star: Website URL
 
 * ### https://smunity.co.kr
 
@@ -12,6 +12,10 @@
 
 * ### 백엔드: Django
 * ### 프론트엔드: HTML, CSS, JavaScript
+
+## :blue_book: 소스 코드 참고
+
+* ### [PleaseGraduate](https://github.com/hanjo8813/PleaseGraduate)
 
 ## :computer: 팀원 
 
