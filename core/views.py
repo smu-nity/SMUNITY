@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -12,6 +14,7 @@ from graduations.models import Subject, Major
 
 def home(request):
     return render(request, 'core/head.html')
+
 
 def team(request):
     return render(request, 'core/team.html')
@@ -32,6 +35,7 @@ def custom(request):
     context = {'courses': courses, 'customs': customs}
     return render(request, 'core/custom.html', context)
 
+
 @login_required
 def course_delete(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
@@ -41,13 +45,52 @@ def course_delete(request, course_id):
     course.delete()
     return redirect('core:custom')
 
+
 # 기이수과목 업로드
 @login_required
 def course_update(request):
-    excel = request.FILES['excel']
+    file, success = request.FILES['file'], False
+
+    # har 파일인지 검사
+    if file.name[-3:] != 'har':
+        messages.error(request, '⚠️ 잘못된 파일 형식입니다. 확장자가 har인 파일을 올려주세요. ')
+        return redirect('core:mypage')
+
+    # 추가 전 기존 데이터 삭제
+    courses = Course.objects.filter(user=request.user)
+    if courses.exists():
+        courses.delete()
+
+    # 기이수과목 추가
+    response = json.loads(file.read())['log']['entries']
+    for res in response:
+        try:
+            subjects = json.loads(res['response']['content']['text'])['dsRecMattList']
+            for sub in subjects:
+                subject = Subject.objects.get(number=sub['SBJ_NO'])
+                domain = sub['CULT_ARA_NM']
+                if domain == '*':
+                    domain = None
+                if sub['GRD_NM'] != 'F':
+                    if not Course.objects.filter(user=request.user, subject=subject):
+                        Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
+            success = True
+        except:
+            print('error')
+    if success:
+        messages.error(request, '기이수과목이 업데이트 되었습니다.')
+    else:
+        messages.error(request, '⚠️ 파일 내용이 다릅니다! 다운로드 방법을 확인해주세요.')
+    return redirect('core:mypage')
+
+
+# 엑셀파일 업로드
+@login_required
+def course_update_excel(request):
+    file = request.FILES['file']
 
     # 엑셀파일인지 검사
-    if excel.name[-4:] != 'xlsx':
+    if file.name[-4:] != 'xlsx':
         messages.error(request, '⚠️ 잘못된 파일 형식입니다. 확장자가 xlsx인 파일을 올려주세요. ')
         return redirect('core:mypage')
 
@@ -58,7 +101,7 @@ def course_update(request):
 
     # 기이수과목 추가
     try:
-        df = pd.read_excel(excel)
+        df = pd.read_excel(file)
         for _, item in df.iterrows():
             if item[0].isnumeric():
                 subject = Subject.objects.get(number=item[2])
@@ -73,6 +116,7 @@ def course_update(request):
         return redirect('core:mypage')
     messages.error(request, '기이수과목이 업데이트 되었습니다.')
     return redirect('core:mypage')
+
 
 @login_required
 def result(request):
@@ -102,6 +146,7 @@ def result(request):
         'subjects_culture_e': profile.subjects_culture_e(), 'subjects_culture_s': profile.subjects_culture_s()
     }
     return render(request, 'core/result.html', context)
+
 
 def member_del(request):
     if request.method == "POST":
