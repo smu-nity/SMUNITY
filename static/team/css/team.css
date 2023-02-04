@@ -150,15 +150,7 @@
 .u-section-2 .u-image-2 {
   width: 145px;
   height: 145px;
-  background-image: url("images/4.jpeg");
-  background-position: 50% 50%;
-  margin: 0 auto;
-}
-
-.u-section-2 .u-image-5 {
-  width: 145px;
-  height: 145px;
-  background-image: url("images/8.jpeg");
+  background-image: url("images/2.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -201,7 +193,7 @@
 .u-section-2 .u-image-3 {
   width: 145px;
   height: 145px;
-  background-image: url("images/3.jpeg");
+  background-image: url("images/7.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -244,7 +236,7 @@
 .u-section-2 .u-image-4 {
   width: 145px;
   height: 145px;
-  background-image: url("images/5.jpeg");
+  background-image: url("images/9.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -570,7 +562,15 @@
 .u-section-3 .u-image-2 {
   width: 145px;
   height: 145px;
-  background-image: url("images/2.jpeg");
+  background-image: url("images/4.jpeg");
+  background-position: 50% 50%;
+  margin: 0 auto;
+}
+
+.u-section-3 .u-image-5 {
+  width: 145px;
+  height: 145px;
+  background-image: url("images/8.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -629,7 +629,7 @@
 .u-section-3 .u-image-3 {
   width: 145px;
   height: 145px;
-  background-image: url("images/7.jpeg");
+  background-image: url("images/3.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -672,7 +672,7 @@
 .u-section-3 .u-image-4 {
   width: 145px;
   height: 145px;
-  background-image: url("images/9.jpeg");
+  background-image: url("images/5.jpeg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -736,6 +736,11 @@
   }
 
   .u-section-3 .u-image-4 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .u-section-3 .u-image-5 {
     width: 100px;
     height: 100px;
   }
