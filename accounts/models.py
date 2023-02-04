@@ -20,7 +20,7 @@ class Department(models.Model):     # 학과 테이블
     college = models.CharField(max_length=20, choices=COLLEGE_CHOICES)  # 소속 단과대
     name = models.CharField(max_length=20)  # 학과 이름
     type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)    # 균교 타입
-    call = models.CharField(max_length=20, null=True, blank=True)       # 학과 사무실 전화번호
+    url = models.CharField(max_length=250, null=True, blank=True)       # 학과 교육과정 url
     def __str__(self):
         return f'[{self.college}] {self.name}'
 

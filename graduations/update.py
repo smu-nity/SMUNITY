@@ -60,21 +60,21 @@ def year():
 # 학과 업데이트 스크립트
 def departments():
     datas = [
-        {'college': '융합공과대학', 'name': '컴퓨터과학전공', 'type': '공학', 'call': '02-2287-5292'},
-        {'college': '융합공과대학', 'name': '전기공학전공', 'type': '공학', 'call': '02-2287-0097'},
-        {'college': '융합공과대학', 'name': '지능IOT융합전공', 'type': '공학', 'call': '02-2287-5392'},
-        {'college': '융합공과대학', 'name': '게임전공', 'type': '공학', 'call': '02-2287-5462'},
-        {'college': '융합공과대학', 'name': '애니메이션전공', 'type': '공학', 'call': '02-2287-5464'},
-        {'college': '융합공과대학', 'name': '휴먼지능정보공학전공', 'type': '공학', 'call': '02-2287-5391'},
-        {'college': '융합공과대학', 'name': '핀테크전공', 'type': '공학', 'call': '02-2287-5403'},
-        {'college': '융합공과대학', 'name': '빅데이터융합전공', 'type': '공학', 'call': '02-2287-5403'},
-        {'college': '융합공과대학', 'name': '스마트생산전공', 'type': '공학', 'call': '02-2287-5403'},
-        {'college': '융합공과대학', 'name': '생명공학전공', 'type': '공학', 'call': '02-2287-5142'},
-        {'college': '융합공과대학', 'name': '화학에너지공학전공', 'type': '공학', 'call': '02-2287-5283'},
-        {'college': '융합공과대학', 'name': '화공신소재전공', 'type': '공학', 'call': '02-2287-5297'},
+        {'college': '융합공과대학', 'name': '컴퓨터과학전공', 'type': '공학', 'url': 'https://cs.smu.ac.kr/cs/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03005'},
+        {'college': '융합공과대학', 'name': '전기공학전공', 'type': '자연', 'url': 'https://electric.smu.ac.kr/electric/admissions/curriculum.do?&srYear=2023&srShyr=all&srSust=03208'},
+        {'college': '융합공과대학', 'name': '지능IOT융합전공', 'type': '공학', 'url': 'https://www.smu.ac.kr/aiot/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03209'},
+        {'college': '융합공과대학', 'name': '게임전공', 'type': '공학', 'url': 'https://game.smu.ac.kr/game01/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03006'},
+        {'college': '융합공과대학', 'name': '애니메이션전공', 'type': '예술', 'url': 'https://animation.smu.ac.kr/animation/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03007'},
+        {'college': '융합공과대학', 'name': '휴먼지능정보공학전공', 'type': '공학', 'url': 'https://hi.smu.ac.kr/hi/admissions/curriculum.do?&srYear=2023&srShyr=all&srSust=03204'},
+        {'college': '융합공과대학', 'name': '핀테크전공', 'type': '공학', 'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03205'},
+        {'college': '융합공과대학', 'name': '빅데이터융합전공', 'type': '공학', 'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum_big.do?&srYear=2023&srShyr=all&srSust=03206'},
+        {'college': '융합공과대학', 'name': '스마트생산전공', 'type': '공학', 'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum_smart.do?&srYear=2023&srShyr=all&srSust=03207'},
+        {'college': '융합공과대학', 'name': '생명공학전공', 'type': '자연', 'url': 'https://biotechnology.smu.ac.kr/biotechnology/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=0300'},
+        {'college': '융합공과대학', 'name': '화학에너지공학전공', 'type': '자연', 'url': 'https://energy.smu.ac.kr/cee/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03001'},
+        {'college': '융합공과대학', 'name': '화공신소재전공', 'type': '자연', 'url': 'https://ichem.smu.ac.kr/ichemistry/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03002'},
     ]
     for data in datas:
-        Department.objects.create(college=data['college'], name=data['name'], type=data['type'], call=data['call'])
+        Department.objects.create(college=data['college'], name=data['name'], type=data['type'], url=data['url'])
 
 
 # 상명핵심역량교양 과목 업데이트 스크립트
@@ -139,34 +139,9 @@ def major_computer_science():
 
 # 융합공과대학 전공 업데이트 스크립트
 def majors():
-    departments = [
-        {'dept': Department.objects.get(name='컴퓨터과학전공'),
-         'url': 'https://cs.smu.ac.kr/cs/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03005'},
-        {'dept': Department.objects.get(name='전기공학전공'),
-         'url': 'https://electric.smu.ac.kr/electric/admissions/curriculum.do?&srYear=2023&srShyr=all&srSust=03208'},
-        {'dept': Department.objects.get(name='지능IOT융합전공'),
-         'url': 'https://www.smu.ac.kr/aiot/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03209'},
-        {'dept': Department.objects.get(name='게임전공'),
-         'url': 'https://game.smu.ac.kr/game01/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03006'},
-        {'dept': Department.objects.get(name='애니메이션전공'),
-         'url': 'https://animation.smu.ac.kr/animation/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03007'},
-        {'dept': Department.objects.get(name='휴먼지능정보공학전공'),
-         'url': 'https://hi.smu.ac.kr/hi/admissions/curriculum.do?&srYear=2023&srShyr=all&srSust=03204'},
-        {'dept': Department.objects.get(name='핀테크전공'),
-         'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03205'},
-        {'dept': Department.objects.get(name='빅데이터융합전공'),
-         'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum_big.do?&srYear=2023&srShyr=all&srSust=03206'},
-        {'dept': Department.objects.get(name='스마트생산전공'),
-         'url': 'https://fbs.smu.ac.kr/fbs/admission/curriculum_smart.do?&srYear=2023&srShyr=all&srSust=03207'},
-        {'dept': Department.objects.get(name='생명공학전공'),
-         'url': 'https://biotechnology.smu.ac.kr/biotechnology/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03000'},
-        {'dept': Department.objects.get(name='화학에너지공학전공'),
-         'url': 'https://energy.smu.ac.kr/cee/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03001'},
-        {'dept': Department.objects.get(name='화공신소재전공'),
-         'url': 'https://ichem.smu.ac.kr/ichemistry/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03002'}
-    ]
+    departments = Department.objects.all()
     for department in departments:
-        major(department['dept'], department['url'])
+        major(department, department.url)
 
 
 # 전체 업데이트 스크립트 (17학년도 ~ 22학년도)
