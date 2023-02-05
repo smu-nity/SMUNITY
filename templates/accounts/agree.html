@@ -105,12 +105,14 @@
 
                     <table class="target_table">
                         <tr>
-                            <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과/전공</th>
+                            <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과</th>
+                            <th class="target_table_th">단과대학</th>
                             <th class="target_table_th">학번</th>
                         </tr>
                         {% for department in departments %}
                         <tr>
                             <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ department.name }}</td>
+                            <td class="target_table_td">{{ department.college }}</td>
                             <td class="target_table_td" >23, 22, 21, 20, 19, 18, 17</td>
                         </tr>
                         {% endfor %}

@@ -30,7 +30,7 @@ def agree(request):
             return redirect('accounts:agree')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
         return redirect('accounts:agree')
-    departments = Department.objects.all()
+    departments = Department.objects.filter(url__isnull=False)
     dept_num = departments.count()
     return render(request, 'accounts/agree.html', {'departments': departments, 'dept_num': dept_num})
 

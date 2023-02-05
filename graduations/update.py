@@ -72,6 +72,29 @@ def departments():
         {'college': '융합공과대학', 'name': '생명공학전공', 'type': '자연', 'url': 'https://biotechnology.smu.ac.kr/biotechnology/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=0300'},
         {'college': '융합공과대학', 'name': '화학에너지공학전공', 'type': '자연', 'url': 'https://energy.smu.ac.kr/cee/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03001'},
         {'college': '융합공과대학', 'name': '화공신소재전공', 'type': '자연', 'url': 'https://ichem.smu.ac.kr/ichemistry/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03002'},
+        {'college': '융합공과대학', 'name': '한일문화콘텐츠전공', 'type': '인문', 'url': None},
+        {'college': '인문사회과학대학', 'name': '역사콘텐츠전공', 'type': '인문', 'url': 'https://history.smu.ac.kr/history/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02988'},
+        {'college': '인문사회과학대학', 'name': '지적재산권전공', 'type': '사회', 'url': 'https://cr.smu.ac.kr/cc/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02989'},
+        {'college': '인문사회과학대학', 'name': '문헌정보학전공', 'type': '사회', 'url': 'https://libinfo.smu.ac.kr/libinfo/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02990'},
+        {'college': '인문사회과학대학', 'name': '공간환경학부', 'type': '사회', 'url': 'https://space.smu.ac.kr/space/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00962'},
+        {'college': '인문사회과학대학', 'name': '행정학부', 'type': '사회', 'url': 'https://public.smu.ac.kr/public/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=03183'},
+        {'college': '인문사회과학대학', 'name': '가족복지학과', 'type': '사회', 'url': 'https://smfamily.smu.ac.kr/smfamily/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00951'},
+        {'college': '인문사회과학대학', 'name': '국가안보학과', 'type': '인문', 'url': 'https://ns.smu.ac.kr/sdms/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00964'},
+        {'college': '사범대학', 'name': '국어교육과', 'type': '인문', 'url': 'https://koredu.smu.ac.kr/koredu/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00971'},
+        {'college': '사범대학', 'name': '영어교육과', 'type': '인문', 'url': 'https://engedu.smu.ac.kr/engedu/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00972'},
+        {'college': '사범대학', 'name': '교육학과', 'type': '인문', 'url': 'https://learning.smu.ac.kr/peda/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00975'},
+        {'college': '사범대학', 'name': '수학교육과', 'type': '자연', 'url': 'https://mathed.smu.ac.kr/mathedu/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=00976'},
+        {'college': '경영경제대학', 'name': '경제금융학부', 'type': '사회', 'url': 'https://econo.smu.ac.kr/economic/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=01178'},
+        {'college': '경영경제대학', 'name': '경영학부', 'type': '사회', 'url': None},
+        {'college': '경영경제대학', 'name': '글로벌경영학과', 'type': '사회', 'url': None},
+        {'college': '경영경제대학', 'name': '융합경영학과', 'type': '사회', 'url': 'https://imgmt.smu.ac.kr/cm/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=01181'},
+        {'college': '문화예술대학', 'name': '식품영양학전공', 'type': '자연', 'url': 'https://food.smu.ac.kr/foodnutrition/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02994'},
+        {'college': '문화예술대학', 'name': '의류학전공', 'type': '자연', 'url': 'https://fashionindustry.smu.ac.kr/clothing2/admission/curriculum.do?srYear=2023&srSust=02995&srShyr=all'},
+        {'college': '문화예술대학', 'name': '스포츠건강관리전공', 'type': '예술', 'url': 'https://smpe.smu.ac.kr/smpe/admission/curriculum.do?srYear=2023&srSust=02997&srShyr=all'},
+        {'college': '문화예술대학', 'name': '무용예술전공', 'type': '예술', 'url': 'https://dance.smu.ac.kr/dance/undergraduate/undergraduate_curriculum.do?&srYear=2023&srShyr=all&srSust=02998'},
+        {'college': '문화예술대학', 'name': '조형예술전공', 'type': '예술', 'url': 'https://finearts.smu.ac.kr/finearts/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02991'},
+        {'college': '문화예술대학', 'name': '생활예술전공', 'type': '예술', 'url': 'https://smulad.smu.ac.kr/smulad/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=02992'},
+        {'college': '문화예술대학', 'name': '음악학부', 'type': '예술', 'url': 'https://music.smu.ac.kr/music/admission/curriculum.do?&srYear=2023&srShyr=all&srSust=01132'},
     ]
     for data in datas:
         Department.objects.create(college=data['college'], name=data['name'], type=data['type'], url=data['url'])
@@ -141,7 +164,8 @@ def major_computer_science():
 def majors():
     departments = Department.objects.all()
     for department in departments:
-        major(department, department.url)
+        if department.url:
+            major(department, department.url)
 
 
 # 전체 업데이트 스크립트 (17학년도 ~ 22학년도)
