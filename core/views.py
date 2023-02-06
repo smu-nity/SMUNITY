@@ -158,3 +158,6 @@ def member_del(request):
             return redirect('home')
     messages.error(request, '⚠️ 비밀번호가 일치하지 않습니다.')
     return redirect('core:mypage')
+
+def info(request):
+    return render(request,'core/info.html')

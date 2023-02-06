@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel= "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+{% endblock %}
+
+{% block main_area %}
+    <!-- 설명 페이지 박스 -->
+    <div class="mypage_info_container">
+        <div class="mypage_info_box">
+            <div class="mypage_info_title">
+                <a href="{% url 'core:mypage' %}"><img src="{% static 'img/chevron-left-solid.svg' %}" style="width: 40px; height: 40px; margin: 25px;"></a>
+            </div>
+                <h1 style="border-bottom: 1px solid lightgray; padding-bottom: 30px; margin-top: 0">기이수 성적 업로드 방법</h1>
+                <div class="content">
+                    <div class="mypage_info_tab">
+                        <button id="window_btn" class="mypage_info_tab_btn" onclick="window_tab()" style="box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7), inset 2px 2px 4px rgba(0, 0, 0, .15);">Windows</button><button id="mac_btn" class="mypage_info_tab_btn" onclick="mac_tab()">Mac</button>
+                    </div>
+                    <div id="mac_tab" style="display: none;">
+                        <p> <i class="fa-brands fa-apple"></i> Mac OS 환경 </p>
+                        <p style="color: gray">*Google Chrome브라우저 환경에서 작성되었습니다.</p>
+                        <p>1. 샘물 로그인 → 통합정보 → 학적정보 → 개인정보 수정탭으로 이동합니다.</p>
+                        <a href="https://smul.smu.ac.kr/" style="color: blue; text-decoration: underline" target='_blank'>샘물 링크 가기</a>
+                        <br>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_1.png' %}">
+                        </div>
+                        <p>2. 개발자 도구를 엽니다. </p>
+                        <p>&nbsp;&nbsp;- Mac OS : <b>fn + F12</b> or <b>cmd + option + I</b></p>
+                        <p>&nbsp;&nbsp;- Safari의 경우, Safari-설정-고급탭에서 '메뉴 막대에서 개발자용 메뉴 보기'를 체크하고, cmd+Option+I를 누르시면 됩니다.</p>
+                        <p>3. 개발자 도구에서 <b>Network (네트워크)</b> 탭을 클릭합니다.</p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_2.png' %}">
+                        </div>
+                        <p>4. 다시 샘물에서 개인정보 밑에 위치한 <b> 성적사항 탭</b>을 클릭합니다. </p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_3.png' %}">
+                        </div>
+                        <p>5. list.do가 생기면 개발자 도구 내 다운로드 버튼(<img src="{% static 'img/download.png' %}" style="width: 20px; height: 20px;">)을 클릭합니다. </p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_4.png' %}">
+                        </div>
+                        <p>6. 다운로드가 완료되면 .har 파일을 업로드합니다.</p>
+                        <br>
+                        <p><span class="caution_info">※ 반드시 안내된 순서대로 진행해야 합니다!</span></p>
+                        <p><span class="caution_info">※ 다운로드한 파일을 수정하지 않고 그대로 업로드해야 합니다.</span></p>
+                        <p><span class="caution_info">※ 저장 시 성적 중 학점이 F 인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
+                        <p><span class="caution_info">※ 다운로드한 파일 내 기이수 과목 이외의 정보는 사용되지 않습니다.</span></p>
+                        <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드할 수 있도록 현재 협의 중입니다.</span></p>
+                    </div>
+                    <div id="window_tab" >
+                        <p> <i class="fa-brands fa-windows"></i> Windows 환경 </p>
+                        <p style="color: gray">*Google Chrome브라우저 환경에서 작성되었습니다.</p>
+                        <p>1. 샘물 로그인 → 통합정보 → 학적정보 → 개인정보 수정탭으로 이동합니다.</p>
+                        <a href="https://smul.smu.ac.kr/" style="color: blue; text-decoration: underline" target='_blank'>샘물 링크 가기</a>
+                        <br>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_1.png' %}">
+                        </div>
+                        <p>2. 개발자 도구를 엽니다. </p>
+                        <p>&nbsp;&nbsp;- Windows : <b>F12</b> or <b>ctrl + Shift + I</b></p>
+                        <p>3. 개발자 도구에서 <b>Network (네트워크)</b> 탭을 클릭합니다.</p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_2.png' %}">
+                        </div>
+                        <p>4. 다시 샘물에서 개인정보 밑에 위치한 <b> 성적사항 탭</b>을 클릭합니다. </p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_3.png' %}">
+                        </div>
+                        <p>5. list.do가 생기면 개발자 도구 내 다운로드 버튼(<img src="{% static 'img/download.png' %}" style="width: 20px; height: 20px;">)을 클릭합니다. </p>
+                        <div class="mypage_info_img">
+                            <img src="{% static 'img/description/windows/window_4.png' %}">
+                        </div>
+                        <p>6. 다운로드가 완료되면 .har 파일을 업로드합니다.</p>
+                        <br>
+                        <p><span class="caution_info">※ 반드시 안내된 순서대로 진행해야 합니다!</span></p>
+                        <p><span class="caution_info">※ 다운로드한 파일을 수정하지 않고 그대로 업로드해야 합니다.</span></p>
+                        <p><span class="caution_info">※ 저장 시 성적 중 학점이 F 인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
+                        <p><span class="caution_info">※ 다운로드한 파일 내 기이수 과목 이외의 정보는 사용되지 않습니다.</span></p>
+                        <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드할 수 있도록 현재 협의 중입니다.</span></p>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/modal.js' %}"></script>
+
+<script>
+    // info에서 뒤로가기 버튼 클릭시 mypage
+    history.pushState(null, null, location.href);
+    window.onpopstate = function (event) {
+        location.href = "{% url 'core:mypage' %}";
+    };
+
+    function mac_tab(){
+        document.getElementById("window_tab").style.display = 'none';
+        document.getElementById("window_btn").style.boxShadow = '-6px -6px 14px rgba(255, 255, 255, .7), 6px 6px 10px rgba(0, 0, 0, .15)';
+        document.getElementById("mac_btn").style.boxShadow = 'inset -2px -2px 6px rgba(255, 255, 255, .7), inset 2px 2px 4px rgba(0, 0, 0, .15)';
+        document.getElementById("mac_tab").style.display = 'block';
+    }
+
+    function window_tab(){
+        document.getElementById("mac_tab").style.display = 'none';
+        document.getElementById("mac_btn").style.boxShadow = '-6px -6px 14px rgba(255, 255, 255, .7), 6px 6px 10px rgba(0, 0, 0, .15)';
+        document.getElementById("window_btn").style.boxShadow = 'inset -2px -2px 6px rgba(255, 255, 255, .7), inset 2px 2px 4px rgba(0, 0, 0, .15)';
+        document.getElementById("window_tab").style.display = 'block';
+    }
+</script>
+{% endblock %}
