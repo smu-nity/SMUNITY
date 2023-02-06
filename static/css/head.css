@@ -217,7 +217,7 @@ input[type="button"]
 /* 공지사항 모달 */
 
 .modal {
-    display: block; /* Block by default */
+    display: none; /* Block by default */
     position: fixed; /* Stay in place */
     z-index: 3; /* Sit on top */
     left: 0;

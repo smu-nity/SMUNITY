@@ -911,6 +911,7 @@ strong {
 }
 
 .update_modal_content{
+    line-height: 10px;
     text-align: center;
     background-color: #fefefe;
     border-radius: 5px;

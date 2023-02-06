@@ -183,20 +183,27 @@
     <div id='m4' class="modal">
         <div class="update_modal_content">
             <div id='c4' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            <div class="login_title" style="font-size:2rem; margin-top:1.7rem; margin-bottom: 3rem;">
                 기이수성적 업로드
             </div>
-
             <hr style="width:80%; margin-top:1.3rem;">
-            <div style="margin:0 auto; margin-top:1.5rem; margin-bottom:2.5rem; text-align: left; width:65%">
-                <p>1. 학과사무실에 연락합니다.</p>
-                <p>&nbsp;&nbsp; - 학과사무실 전화번호: <b><a href="tel:{{ profile.department.call }}">{{ profile.department.call }}</a></b> ({{ profile.department.name }})</p>
-                <p>2. <b>‘성적사항 엑셀파일’</b> 송부를 요청합니다.</p>
-                <p>3. 메일로 송부된 <b>‘성적사항 엑셀 파일’</b>을 다운로드한 후, 해당 파일을 업로드합니다.</p>
-                <p style="margin-top:2rem;><span class="caution_info">※ 다운로드받은 파일을 수정하지 않고 그대로 업로드해야합니다.</span></p>
+            <div style="margin:0 auto; margin-top:1.5rem; margin-bottom:1.5rem; text-align: left; width:65%">
+                <p>1. 샘물 로그인 → 통합정보 → 학적정보 → 개인정보 수정탭으로 이동합니다.</p>
+                <p>2. 개발자 도구를 엽니다. </p>
+                <p>&nbsp;&nbsp;- Windows : F12 or ctrl + Shift + I</p>
+                <p>&nbsp;&nbsp;- Mac OS : fn + F12 or cmd + option + I</p>
+                <p>3. 개발자 도구에서 <b>Network (네트워크)</b> 탭을 클릭합니다.</p>
+                <p style="margin-bottom: 9px">4. 다시 샘물에서 개인정보 밑에 위치한 <b> 성적사항 탭</b>을 클릭합니다. </p>
+                <p style="margin-top: 0px">5. list.do가 생기면 개발자 도구 내 다운로드 버튼(<img src="{% static 'img/download.png' %}" style="width: 20px; height: 20px;">) 클릭합니다. </p>
+                <p>6. 다운 받은 .har 파일을 업로드합니다.</p>
+                <br>
+                <a class="go_info_btn" href="{% url 'core:info' %}" target='_blank'>자세히</a>
+                <br><br><br>
+                <p><span class="caution_info">※ 반드시 안내된 순서대로 진행해야 합니다!</span></p>
+                <p><span class="caution_info">※ 다운로드한 파일을 수정하지 않고 그대로 업로드해야 합니다.</span></p>
                 <p><span class="caution_info">※ 저장 시 성적 중 학점이 F 인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
-                <p><span class="caution_info">※ 사용자가 업로드하는 성적사항 엑셀파일은 따로 저장되지 않습니다.</span></p>
-                <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드 받을 수 있도록 현재 협의 중입니다.</span></p>
+                <p><span class="caution_info">※ 다운로드한 파일 내 기이수 과목 이외의 정보는 사용되지 않습니다.</span></p>
+                <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드할 수 있도록 현재 협의 중입니다.</span></p>
             </div>
 
             <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()" enctype="multipart/form-data">
@@ -207,7 +214,7 @@
                     </label>
                     <span class="filename">파일을 선택해주세요.</span>
                 </div>
-                <input type='submit' class='go_result_btn' value='업로드' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='go_result_btn' value='업로드' style="margin:2.5rem 0 0rem 0;">
             </form>
         </div>
     </div>
@@ -455,7 +462,7 @@
         function Tooltipeb(btn, box) {
             btn.addEventListener('click', () => {
                 box.classList.toggle('active');
-            });
+            });송
         }
     }
 
