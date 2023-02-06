@@ -1,5 +1,13 @@
 # 버전 기록
 
+### 1.0.2
+* **22.02.06**
+* 기이수과목 업로드 방식 변경 ([더 보기](https://github.com/hyunmin0317/smunity/issues/132))
+  * 엑셀 -> har
+* 학과 업데이트 ([더 보기](https://github.com/hyunmin0317/smunity/issues/134))
+  * 35개 학과 중 32개 학과 검사 가능
+---
+
 ### 1.0.1
 * **22.01.30**
 * 마이페이지 학번 오류 ([더 보기](https://github.com/hyunmin0317/smunity/issues/113))

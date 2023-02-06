@@ -21,34 +21,126 @@
             </div>
         </header>
     </div>
-    <!-- 공지사항 모달 창 -->
-    <div id="modal-info" class="modal">
+    <!-- 업데이트 공지 -->
+    <div id='myModal' class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close" id="close-info" onclick="modal_close(this)" close="modal-info">&times;</span>
-            <br>
-            <div class="modal_div">
-                <div class="p_div">
-                    <div style="font-size : 1.5rem;">공지사항</div>
+            <span id='dd' class="close" style="font-size:3rem;">&times;</span>
+            <div class='popup_content'>
+                <div class='popup_title'>
+                    공지사항
                 </div>
-            </div>
-            <div class="modal_div_content">
-                <p>
-                안녕하세요. 스뮤니티입니다. <br>
-                재학생분들의 많은 성원에 정말 감사드립니다. <br>
-                <br>
-                현재 과 사무실에 전화하여 성적사항 엑셀 파일을 받아 업로드하는 방식으로 서비스를 운영하고 있습니다. <br>
-                하지만 이 방식으로 인해 과 사무실에 과도하게 전화가 몰려 업무에 방해됨을 인지하였습니다. <br>
-                <br>
-                샘물에서 엑셀 파일을 받을 수 있도록 기능을 추가하는 것으로 학교와 협의 중에 있습니다. <br>
-                협의가 진행되는 동안 스뮤니티의 졸업 요건 검사 <span class="caution"> 서비스를 잠정 중단</span>하는 것으로 결정하였습니다. <br>
-                <br>
-                현재 엑셀 파일이 아닌 다른 방법도 모색 중이며 팀원 모두 최선을 다하겠습니다! <br>
-                <br>
-                이용에 불편을 드려 죄송합니다. <br>
-                <br>
-                <span class="last"> 스뮤니티 올림</span>
-                </p>
+                <div class='popup_box'>
+                    <ul>
+                        📢안녕하세요. 스뮤니티입니다.<br>
+                        재학생분들의 많은 성원에 정말 감사드립니다.<br><br>
+
+                        기존 엑셀 파일 업로드 방식의 문제점을 인지한 후 업로드 방식을 변경하게 되었습니다.<br>
+                        (<b>마이페이지</b>에서 <b>기이수 과목 업데이트</b> 버튼을 클릭하여 자세한 내용을 확인할 수 있습니다!)<br><br>
+
+                        또한 융합공과대학만을 대상으로 하던 서비스가 32개의 학과로 확대되었습니다 ‼️<br>
+                        대상 학과는 <a id='target_btn' class="link_site" style='cursor: pointer;'>검사대상표</a>에서 확인하실 수 있습니다.<br><br>
+
+                        업데이트가 늦어져 정말 죄송합니다.<br>
+                        앞으로 더 발전하는 스뮤니티가 되겠습니다. 🙇🏻‍♂️
+                        <hr style='border: 0.001px solid rgb(230, 230, 230); margin:1rem 0 1rem 0; width:85%'>
+                        <li>
+                            <b>version 1.0.2 업데이트 내용</b>&nbsp;&nbsp;
+                            <a class="link_site" target="_blank" href="https://github.com/hyunmin0317/smunity/blob/master/version.md">버전 기록 보기</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="popup_check">
+                    <label style='cursor:pointer'>
+                        <input id='unlook' type="checkbox" style='width:1rem; height:1rem;'>
+                        <label for='unlook'></label>
+                        &nbsp;다음 공지까지 보지 않기
+                    </label>
+
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- 검사대상표 모달 -->
+    <div id="target_modal" class="modal" style="display: none;">
+        <div class="modal-content" style='width:70%'>
+            <span class="close" id="target_close">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <!-- 추천과목 -->
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 검사대상표
+                    </div>
+                    <div class="mydiv">아래 표에 해당하는 학과만 회원가입 가능합니다.</div>
+                    <hr>
+
+                    <div class='target_num_div'>
+                        현재 총 <span class='target_color_span'>{{ dept_num }}</span>개 학과 검사 가능
+                    </div>
+
+                    <table class="target_table">
+                        <tr>
+                            <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과</th>
+                            <th class="target_table_th">단과대학</th>
+                            <th class="target_table_th">학번</th>
+                        </tr>
+                        {% for department in departments %}
+                        <tr>
+                            <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ department.name }}</td>
+                            <td class="target_table_td">{{ department.college }}</td>
+                            <td class="target_table_td" >23, 22, 21, 20, 19, 18, 17</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/modal.js' %}"></script>
+
+    <script>
+    // 쿠키 여부에 따라 모달창 렌더링
+    var unlook_cookie = document.cookie.match('(^|;) ?' + 'is_unlook_0206' + '=([^;]*)(;|$)');
+    if (unlook_cookie == null) {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // 모달 창 끄기 + 다시 보지 않음 쿠키 설정
+    var Spanclick_set_cookie = function (x, y) {
+        x.onclick = function () {
+            y.style.display = "none";
+            var chk = document.getElementById('unlook');
+            // 체크하고 누르면 쿠키 생성
+            if (chk.checked) {
+                var date = new Date();
+                date.setTime(date.getTime() + 60 * 24 * 60 * 60 * 1000);
+                document.cookie = 'is_unlook_0206' + '=' + 'unlook' + ';expires=' + date.toUTCString() + ';path=/';
+            }
+        }
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    var modal = document.getElementById('myModal');
+    var span = document.getElementsByClassName("close")[0];
+
+    Spanclick_set_cookie(span, modal);
+
+    // 검사대상표 모달
+    var target_btn = document.getElementById("target_btn");
+    var target_modal = document.getElementById('target_modal');
+    var target_close = document.getElementById("target_close");
+    Btnclick(target_btn, target_modal);
+    Spanclick(target_close, target_modal);
+    window.onclick = function (event) {
+        if (event.target == target_modal) {
+            target_modal.style.display = "none";
+        }
+    }
+</script>
 {% endblock %}

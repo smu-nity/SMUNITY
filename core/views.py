@@ -6,14 +6,16 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
-from accounts.models import Profile
+from accounts.models import Profile, Department
 from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
 
 
 def home(request):
-    return render(request, 'core/head.html')
+    departments = Department.objects.filter(url__isnull=False)
+    dept_num = departments.count()
+    return render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num})
 
 
 def team(request):
