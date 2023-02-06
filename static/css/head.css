@@ -311,3 +311,49 @@ input[type=checkbox] {
     border-radius: 3px;
     background-color: #6188E8;
 }
+
+/* ---------------------------------( agree 검사대상 모달 )---------------------------------------- */
+
+.target_color_span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6188E8
+}
+
+.target_num_div {
+    font-size:1.5rem;
+    margin : 2rem 0 2rem 0;
+}
+
+.target_caution_div {
+    color:#d32f2f;
+    font-weight:bold;
+    font-size:1rem;
+    margin : 2.3rem 0 2.3rem 0;
+}
+
+.target_table {
+    font-size:1rem;
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.target_table_th {
+    text-align: center;
+    height: 2.5rem;
+    background-color: #f8f8f8;
+    border-top: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+
+.target_table_td {
+    text-align: left;
+    padding : 0.3rem 0.7rem 0.3rem 0.7rem;
+    height: 2rem;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+
+}
