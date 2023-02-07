@@ -56,7 +56,7 @@
                         앞으로 더 발전하는 스뮤니티가 되겠습니다. 🙇🏻‍♂️
                         <hr style='border: 0.001px solid rgb(230, 230, 230); margin:1rem 0 1rem 0; width:85%'>
                         <li>
-                            <b>version 1.0.2 업데이트 내용</b>&nbsp;&nbsp;
+                            <b>version 1.0.3 업데이트 내용</b>&nbsp;&nbsp;
                             <a class="link_site" target="_blank" href="https://github.com/hyunmin0317/smunity/blob/master/version.md">버전 기록 보기</a>
                         </li>
                     </ul>
@@ -114,7 +114,8 @@
 
     <script>
     // 쿠키 여부에 따라 모달창 렌더링
-    var unlook_cookie = document.cookie.match('(^|;) ?' + 'is_unlook_0206' + '=([^;]*)(;|$)');
+    const cookie_name = '23.02.07'
+    var unlook_cookie = document.cookie.match('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
     if (unlook_cookie == null) {
         document.getElementById('myModal').style.display = 'block';
     }
@@ -128,7 +129,7 @@
             if (chk.checked) {
                 var date = new Date();
                 date.setTime(date.getTime() + 60 * 24 * 60 * 60 * 1000);
-                document.cookie = 'is_unlook_0206' + '=' + 'unlook' + ';expires=' + date.toUTCString() + ';path=/';
+                document.cookie = cookie_name + '=' + 'unlook' + ';expires=' + date.toUTCString() + ';path=/';
             }
         }
     }

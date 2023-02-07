@@ -25,6 +25,7 @@
 ### 1.0.0
 * **22.01.29**
 * 서비스 출시
-* AWS EC2 배포
-* Nginx SSL 설정 (HTTPS 적용)
+* AWS EC2 배포 ([더 보기](https://github.com/hyunmin0317/smunity/issues/82))
+* Nginx SSL 설정 ([더 보기](https://github.com/hyunmin0317/smunity/issues/83))
+  * HTTPS 적용
 ---
