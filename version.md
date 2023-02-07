@@ -1,5 +1,12 @@
 # 버전 기록
 
+### 1.0.3
+* **22.02.07**
+* 모달 디자인 수정 ([더 보기](https://github.com/hyunmin0317/smunity/issues/148))
+* 장고 로그 설정 ([더 보기](https://github.com/hyunmin0317/smunity/issues/150))
+* 사용자 통계 ([더 보기](https://github.com/hyunmin0317/smunity/issues/152))
+---
+
 ### 1.0.2
 * **22.02.06**
 * 기이수과목 업로드 방식 변경 ([더 보기](https://github.com/hyunmin0317/smunity/issues/132))
