@@ -1,5 +1,4 @@
 import json
-
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,7 +9,9 @@ from accounts.models import Profile, Department
 from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
+import logging
 
+logger = logging.getLogger('smunity')
 
 def home(request):
     departments = Department.objects.filter(url__isnull=False)
@@ -78,7 +79,7 @@ def course_update(request):
                         Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
             success = True
         except:
-            print('error')
+            logger.error(res)
     if success:
         messages.error(request, '기이수과목이 업데이트 되었습니다.')
     else:
