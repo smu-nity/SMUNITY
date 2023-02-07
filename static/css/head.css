@@ -165,15 +165,15 @@ input[type="button"]
 
 
 .num_visit{
-    color:rgb(207, 207, 207);
+    color:black;
     font-size:0.9rem;
     font-weight: bold;
     letter-spacing:0.8px;
-    width:200px;
+    width:11.5rem;
     clear:right;
     float:right;
-    margin-top:14rem;
-    margin-right:0.5rem;
+    margin-top:15.5rem;
+    margin-right:2.5rem;
 }
 
 .popup_content{
@@ -356,4 +356,12 @@ input[type=checkbox] {
     border-right: 1px solid #dadada;
     border-bottom: 1px solid #dadada;
 
+}
+
+.card {
+    background-color: rgba( 255, 255, 255, 0.5 );
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    padding: 1rem;
 }

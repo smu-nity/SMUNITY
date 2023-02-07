@@ -1,11 +1,13 @@
+import datetime
 import json
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
-from accounts.models import Profile, Department
+from accounts.models import Profile, Department, LoginHistory
 from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
@@ -16,7 +18,10 @@ logger = logging.getLogger('smunity')
 def home(request):
     departments = Department.objects.filter(url__isnull=False)
     dept_num = departments.count()
-    return render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num})
+    today = datetime.date.today()
+    user_num, visit = format(User.objects.all().count(), ','), LoginHistory.objects.all()
+    visit_total, visit_today = format(visit.count(), ','), format(visit.filter(login_datetime__range=[f'{today} 00:00:00', f'{today} 23:59:59']).count(), ',')
+    return render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num, 'user_num': user_num, 'visit_total': visit_total, 'visit_today': visit_today})
 
 
 def team(request):
