@@ -74,7 +74,11 @@ def course_update(request):
         try:
             subjects = json.loads(res['response']['content']['text'])['dsRecMattList']
             for sub in subjects:
-                subject = Subject.objects.get(number=sub['SBJ_NO'])
+                number = sub['SBJ_NO']
+                try:
+                    subject = Subject.objects.get(number=number)
+                except:
+                    logger.error(f'DB에 없는 학수번호: {number}')
                 domain = sub['CULT_ARA_NM']
                 if domain == '*':
                     domain = None
