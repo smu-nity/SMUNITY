@@ -44,7 +44,7 @@
                     <tr>
                         <td class="my_box_table_1st_td">학과</td>
                         <td class="regi_box" style="width: 90%; margin-right: 1rem;">
-                             <select id="major">
+                             <select id="major" onchange="handleOnChange(this)">
                                 <option value="7">핀테크전공</option>
                                 <option value="8">빅데이터융합전공</option>
                                 <option value="9">스마트생산전공</option>
@@ -491,6 +491,11 @@
             var major = document.getElementById("major");
             var index = {{ profile.department.pk }} - 7;
             major.options[index].selected = true;
+
+            function handleOnChange(e) {
+                const value = e.options[e.selectedIndex].value;
+                window.open("/accounts/update/dept/" + value, '_self');
+            }
         </script>
     {% endif %}
 {% endblock %}

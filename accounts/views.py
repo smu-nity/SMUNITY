@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -79,6 +80,7 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
+@login_required
 def change_pw(request):
     if request.method == "POST":
         user = request.user
@@ -93,6 +95,7 @@ def change_pw(request):
     return redirect('core:mypage')
 
 
+@login_required
 def update(request):
     if request.method == "POST":
         password = request.POST["password"]
@@ -110,6 +113,7 @@ def update(request):
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
 
+
 def find_pw(request):
     if request.method == "POST":
         # ecampus 존재하면
@@ -123,3 +127,17 @@ def find_pw(request):
             return render(request, 'accounts/changePW.html', {'username': username})
     messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('accounts:login')
+
+
+@login_required
+def change_dept(request, pk):
+    profile = get_object_or_404(Profile, user=request.user)
+    dept_dic = [7, 8, 9]
+    if pk in dept_dic and profile.department.pk in dept_dic:
+        department = get_object_or_404(Department, pk=pk)
+        profile.department = department
+        profile.save()
+        messages.error(request, '전공이 변경되었습니다.')
+        return redirect('core:mypage')
+    messages.error(request, '⚠️ 변경 권한이 없습니다!')
+    return redirect('home')
