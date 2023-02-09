@@ -39,10 +39,24 @@
                         <td class="my_box_table_1st_td">학번</td>
                         <td>{{ profile.user.username }}</td>
                     </tr>
+                    {% if profile.department.pk == 7 or profile.department.pk == 8 or profile.department.pk == 9 %}
+                    <!-- 지능·데이터융합학부 (핀테크전공, 빅데이터융합전공, 스마트생산전공) -->
                     <tr>
                         <td class="my_box_table_1st_td">학과</td>
-                        <td>{{ profile.department.name }}</td>
+                        <td class="regi_box" style="width: 90%; margin-right: 1rem;">
+                             <select id="major">
+                                <option value="7">핀테크전공</option>
+                                <option value="8">빅데이터융합전공</option>
+                                <option value="9">스마트생산전공</option>
+                            </select>
+                        </td>
                     </tr>
+                    {% else %}
+                        <tr>
+                            <td class="my_box_table_1st_td">학과</td>
+                            <td>{{ profile.department.name }}</td>
+                        </tr>
+                    {% endif %}
                 </table>
                 <hr style="margin-bottom:0.8rem; margin-top:1.6rem;">
                 <div class="my_box_title">
@@ -470,4 +484,13 @@
         alert("죄송합니다. 서비스 잠정 중단 상태입니다.")
     }
     </script>
+
+    <!-- 지능·데이터융합학부 (핀테크전공, 빅데이터융합전공, 스마트생산전공) -->
+    {% if profile.department.pk == 7 or profile.department.pk == 8 or profile.department.pk == 9 %}
+        <script>
+            var major = document.getElementById("major");
+            var index = {{ profile.department.pk }} - 7;
+            major.options[index].selected = true;
+        </script>
+    {% endif %}
 {% endblock %}
