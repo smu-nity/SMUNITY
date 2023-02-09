@@ -11,5 +11,6 @@ urlpatterns = [
     path('agree/', views.agree, name='agree'),
     path('change/', views.change_pw, name='change'),
     path('update/', views.update, name='update'),
+    path('update/dept/<int:pk>/', views.change_dept, name='chage_dept'),
     path('find/', views.find_pw, name='find'),
 ]

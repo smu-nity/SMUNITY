@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile, LoginHistory
+from config.settings import DEPT_DIC
 
 
 def agree(request):
@@ -19,10 +21,10 @@ def agree(request):
         context = information(ecampus(username, password))
         if context:
             name = context['department']
-            if name == '융합전자공학전공':
-                name = '지능IOT융합전공'
+            if name in DEPT_DIC.keys():
+                name = DEPT_DIC[name]
             if Year.objects.filter(year=username[:4]) and Department.objects.filter(name=name):
-                context['id'], context['department'] = username, name
+                context['id'], context['dept'] = username, name
                 request.session['context'] = context
                 return redirect('accounts:register')
 
@@ -59,7 +61,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             year = Year.objects.filter(year=context['id'][:4]).first()
-            department = Department.objects.filter(name=context['department']).first()
+            department = Department.objects.filter(name=context['dept']).first()
             if year and department:  # 지원하는 학과와 학번인지 확인
                 form.save()
                 username = form.cleaned_data.get('username')
@@ -78,6 +80,7 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
+@login_required
 def change_pw(request):
     if request.method == "POST":
         user = request.user
@@ -92,12 +95,16 @@ def change_pw(request):
     return redirect('core:mypage')
 
 
+@login_required
 def update(request):
     if request.method == "POST":
         password = request.POST["password"]
         context = information(ecampus(request.user.username, password))
         if context:
-            department = Department.objects.filter(name=context['department'])
+            name = context['department']
+            if name in DEPT_DIC.keys():
+                name = DEPT_DIC[name]
+            department = Department.objects.filter(name=name)
             if department:
                 Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
                 messages.error(request, '회원 정보가 업데이트 되었습니다.')
@@ -105,6 +112,7 @@ def update(request):
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
+
 
 def find_pw(request):
     if request.method == "POST":
@@ -119,3 +127,17 @@ def find_pw(request):
             return render(request, 'accounts/changePW.html', {'username': username})
     messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('accounts:login')
+
+
+@login_required
+def change_dept(request, pk):
+    profile = get_object_or_404(Profile, user=request.user)
+    dept_dic = [7, 8, 9]
+    if pk in dept_dic and profile.department.pk in dept_dic:
+        department = get_object_or_404(Department, pk=pk)
+        profile.department = department
+        profile.save()
+        messages.error(request, '전공이 변경되었습니다.')
+        return redirect('core:mypage')
+    messages.error(request, '⚠️ 변경 권한이 없습니다!')
+    return redirect('home')
