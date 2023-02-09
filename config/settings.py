@@ -147,6 +147,7 @@ CULTURES_1 = [{'number': 'HALR1032', 'name': '사고와표현', 'credit': 3, 'se
 CULTURES_2 = [{'number': 'HALR1032', 'name': '사고와표현', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1050\nHALR1231', 'name': 'EnglishforAcademicPurpose\n기초수학', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1238', 'name': '컴퓨팅사고와데이터의이해', 'credit': 2, 'semester': '1'}, {'number': 'HALR1239', 'name': '알고리즘과게임콘텐츠', 'credit': 2, 'semester': '2'}]
 CULTURES_DIC1 = [['사고와표현'], ['English', '영어', '수학', '미적분학'], ['컴퓨팅사고', '알고리즘']]
 CULTURES_DIC2 = [['사고와표현'], ['English', '영어', '수학', '미적분학'], ['컴퓨팅사고'], ['알고리즘']]
+DEPT_DIC = {'융합전자공학전공': '지능IOT융합전공', '지능데이터융합학부': '핀테크전공'}
 
 # 로깅설정
 LOGGING = {

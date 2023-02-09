@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile, LoginHistory
+from config.settings import DEPT_DIC
 
 
 def agree(request):
@@ -19,10 +20,10 @@ def agree(request):
         context = information(ecampus(username, password))
         if context:
             name = context['department']
-            if name == '융합전자공학전공':
-                name = '지능IOT융합전공'
+            if name in DEPT_DIC.keys():
+                name = DEPT_DIC[name]
             if Year.objects.filter(year=username[:4]) and Department.objects.filter(name=name):
-                context['id'], context['department'] = username, name
+                context['id'], context['dept'] = username, name
                 request.session['context'] = context
                 return redirect('accounts:register')
 
@@ -59,7 +60,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             year = Year.objects.filter(year=context['id'][:4]).first()
-            department = Department.objects.filter(name=context['department']).first()
+            department = Department.objects.filter(name=context['dept']).first()
             if year and department:  # 지원하는 학과와 학번인지 확인
                 form.save()
                 username = form.cleaned_data.get('username')
@@ -97,7 +98,10 @@ def update(request):
         password = request.POST["password"]
         context = information(ecampus(request.user.username, password))
         if context:
-            department = Department.objects.filter(name=context['department'])
+            name = context['department']
+            if name in DEPT_DIC.keys():
+                name = DEPT_DIC[name]
+            department = Department.objects.filter(name=name)
             if department:
                 Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
                 messages.error(request, '회원 정보가 업데이트 되었습니다.')
