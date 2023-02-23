@@ -1,5 +1,13 @@
 # 버전 기록
 
+### 1.0.5
+* **22.02.23**
+* DB 마이그레이션 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/172))
+  * 기존: PostgreSQL 도커 이미지
+  * 변경: MySQL RDS
+* 비밀번호 찾기 오류 해결 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/175))
+---
+
 ### 1.0.4
 * **22.02.09**
 * 파일 업로드 오류 해결 ([더 보기](https://github.com/hyunmin0317/smunity/issues/156))

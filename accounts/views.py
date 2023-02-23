@@ -80,7 +80,6 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 
-@login_required
 def change_pw(request):
     if request.method == "POST":
         user = request.user
