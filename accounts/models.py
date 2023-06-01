@@ -88,9 +88,18 @@ class Profile(models.Model):    # 사용자 프로필
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context
 
+
 class LoginHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # 장고 유저
     login_datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.user} - {self.login_datetime}'
+
+
+class Statistics(models.Model):
+    date = models.CharField(unique=True, max_length=10)
+    visit_count = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.date} : {self.visit_count}'
