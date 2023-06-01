@@ -1,12 +1,12 @@
+import datetime
 from django.contrib import messages
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-
 from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
-from accounts.models import Year, Department, Profile, LoginHistory
+from accounts.models import Year, Department, Profile, LoginHistory, Statistics
 from config.settings import DEPT_DIC
 
 
@@ -34,7 +34,13 @@ def agree(request):
         return redirect('accounts:agree')
     departments = Department.objects.filter(url__isnull=False)
     dept_num = departments.count()
-    return render(request, 'accounts/agree.html', {'departments': departments, 'dept_num': dept_num})
+    response = render(request, 'accounts/agree.html', {'departments': departments, 'dept_num': dept_num})
+    st, _ = Statistics.objects.get_or_create(date=datetime.date.today())
+    if request.COOKIES.get('is_visit') is None:
+        response.set_cookie('is_visit', 'visited', 60*30)
+        st.visit_count += 1
+        st.save()
+    return response
 
 
 def login(request):
@@ -51,7 +57,14 @@ def login(request):
         else:
             messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
         redirect('accounts:login')
-    return render(request, 'accounts/login.html')
+    response = render(request, 'accounts/login.html')
+
+    st, _ = Statistics.objects.get_or_create(date=datetime.date.today())
+    if request.COOKIES.get('is_visit') is None:
+        response.set_cookie('is_visit', 'visited', 60*30)
+        st.visit_count += 1
+        st.save()
+    return response
 
 
 def register(request):

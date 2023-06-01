@@ -3,10 +3,10 @@ import json
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
-from accounts.models import Profile, Department, LoginHistory
+from accounts.models import Profile, Department, Statistics
 from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
@@ -16,11 +16,17 @@ logger = logging.getLogger('smunity')
 
 def home(request):
     departments = Department.objects.filter(url__isnull=False)
-    dept_num = departments.count()
-    today = datetime.date.today()
-    user_num, visit = format(Profile.objects.all().count(), ','), LoginHistory.objects.all()
-    visit_total, visit_today = format(visit.count(), ','), format(visit.filter(login_datetime__range=[f'{today} 00:00:00', f'{today} 23:59:59']).count(), ',')
-    return render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num, 'user_num': user_num, 'visit_total': visit_total, 'visit_today': visit_today})
+    dept_num, today = departments.count(), datetime.date.today()
+    st, _ = Statistics.objects.get_or_create(date=today)
+    visit_total = Statistics.objects.aggregate(Sum('visit_count'))['visit_count__sum']
+    user_num = format(Profile.objects.all().count(), ',')
+    visit_total, visit_today = format(visit_total, ','), format(st.visit_count, ',')
+    response = render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num, 'user_num': user_num, 'visit_total': visit_total, 'visit_today': visit_today})
+    if request.COOKIES.get('is_visit') is None:
+        response.set_cookie('is_visit', 'visited', 60*30)
+        st.visit_count += 1
+        st.save()
+    return response
 
 
 def team(request):
