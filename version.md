@@ -1,5 +1,13 @@
 # 버전 기록
 
+### 1.0.6
+* **22.06.02**
+* 사용자 통계 수정 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/177))
+  * 기존: 로그인 횟수
+  * 변경: 방문자 수
+* 로그인 페이지 화면 개선 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/179))
+---
+
 ### 1.0.5
 * **22.02.23**
 * DB 마이그레이션 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/172))
