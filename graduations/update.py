@@ -160,7 +160,7 @@ def major_computer_science():
     major(dept, subjects)
 
 
-# 융합공과대학 전공 업데이트 스크립트
+# 전공 과목 업데이트 스크립트
 def majors():
     departments = Department.objects.all()
     for department in departments:
@@ -180,9 +180,9 @@ def subjects_all():
 
 
 if __name__ == '__main__':
-    subjects_all()
-    year()
-    departments()
+    #subjects_all()
+    #year()
+    #departments()
     majors()
-    culture_e()
-    culture_s()
+    #culture_e()
+    #culture_s()
