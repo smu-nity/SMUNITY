@@ -1,5 +1,12 @@
 # 버전 기록
 
+### 1.0.7
+* **22.07.19**
+* 2023학년도 2학기 강의시간표 및 교육과정 업데이트 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/188))
+* 서비스 대상 모든 학과로 업데이트 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/164))
+  * 한일문화콘텐츠전공, 경영학부, 글로벌경영학과 추가
+---
+
 ### 1.0.6
 * **22.06.02**
 * 사용자 통계 수정 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/177))
