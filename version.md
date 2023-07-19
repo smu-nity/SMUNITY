@@ -5,6 +5,7 @@
 * 2023학년도 2학기 강의시간표 및 교육과정 업데이트 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/188))
 * 서비스 대상 모든 학과로 업데이트 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/164))
   * 한일문화콘텐츠전공, 경영학부, 글로벌경영학과 추가
+* 413 Request Entity Too Large 오류 해결 ([더 보기](https://github.com/hyunmin0317/SMUNITY/issues/184))
 ---
 
 ### 1.0.6
