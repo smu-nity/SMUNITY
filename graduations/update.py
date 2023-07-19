@@ -41,8 +41,8 @@ def major(dept, url):
         number = subject[3].text
         try:
             sub = Subject.objects.get(number=number)
-            # Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
-            #                      type=subject[2].text)
+            Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
+                                 type=subject[2].text)
         except:
             print(number)
 
