@@ -46,24 +46,22 @@
                         📢 안녕하세요! 상명대학교 개발팀 스뮤니티입니다.<br>
                         재학생분들의 많은 성원에 정말 감사드립니다.<br><br>
 
-                        기존 엑셀 파일 업로드 방식의 문제점을 인지한 후 업로드 방식을 변경하게 되었습니다.<br>
-                        자세한 내용은 <a class="link_site" href="{% url 'core:info' %}" target='_blank'>기이수과목 업로드</a> 에서 확인하실 수 있습니다.<br><br>
-
-                        또한 융합공과대학만을 대상으로 하던 서비스가 32개의 학과로 확대되었습니다!<br>
-                        대상 학과는 <a id='target_btn' class="link_site" style='cursor: pointer;'>검사대상표</a> 에서 확인하실 수 있습니다.<br><br>
+                        2023학년도 2학기 강의시간표 및 교육과정이 업데이트 되었습니다.<br>
+                        또한 서비스 대상이 모든 학과로 확대되었습니다!<br>
+                        대상 학과 및 학번은 <a id='target_btn' class="link_site" style='cursor: pointer;'>검사대상표</a> 에서 확인하실 수 있습니다.<br><br>
 
                         앞으로 더 발전하는 스뮤니티가 되겠습니다. 🙇🏻‍♂️<br>
                         감사합니다!
                         <hr style='border: 0.001px solid rgb(230, 230, 230); margin:1rem 0 1rem 0; width:85%'>
                         <li>
-                            <b>version 1.0.6 업데이트 내용</b>&nbsp;&nbsp;
+                            <b>version 1.0.7 업데이트 내용</b>&nbsp;&nbsp;
                             <a class="link_site" target="_blank" href="https://github.com/hyunmin0317/smunity/blob/master/version.md">버전 기록 보기</a>
                         </li>
                         <li>
-                            사용자 통계 수정
+                            2023학년도 2학기 강의시간표 및 교육과정 업데이트
                         </li>
                         <li>
-                            로그인 페이지 화면 개선
+                            서비스 대상 모든 학과로 업데이트
                         </li>
                     </ul>
                 </div>
@@ -96,17 +94,19 @@
                         현재 총 <span class='target_color_span'>{{ dept_num }}</span>개 학과 검사 가능
                     </div>
 
-                    <table class="target_table">
+                    <table class="target_table" style="width: 80%;">
                         <tr>
                             <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과</th>
                             <th class="target_table_th">단과대학</th>
                             <th class="target_table_th">학번</th>
+                            <th class="target_table_th">교육과정</th>
                         </tr>
                         {% for department in departments %}
                         <tr>
                             <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ department.name }}</td>
                             <td class="target_table_td">{{ department.college }}</td>
                             <td class="target_table_td" >23, 22, 21, 20, 19, 18, 17</td>
+                            <td class="target_table_td" ><a class="link_site" href="{{ department.url }}" target="_blank">교육과정</a></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -120,7 +120,7 @@
 
     <script>
     // 쿠키 여부에 따라 모달창 렌더링
-    const cookie_name = '23.06.02';
+    const cookie_name = '23.07.19';
     var unlook_cookie = document.cookie.match('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
     if (unlook_cookie == null) {
         document.getElementById('myModal').style.display = 'block';
