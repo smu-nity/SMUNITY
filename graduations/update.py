@@ -36,8 +36,8 @@ def major(dept, url):
         number = subject[3].text
         try:
             sub = Subject.objects.get(number=number)
-            Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
-                                 type=subject[2].text)
+            # Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
+            #                      type=subject[2].text)
         except:
             print(number)
 
@@ -140,8 +140,8 @@ def culture_s():
                 print(number)
 
 
-# 컴퓨터과학과 전공 업데이트 스크립트
-def major_computer_science():
+# 컴퓨터과학과 전공 과목 업데이트 스크립트
+def major_cs():
     dept = Department.objects.get(name='컴퓨터과학전공')
     subjects = [
         {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HASW0001', 'HAEA9225', 'HAEA9237', 'HAFL7001']},
@@ -156,6 +156,44 @@ def major_computer_science():
         {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAEA0011', 'HAEA0014', 'HAEA9228', 'HAGH0030']},
         {'grade': '4학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAEA0020', 'HAEA9229', 'HAEA9240']},
         {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAEA0026', 'HAEA9231']},
+    ]
+    major(dept, subjects)
+
+
+# 경영학부 전공 과목 업데이트 스크립트
+def major_biz():
+    dept = Department.objects.get(name='경영학부')
+    subjects = [
+        {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAFB0002']},
+        {'grade': '1학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAFC0001']},
+        {'grade': '2학년', 'semester': '1학기', 'type': '1전선',
+         'numbers': ['HAAE0010', 'HAAE1122', 'HAAE2131', 'HAAE3211']},
+        {'grade': '2학년', 'semester': '2학기', 'type': '1전선',
+         'numbers': ['HAAE0006', 'HAAE9003']},
+        {'grade': '3학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAE6005', 'HAAE9226']},
+        {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAAE6008']},
+        {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAE9008', 'HAAE9213', 'HAAE9225']},
+    ]
+    major(dept, subjects)
+
+
+# 글로벌경영학과 전공 과목 업데이트 스크립트
+def major_gbiz():
+    dept = Department.objects.get(name='글로벌경영학과')
+    subjects = [
+        {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM9213', 'HAFB0004']},
+        {'grade': '1학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM0008', 'HAAM5003']},
+        {'grade': '2학년', 'semester': '1학기', 'type': '1전선',
+         'numbers': ['HAAM0013', 'HAAM5005', 'HAAM6003', 'HAAM9212', 'HAAM9219', 'HAAM9220', 'HAAM9221']},
+        {'grade': '2학년', 'semester': '2학기', 'type': '1전선',
+         'numbers': ['HAAM0009', 'HAAM0014', 'HAAM2031', 'HAAM9210', 'HAAM9214', 'HAAM9218', 'HAAM9222', 'HAAM9223', 'HAFU0028']},
+        {'grade': '3학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM3001', 'HAAM9003', 'HAAM5003']},
+        {'grade': '3학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAM0003']},    # 강소기업전략론
+        {'grade': '3학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM0001', 'HAAM0004', 'HAAM0021', 'HAAM6001', 'HAAM9201']},
+        {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAAM0007', 'HAAM7001', 'HAAM9004', 'HAAM0019']},
+        {'grade': '4학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM0005', 'HAAM5009', 'HAAM7002', 'HAAM9211']},
+        {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAM0012', 'HAAM6002', 'HAAM9006']},
+        {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM9005', 'HAAM9215', 'HAAM9216', 'HAAM9217']},
     ]
     major(dept, subjects)
 
