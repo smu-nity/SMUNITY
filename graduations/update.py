@@ -23,8 +23,11 @@ def subjects(year, semester):
         datas = json.load(f)['dsUcsLectLsnPdoc']
         for data in datas:
             SBJ_NO = data['SBJ_NO']
-            if not Subject.objects.filter(number=SBJ_NO):
+            sbj = Subject.objects.filter(number=SBJ_NO)
+            if not sbj:
                 Subject.objects.create(number=SBJ_NO, name=data['SBJ_NM'], credit=data['CDT'], dept=data['EST_DEPT_INFO'], type=data['CMP_DIV_NM'])
+            else:
+                sbj.update(name=data['SBJ_NM'], credit=data['CDT'], dept=data['EST_DEPT_INFO'], type=data['CMP_DIV_NM'])
 
 
 # 전공 과목 업데이트 스크립트
@@ -159,7 +162,14 @@ def major_cs():
         {'grade': '4학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAEA0020', 'HAEA9229', 'HAEA9240']},
         {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAEA0026', 'HAEA9231']},
     ]
-    major(dept, subjects)
+    for subject in subjects:
+        numbers = subject['numbers']
+        for number in numbers:
+            try:
+                sub = Subject.objects.get(number=number)
+                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
+            except:
+                print(number)
 
 
 # 경영학부 전공 과목 업데이트 스크립트
@@ -176,7 +186,14 @@ def major_biz():
         {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAAE6008']},
         {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAE9008', 'HAAE9213', 'HAAE9225']},
     ]
-    major(dept, subjects)
+    for subject in subjects:
+        numbers = subject['numbers']
+        for number in numbers:
+            try:
+                sub = Subject.objects.get(number=number)
+                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
+            except:
+                print(number)
 
 
 # 글로벌경영학과 전공 과목 업데이트 스크립트
@@ -197,7 +214,14 @@ def major_gbiz():
         {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAM0012', 'HAAM6002', 'HAAM9006']},
         {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM9005', 'HAAM9215', 'HAAM9216', 'HAAM9217']},
     ]
-    major(dept, subjects)
+    for subject in subjects:
+        numbers = subject['numbers']
+        for number in numbers:
+            try:
+                sub = Subject.objects.get(number=number)
+                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
+            except:
+                print(number)
 
 
 # 전공 과목 업데이트 스크립트
@@ -214,14 +238,14 @@ def subjects_all():
     data = [['2017', '10'], ['2017', '11'], ['2017', '20'], ['2017', '21'], ['2018', '10'], ['2018', '11'],
             ['2018', '20'], ['2018', '21'], ['2019', '10'], ['2019', '11'], ['2019', '20'], ['2019', '21'],
             ['2020', '10'], ['2020', '11'], ['2020', '20'], ['2020', '21'], ['2021', '10'], ['2021', '11'],
-            ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'], ['2023', '10']]
-    data.reverse()
+            ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'],
+            ['2023', '10'], ['2023', '11'], ['2023', '20']]
     for d in data:
         subjects(d[0], d[1])
 
 
 if __name__ == '__main__':
-    # subjects_all()
+    subjects_all()
     # year()
     # departments()
     majors()
