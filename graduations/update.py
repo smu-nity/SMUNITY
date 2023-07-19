@@ -245,7 +245,7 @@ def subjects_all():
 
 
 if __name__ == '__main__':
-    subjects_all()
+    # subjects_all()
     # year()
     # departments()
     majors()
