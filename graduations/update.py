@@ -1,10 +1,12 @@
 # 장고 환경
 import os
+import sys
 import json
 import requests
 from bs4 import BeautifulSoup as bs
 from django.core.wsgi import get_wsgi_application
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)) + '/app')))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 application = get_wsgi_application()
 
@@ -17,7 +19,7 @@ from config.settings import SUBTYPE_CHOICES_S, SUBTYPE_CHOICES_E
 def subjects(year, semester):
     print(f'{year}-{semester}')
     file_path = f'dataset/{year}_{semester}.json'
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='UTF-8') as f:
         datas = json.load(f)['dsUcsLectLsnPdoc']
         for data in datas:
             SBJ_NO = data['SBJ_NO']
@@ -202,6 +204,7 @@ def major_gbiz():
 def majors():
     departments = Department.objects.all()
     for department in departments:
+        print(department)
         if department.url:
             major(department, department.url)
 
@@ -218,9 +221,11 @@ def subjects_all():
 
 
 if __name__ == '__main__':
-    #subjects_all()
-    #year()
-    #departments()
+    # subjects_all()
+    # year()
+    # departments()
     majors()
-    #culture_e()
-    #culture_s()
+    major_biz()
+    major_gbiz()
+    # culture_e()
+    # culture_s()
