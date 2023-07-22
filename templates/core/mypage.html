@@ -51,16 +51,16 @@
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="my_box_table_1st_td">교육과정</td>
+                        <td><a class="link_site" href="{{ profile.department.url }}" target="_blank">{{ profile.department.name }}</a></td>
+                    </tr>
                     {% else %}
                         <tr>
                             <td class="my_box_table_1st_td">학과</td>
-                            <td>{{ profile.department.name }}</td>
+                            <td><a class="link_site" href="{{ profile.department.url }}" target="_blank">{{ profile.department.name }}</a></td>
                         </tr>
                     {% endif %}
-                    <tr>
-                        <td class="my_box_table_1st_td">교육과정</td>
-                        <td><a class="link_site" href="{{ profile.department.url }}" target="_blank">교육과정</a></td>
-                    </tr>
                 </table>
                 <hr style="margin-bottom:0.8rem; margin-top:1.6rem;">
                 <div class="my_box_title">
