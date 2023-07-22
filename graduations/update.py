@@ -108,11 +108,11 @@ def departments():
 # 상명핵심역량교양 과목 업데이트 스크립트
 def culture_e():
     dic = {
-        '전문지식탐구역량': ['HALF9398', 'HALF9408', 'HALF9425', 'HALF9426'],
-        '창의적문제해결역량': ['HALF9427', 'HALF9428', 'HALR1040', 'HALR1230'],
-        '융복합역량': ['HALF9429', 'HALF9430', 'HALF9431', 'HALF9432'],
-        '다양성존중역량': ['HALF9433', 'HALF9434', 'HALF9435', 'HALF9436'],
-        '윤리실천역량': ['HALF9404', 'HALF9437', 'HALF9438', 'HALR1038']
+        '전문지식탐구역량': ['HALF9398', 'HALF9408', 'HALR1269'],   # HALF9425, HALF9426
+        '창의적문제해결역량': ['HALF9427', 'HALR1040', 'HALR1230'],  # HALF9428
+        '융복합역량': ['HALF9429', 'HALF9432', 'HALR1271'],  # HALF9430, HALF9431
+        '다양성존중역량': ['HALF9435'],    # HALF9433, HALF9434, HALF9436
+        '윤리실천역량': ['HALF9404', 'HALF9438', 'HALR1038']  # HALF9437
     }
     types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_E))
     for type in types:
