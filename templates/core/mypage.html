@@ -45,22 +45,18 @@
                         <td class="my_box_table_1st_td">학과</td>
                         <td class="regi_box" style="width: 90%; margin-right: 1rem;">
                              <select id="major" onchange="handleOnChange(this)">
-                                <option value="7">핀테크전공</option>
-                                <option value="8">빅데이터융합전공</option>
-                                <option value="9">스마트생산전공</option>
+                                <option value="7"><a class="link_site" href="{{ profile.department.url }}" target="_blank">핀테크전공</a></option>
+                                <option value="8"><a class="link_site" href="{{ profile.department.url }}" target="_blank">빅데이터융합전공</a></option>
+                                <option value="9"><a class="link_site" href="{{ profile.department.url }}" target="_blank">스마트생산전공</a></option>
                             </select>
                         </td>
                     </tr>
                     {% else %}
                         <tr>
                             <td class="my_box_table_1st_td">학과</td>
-                            <td>{{ profile.department.name }}</td>
+                            <td><a class="link_site" href="{{ profile.department.url }}" target="_blank">{{ profile.department.name }}</a></td>
                         </tr>
                     {% endif %}
-                    <tr>
-                        <td class="my_box_table_1st_td">교육과정</td>
-                        <td><a class="link_site" href="{{ profile.department.url }}" target="_blank">교육과정</a></td>
-                    </tr>
                 </table>
                 <hr style="margin-bottom:0.8rem; margin-top:1.6rem;">
                 <div class="my_box_title">
