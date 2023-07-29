@@ -9,10 +9,10 @@
 {% block main_area %}
     <div class="lcontainer">
         <div class="rcontainer">
-            <!-- 내 학점 -->
+            <!-- 이수학점 -->
             <div class="resultbox-main">
                 <div class="result_name">
-                    <i class="fa-solid fa-user"></i> &nbsp;내 학점 &emsp;<span class="small">{{ profile.tostring }}</span>
+                    <i class="fa-solid fa-user"></i> &nbsp;이수학점 &emsp;<span class="small">{{ profile.tostring }}</span>
 {#                    <a href="{% url 'core:custom' %}" title="내 기이수과목 수정"><i class="fa-solid fa-circle-plus"></i></a>#}
                 </div>
                 <div class="result_container">
@@ -53,15 +53,10 @@
             </div>
         </div>
         <div class="rcontainer">
-            <!-- 전공 심화 -->
+            <!-- 전공심화 -->
             <div class="resultbox">
                 <div class="result_name">
-                    <i class="fa-solid fa-pen"></i> &nbsp;전공 심화
-{#                    <i open="jonsim" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="jonsim" class="result_info">#}
-{#                        전공 심화 <br> <br>#}
-{#                        설명설명#}
-{#                    </div>#}
+                    <i class="fa-solid fa-pen"></i> &nbsp;전공심화
                     <div class="recommend" onclick="info_in(this)" open="modal-major-i">추천 과목 보기</div>
                 </div>
                 <div class="result_container">
@@ -89,15 +84,10 @@
                 </div>
             </div>
             <div class="test"></div>
-            <!-- 전공 선택 -->
+            <!-- 전공선택 -->
             <div class="resultbox">
                 <div class="result_name">
-                    <i class="fa-solid fa-pen-to-square"></i></i> &nbsp;전공 선택
-{#                    <i open="jonsun" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="jonsun" class="result_info">#}
-{#                        전공 선택 <br> <br>#}
-{#                        설명설명#}
-{#                    </div>#}
+                    <i class="fa-solid fa-pen-to-square"></i></i> &nbsp;전공선택
                     <div class="recommend" onclick="info_in(this)" open="modal-major-s">추천 과목 보기</div>
                 </div>
                 <div class="result_container">
@@ -159,15 +149,10 @@
                     </div>
                 </div>
             </div>
-            <!-- 기초 교양 -->
+            <!-- 기초교양 -->
             <div class="resultbox">
                 <div class="result_name">
-                    <i class="fa-solid fa-book-open-reader"></i> &nbsp;기초 교양
-{#                    <i open="gigyo" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="gigyo" class="result_info">#}
-{#                        기초 교양 <br><br>#}
-{#                        설명설명#}
-{#                    </div>#}
+                    <i class="fa-solid fa-book-open-reader"></i> &nbsp;기초교양
                     <div class="recommend" onclick="info_in(this)" open="modal-culture-c">추천 과목 보기</div>
                 </div>
                 <div class="result_container">
@@ -232,12 +217,7 @@
             <!-- 균형교양 -->
             <div class="resultbox">
                 <div class="result_name">
-                    <i class="fa-solid fa-book-journal-whills"></i> &nbsp;균형 교양
-{#                    <i open="ggyo" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="ggyo" class="result_info">#}
-{#                        균형교양 <br><br>#}
-{#                        설명설명#}
-{#                    </div>#}
+                    <i class="fa-solid fa-book-journal-whills"></i> &nbsp;균형교양
                     <div class="recommend" onclick="info_in(this)" open="modal-culture-s">추천 과목 보기</div>
                 </div>
                 <div class="result_container">
@@ -269,16 +249,16 @@
 
 
         <!-- 추천 모달 -->
-        <!-- 전공 심화 -->
+        <!-- 전공심화 -->
         <div id="modal-major-i" class="modal">
             <div class="modal-content">
                 <span class="close" id="close-major-i" onclick="modal_close(this)" close="modal-major-i">&times;</span>
                 <br>
                 <div style="padding: 1rem; text-align: center;">
                     <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공 심화 추천과목
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공심화 추천과목
                     </div>
-                    <div class="mydiv">전공 심화 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
+                    <div class="mydiv">전공심화 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                     <hr>
                     {% if major_i %}
                     <table class="mytable">
@@ -316,16 +296,16 @@
                 </div>
             </div>
         </div>
-        <!-- 전공 선택 -->
+        <!-- 전공선택 -->
         <div id="modal-major-s" class="modal">
             <div class="modal-content">
-                <span class="close" id="close-major-s" onclick="modal_close(this)" close="modal-major-s">&times;</span>
+                <span class="close" id="close-major-택s" onclick="modal_close(this)" close="modal-major-s">&times;</span>
                 <br>
                 <div style="padding: 1rem; text-align: center;">
                     <!-- 추천과목 -->
-                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공 선택 추천과목
+                    <div style="font-size : 1.5rem;"><i class="my_i fas fa-check-circle"></i> 전공선택 추천과목
                     </div>
-                    <div class="mydiv">전공 선택 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
+                    <div class="mydiv">전공선택 과목 중 미이수과목을 학년 순으로 추천합니다.</div>
                     <hr>
                     {% if major_s %}
                     <table class="mytable">
@@ -368,7 +348,7 @@
             <div class="modal-content">
             </div>
         </div>
-        <!-- 기초 교양 -->
+        <!-- 기초교양 -->
         <div id="modal-culture-c" class="modal">
             <div class="modal-content">
                 <span class="close" id="close-culture-c" onclick="modal_close(this)" close="modal-culture-c">&times;</span>
@@ -472,7 +452,7 @@
                 </div>
             </div>
         </div>
-        <!-- 균형 교양 -->
+        <!-- 균형교양 -->
         <div id="modal-culture-s" class="modal">
             <div class="modal-content">
                 <span class="close" id="close-culture-s" onclick="modal_close(this)" close="modal-culture-s">&times;</span>
