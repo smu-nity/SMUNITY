@@ -8,7 +8,9 @@ from accounts.ecampus import ecampus, information
 from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile, LoginHistory, Statistics
 from config.settings import DEPT_DIC
+import logging
 
+logger = logging.getLogger('smunity')
 
 def agree(request):
     if request.method == "POST":
@@ -27,8 +29,8 @@ def agree(request):
                 context['id'], context['dept'] = username, name
                 request.session['context'] = context
                 return redirect('accounts:register')
-
             messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            logger.error(f'서비스에서 지원하지 않는 학과와 학번\n학과: {name}\n학번: {username[:4]}')
             return redirect('accounts:agree')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
         return redirect('accounts:agree')
