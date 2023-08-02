@@ -145,7 +145,7 @@ SUBTYPE_CHOICES_E = (("전문지식탐구역량", "전문지식탐구역량"), (
 SUBTYPE_CHOICES_S = (("인문", "인문"), ("사회", "사회"), ("자연", "자연"), ("공학", "공학"), ("예술", "예술"))
 CULTURES = [{'number': 'HALR1032', 'name': '사고와표현', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1050\nHALR1231', 'name': 'EnglishforAcademicPurpose\n기초수학', 'credit': 3, 'semester': '1, 2'}, {'number': 'HALR1238', 'name': '컴퓨팅사고와데이터의이해', 'credit': 2, 'semester': '1'}, {'number': 'HALR1239', 'name': '알고리즘과게임콘텐츠', 'credit': 2, 'semester': '2'}]
 CULTURES_DIC = [['사고와표현'], ['English', '영어', '수학', '미적분학'], ['컴퓨팅사고'], ['알고리즘']]
-DEPT_DIC = {'융합전자공학전공': '지능IOT융합전공', '지능데이터융합학부': '핀테크전공'}
+DEPT_DIC = {'융합전자공학전공': '지능IOT융합전공', '지능·데이터융합학부': '핀테크전공'}
 
 # 로깅설정
 LOGGING = {
