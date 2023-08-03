@@ -235,7 +235,9 @@ def majors():
 def subjects_all():
     path = 'dataset'
     files = os.listdir(path)
+    files = sorted(files, key=lambda x: int(x.split('.')[0]))
     for file in files:
+        print(file)
         file_path = f'{path}/{file}'
         subjects(file_path)
 
