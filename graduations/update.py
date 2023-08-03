@@ -16,9 +16,7 @@ from config.settings import SUBTYPE_CHOICES_S, SUBTYPE_CHOICES_E
 
 
 # 과목 업데이트 스크립트
-def subjects(year, semester):
-    print(f'{year}-{semester}')
-    file_path = f'dataset/{year}_{semester}.json'
+def subjects(file_path):
     with open(file_path, 'r', encoding='UTF-8') as f:
         datas = json.load(f)['dsUcsLectLsnPdoc']
         for data in datas:
@@ -235,21 +233,19 @@ def majors():
 
 # 전체 업데이트 스크립트 (17학년도 ~ 22학년도)
 def subjects_all():
-    data = [['2017', '10'], ['2017', '11'], ['2017', '20'], ['2017', '21'], ['2018', '10'], ['2018', '11'],
-            ['2018', '20'], ['2018', '21'], ['2019', '10'], ['2019', '11'], ['2019', '20'], ['2019', '21'],
-            ['2020', '10'], ['2020', '11'], ['2020', '20'], ['2020', '21'], ['2021', '10'], ['2021', '11'],
-            ['2021', '20'], ['2021', '21'], ['2022', '10'], ['2022', '11'], ['2022', '20'], ['2022', '21'],
-            ['2023', '10'], ['2023', '11'], ['2023', '20']]
-    for d in data:
-        subjects(d[0], d[1])
+    path = 'dataset'
+    files = os.listdir(path)
+    for file in files:
+        file_path = f'{path}/{file}'
+        subjects(file_path)
 
 
 if __name__ == '__main__':
-    # subjects_all()
+    subjects_all()
     # year()
     # departments()
-    majors()
-    major_biz()
-    major_gbiz()
+    # majors()
+    # major_biz()
+    # major_gbiz()
     # culture_e()
     # culture_s()
