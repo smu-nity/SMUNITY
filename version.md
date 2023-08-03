@@ -1,5 +1,10 @@
 # 버전 기록
 
+### 1.1.2
+* **22.08.03**
+* 특별학기, 몰입 과목 추가 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/205))
+---
+
 ### 1.1.1
 * **22.08.02**
 * 지능데이터융합학부 (핀테크·빅데이터·스마트생산) 회원가입 오류 수정 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/201))
