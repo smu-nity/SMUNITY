@@ -234,7 +234,7 @@ def majors():
 # 전체 업데이트 스크립트 (17학년도 ~ 22학년도)
 def subjects_all():
     path = 'dataset'
-    files = os.listdir(path)
+    files = os.listdir(os.path.abspath(path))
     files = sorted(files, key=lambda x: int(x.split('.')[0]))
     for file in files:
         print(file)
