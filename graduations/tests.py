@@ -1,3 +1,5 @@
+import json
+
 import requests
 from bs4 import BeautifulSoup as bs
 from django.test import TestCase
@@ -15,5 +17,13 @@ def major(url):
         subjects.append({'grade': subject[0].text, 'semester': subject[1].text, 'type': subject[2].text, 'numbers': subject[3].text})
     print(subjects)
 
-major('https://cs.smu.ac.kr/cs/admission/curriculum.do?srYear=2023&srSust=03005&srShyr=all')
-major('https://hi.smu.ac.kr/hi/admissions/curriculum.do?srYear=2022&srSust=03204&srShyr=all')
+def subjects(year, semester):
+    print(f'{year}-{semester}')
+    file_path = f'dataset/{year}_{semester}.json'
+    with open(file_path, 'r', encoding='UTF-8') as f:
+        datas = json.load(f)['dsUcsLectLsnPdoc']
+        print(len(datas))
+
+# major('https://cs.smu.ac.kr/cs/admission/curriculum.do?srYear=2023&srSust=03005&srShyr=all')
+# major('https://hi.smu.ac.kr/hi/admissions/curriculum.do?srYear=2022&srSust=03204&srShyr=all')
+subjects(2019, 20)
