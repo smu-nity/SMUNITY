@@ -155,3 +155,7 @@ def change_dept(request, pk):
         return redirect('core:mypage')
     messages.error(request, '⚠️ 변경 권한이 없습니다!')
     return redirect('home')
+
+
+def terms(request):
+    return render(request, 'accounts/terms.html')
