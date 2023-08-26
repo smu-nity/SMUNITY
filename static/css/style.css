@@ -1062,6 +1062,12 @@ strong {
     position: fixed;
 }
 
+.footer_link {
+    color: grey;
+}
+.footer_link:hover {
+    text-decoration: underline;
+}
 
 /* ---------------------------------( loading )---------------------------------------- */
 

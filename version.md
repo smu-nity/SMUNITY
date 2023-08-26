@@ -1,5 +1,10 @@
 # 버전 기록
 
+### 1.1.3
+* **22.08.26**
+* 이용약관 & 개인정보처리방침 추가 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/209))
+---
+
 ### 1.1.2
 * **22.08.03**
 * 특별학기, 몰입 과목 추가 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/205))
