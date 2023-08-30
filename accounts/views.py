@@ -89,7 +89,7 @@ def register(request):
                 auth_login(request, user)  # 로그인
                 LoginHistory.objects.create(user=user)
                 return redirect('core:mypage')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
             return redirect('accounts:agree')
         messages.error(request, form.errors['password2'][0])
         return redirect('accounts:register')
@@ -126,7 +126,7 @@ def update(request):
                 Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
                 messages.error(request, '회원 정보가 업데이트 되었습니다.')
                 return redirect('core:mypage')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
 
