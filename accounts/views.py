@@ -51,6 +51,9 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user:
+            if not user.is_superuser and int(user.username[:4]) < 2017:
+                messages.error(request, '⚠️ 서비스에서 지원하지 않는 학번 입니다.')
+                return redirect('accounts:login')
             auth_login(request, user)
             LoginHistory.objects.create(user=user)
             return redirect('core:mypage')
@@ -58,7 +61,7 @@ def login(request):
             messages.error(request, '⚠️ 비밀번호를 확인하세요.')
         else:
             messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
-        redirect('accounts:login')
+        return redirect('accounts:login')
     response = render(request, 'accounts/login.html')
 
     st, _ = Statistics.objects.get_or_create(date=datetime.date.today())
