@@ -25,11 +25,11 @@ def agree(request):
             name = context['department']
             if name in DEPT_DIC.keys():
                 name = DEPT_DIC[name]
-            if Year.objects.filter(year=username[:4]) and Department.objects.filter(name=name):
+            if Department.objects.filter(name=name):
                 context['id'], context['dept'] = username, name
                 request.session['context'] = context
                 return redirect('accounts:register')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
             logger.error(f'서비스에서 지원하지 않는 학과와 학번\n학과: {name}\n학번: {username[:4]}')
             return redirect('accounts:agree')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
@@ -51,6 +51,9 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user:
+            if not user.is_superuser and int(user.username[:4]) < 2017:
+                messages.error(request, '⚠️ 서비스에서 지원하지 않는 학번 입니다.')
+                return redirect('accounts:login')
             auth_login(request, user)
             LoginHistory.objects.create(user=user)
             return redirect('core:mypage')
@@ -58,7 +61,7 @@ def login(request):
             messages.error(request, '⚠️ 비밀번호를 확인하세요.')
         else:
             messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
-        redirect('accounts:login')
+        return redirect('accounts:login')
     response = render(request, 'accounts/login.html')
 
     st, _ = Statistics.objects.get_or_create(date=datetime.date.today())
@@ -75,7 +78,7 @@ def register(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            year = Year.objects.filter(year=context['id'][:4]).first()
+            year, _ = Year.objects.get_or_create(year=context['id'][:4])
             department = Department.objects.filter(name=context['dept']).first()
             if year and department:  # 지원하는 학과와 학번인지 확인
                 form.save()
@@ -86,7 +89,7 @@ def register(request):
                 auth_login(request, user)  # 로그인
                 LoginHistory.objects.create(user=user)
                 return redirect('core:mypage')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
             return redirect('accounts:agree')
         messages.error(request, form.errors['password2'][0])
         return redirect('accounts:register')
@@ -123,7 +126,7 @@ def update(request):
                 Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
                 messages.error(request, '회원 정보가 업데이트 되었습니다.')
                 return redirect('core:mypage')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과와 학번 입니다.')
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
 
