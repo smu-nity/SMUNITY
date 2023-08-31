@@ -103,3 +103,8 @@ class Statistics(models.Model):
 
     def __str__(self):
         return f'{self.date} : {self.visit_count}'
+
+
+class Statistics2(models.Model):
+    date = models.CharField(unique=True, max_length=10)
+    visit_count = models.IntegerField(default=1)
