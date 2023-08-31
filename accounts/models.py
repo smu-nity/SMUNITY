@@ -6,11 +6,11 @@ from config.settings import YEAR_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SU
 
 class Year(models.Model):   # 학년도 테이블
     year = models.CharField(max_length=4, choices=YEAR_CHOICES)     # 학번
-    major_i = models.IntegerField()         # 전심
-    major_s = models.IntegerField()         # 전선
-    culture = models.IntegerField()         # 교양 전체
-    culture_cnt = models.IntegerField()     # 기초교양 개수
-    all = models.IntegerField()             # 전체
+    major_i = models.IntegerField(default=0)         # 전심
+    major_s = models.IntegerField(default=0)         # 전선
+    culture = models.IntegerField(default=0)         # 교양 전체
+    culture_cnt = models.IntegerField(default=0)     # 기초교양 개수
+    all = models.IntegerField(default=0)             # 전체
 
     def __str__(self):
         return self.year
