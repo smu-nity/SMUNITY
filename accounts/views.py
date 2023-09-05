@@ -56,7 +56,9 @@ def login(request):
                 return redirect('accounts:login')
             auth_login(request, user)
             LoginHistory.objects.create(user=user)
-            return redirect('core:mypage')
+            if Profile.objects.filter(user=user):
+                return redirect('core:mypage')
+            return redirect('home')
         if User.objects.filter(username=username):
             messages.error(request, '⚠️ 비밀번호를 확인하세요.')
         else:

@@ -5,9 +5,18 @@
     </div>
 
     <ul class="navbar_menu">
-        <li>
-            <a href='https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI' target="_blank">피드백하기</a>
-        </li>
+        {% if user.is_superuser %}
+            <li>
+                <a href='https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI' target="_blank">피드백보기</a>
+            </li>
+            <li>
+                <a href="/admin/">관리자 페이지</a>
+            </li>
+        {% else %}
+            <li>
+                <a href='https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI' target="_blank">피드백하기</a>
+            </li>
+        {% endif %}
         {% if user.is_authenticated %}
         <li>
             <a href="{% url 'core:mypage' %}">마이페이지</a>
