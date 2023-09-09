@@ -97,6 +97,11 @@ class LoginHistory(models.Model):
         return f'{self.user} - {self.login_datetime}'
 
 
+class LoginHistory2(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # 장고 유저
+    login_datetime = models.DateTimeField(auto_now_add=True)
+
+
 class Statistics(models.Model):
     date = models.CharField(unique=True, max_length=10)
     visit_count = models.IntegerField(default=1)
