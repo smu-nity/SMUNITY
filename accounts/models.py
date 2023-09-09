@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from config.settings import YEAR_CHOICES, SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
+from config.settings import SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
 
 
 class Year(models.Model):   # 학년도 테이블
-    year = models.CharField(max_length=4, choices=YEAR_CHOICES)     # 학번
+    year = models.CharField(max_length=4)     # 학번
     major_i = models.IntegerField(default=0)         # 전심
     major_s = models.IntegerField(default=0)         # 전선
     culture = models.IntegerField(default=0)         # 교양 전체

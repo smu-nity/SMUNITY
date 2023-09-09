@@ -9,12 +9,12 @@ class YearAdmin(admin.ModelAdmin):
 
 class DepartmentAdmin(admin.ModelAdmin):
     search_fields = ['college', 'name', 'type']
-    list_display = ['college', 'name', 'type', 'url']
+    list_display = ['college', 'name', 'type']
 
 
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['name', 'user__username', 'year__year', 'department__name']
-    list_display = ['user', 'year', 'department', 'name']
+    list_display = ['user', 'name', 'department']
 
 class LoginHistoryAdmin(admin.ModelAdmin):
     search_fields = ['user__username']
