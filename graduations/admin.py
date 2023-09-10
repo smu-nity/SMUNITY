@@ -9,7 +9,7 @@ class SubjectAdmin(admin.ModelAdmin):
 
 class MajorAdmin(admin.ModelAdmin):
     search_fields = ['department__name', 'subject__number', 'subject__name', 'type']
-    list_display = ['department', 'subject', 'grade', 'semester', 'type']
+    list_display = ['subject', 'department', 'grade', 'semester', 'type']
 
 
 class CultureAdmin(admin.ModelAdmin):
