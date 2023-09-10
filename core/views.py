@@ -80,11 +80,7 @@ def course_update(request):
         try:
             subjects = json.loads(res['response']['content']['text'])['dsRecMattList']
             for sub in subjects:
-                number = sub['SBJ_NO']
-                try:
-                    subject = Subject.objects.get(number=number)
-                except:
-                    logger.error(f'DB에 없는 학수번호: {number}')
+                subject, _ = Subject.objects.get_or_create(number=sub['SBJ_NO'], defaults={'name': sub['SBJ_NM'], 'credit': sub['CDT'], 'dept': '커스텀', 'type': sub['CMP_DIV_NM']})
                 domain = sub['CULT_ARA_NM']
                 if domain == '*':
                     domain = None
@@ -172,5 +168,6 @@ def member_del(request):
     messages.error(request, '⚠️ 비밀번호가 일치하지 않습니다.')
     return redirect('core:mypage')
 
+
 def info(request):
-    return render(request,'core/info.html')
+    return render(request, 'core/info.html')
