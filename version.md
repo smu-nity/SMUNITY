@@ -1,5 +1,11 @@
 # 버전 기록
 
+### 1.1.4
+* **22.09.10**
+* 관리자 페이지 수정 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/226))
+* DB에 없는 학수번호 에러 핸들링 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/228))
+---
+
 ### 1.1.3
 * **22.08.26**
 * 이용약관 & 개인정보처리방침 추가 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/209))
