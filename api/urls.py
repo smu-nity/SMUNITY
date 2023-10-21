@@ -4,5 +4,5 @@ from api import views
 app_name = 'api'
 
 urlpatterns = [
-    path('', views.helloAPI, name='helloAPI'),
+    path('auth', views.authenticate, name='authenticate'),
 ]
