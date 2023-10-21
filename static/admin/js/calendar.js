@@ -72,7 +72,7 @@ depends on core.js for utility functions like removeChildren or quickElement
             let todayClass = '';
 
             // Use UTC functions here because the date field does not contain time
-            // and using the UTC function variants prevent the nginx_local time offset
+            // and using the UTC function variants prevent the local time offset
             // from altering the date, specifically the day field.  For example:
             //
             // ```
