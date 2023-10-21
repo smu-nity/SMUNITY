@@ -4,7 +4,8 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from accounts.ecampus import ecampus, information
+from sangmyung_univ_auth import auth
+
 from accounts.forms import UserForm
 from accounts.models import Year, Department, Profile, LoginHistory, Statistics
 from config.settings import DEPT_DIC
@@ -12,28 +13,30 @@ import logging
 
 logger = logging.getLogger('smunity')
 
+
 def agree(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        if User.objects.filter(username=username).exists():     # 학번 중복 검사
+        if User.objects.filter(username=username).exists():
             messages.error(request, '⚠️ 이미 가입된 학번입니다.')
             return redirect('accounts:agree')
-
-        context = information(ecampus(username, password))
-        if context:
-            name = context['department']
-            if name in DEPT_DIC.keys():
-                name = DEPT_DIC[name]
-            if Department.objects.filter(name=name):
-                context['id'], context['dept'] = username, name
-                request.session['context'] = context
-                return redirect('accounts:register')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
-            logger.error(f'서비스에서 지원하지 않는 학과와 학번\n학과: {name}\n학번: {username[:4]}')
+        result = auth(username, password)
+        if not result.is_auth:
+            messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
             return redirect('accounts:agree')
-        messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
-        return redirect('accounts:agree')
+        context = result.body
+        dept = context['department']
+        if dept in DEPT_DIC.keys():
+            dept = DEPT_DIC[dept]
+        if not Department.objects.filter(name=dept):
+            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
+            logger.error(f'서비스에서 지원하지 않는 학과와 학번\n학과: {dept}\n학번: {username[:4]}')
+            return redirect('accounts:agree')
+        context['id'], context['dept'] = username, dept
+        request.session['context'] = context
+        return redirect('accounts:register')
+
     departments = Department.objects.filter(url__isnull=False)
     dept_num = departments.count()
     response = render(request, 'accounts/agree.html', {'departments': departments, 'dept_num': dept_num})
@@ -118,31 +121,32 @@ def change_pw(request):
 def update(request):
     if request.method == "POST":
         password = request.POST["password"]
-        context = information(ecampus(request.user.username, password))
-        if context:
-            name = context['department']
-            if name in DEPT_DIC.keys():
-                name = DEPT_DIC[name]
-            department = Department.objects.filter(name=name)
-            if department:
-                Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
-                messages.error(request, '회원 정보가 업데이트 되었습니다.')
+        result = auth(request.user.username, password)
+        if result.is_auth:
+            context = result.body
+            dept = context['department']
+            if dept in DEPT_DIC.keys():
+                dept = DEPT_DIC[dept]
+            department = Department.objects.filter(name=dept)
+            if not department:
+                messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
                 return redirect('core:mypage')
-            messages.error(request, '⚠️ 서비스에서 지원하지 않는 학과 입니다.')
+            Profile.objects.filter(user=request.user).update(name=context['name'], department=department.first())
+            messages.error(request, '회원 정보가 업데이트 되었습니다.')
+            return redirect('core:mypage')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
 
 
 def find_pw(request):
     if request.method == "POST":
-        # ecampus 존재하면
         username = request.POST["id"]
         password = request.POST["password1"]
         if not User.objects.filter(username=username):
             messages.error(request, '⚠️ 가입되지 않은 학번입니다.')
             return redirect('accounts:login')
-        context = information(ecampus(username, password))
-        if context:
+        result = auth(username, password)
+        if result.is_auth:
             return render(request, 'accounts/changePW.html', {'username': username})
     messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('accounts:login')
