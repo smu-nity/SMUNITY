@@ -1,23 +1,27 @@
-# SMUNITY
+# SMUNITY ![Python versions](https://img.shields.io/badge/Python-3.9-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/badge/release-1.1.5-red)
 
 ### 상명대학교 졸업요건 검사 사이트
 
 ---
 
-## :star: Website URL
+## ⭐ Website URL
 
 * ### https://smunity.co.kr
 
-## ⚒️기술 스택
+## ⚒️ 기술 스택
 
 * ### 백엔드: Django, MySQL
 * ### 프론트엔드: HTML, CSS, JavaScript
 
-## :blue_book: 소스 코드 참고
+## 🔒 상명대학교 재학생 인증
+
+* ### [sangmyung-univ-auth](https://pypi.org/project/sangmyung-univ-auth/)
+
+## 📘 소스 코드 참고
 
 * ### [PleaseGraduate](https://github.com/hanjo8813/PleaseGraduate)
 
-## :computer: 팀원 
+## 💻 팀원 
 
 > **최현민 [(hyunmin0317)](https://github.com/hyunmin0317)**
 >
