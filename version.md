@@ -1,10 +1,5 @@
 # 버전 기록
 
-### 1.1.5
-* **23.10.21**
-* 상명대학교 재학생 인증 API ([더 보기](https://github.com/smu-nity/SMUNITY/issues/230))
----
-
 ### 1.1.4
 * **23.09.10**
 * 관리자 페이지 수정 ([더 보기](https://github.com/smu-nity/SMUNITY/issues/226))
