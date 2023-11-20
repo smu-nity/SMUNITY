@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=round-square&logo=JavaScript&logoColor=white"/>
   <img src="https://img.shields.io/badge/CSS-1572B6?style=round-square&logo=CSS3&logoColor=white"/>
 
-* #### DataBase
+* #### DBMS
   <img src="https://img.shields.io/badge/MySQL-8.0.28-4479A1?style=round-square&logo=MySQL&logoColor=white"/>
 
 * #### Server
