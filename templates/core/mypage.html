@@ -158,8 +158,9 @@
             <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
                 내 정보 업데이트
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color:rgb(199, 199, 199)">
-                이캠퍼스에 로그인하여 이름, 학과 정보를 업데이트합니다. (상명대학교 포털 ID/PW와 동일)
+            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey">
+                샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
+                (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
             <!-- 폼 -->
@@ -169,8 +170,8 @@
                     <label>학번</label>
                     <input type="text" value="{{ user.username }}"
                         style="background-color:rgb(248,249,250);" disabled>
-                    <label>이캠퍼스 비밀번호</label>
-                    <input type="password" id="pw" name="password" placeholder="이캠퍼스 비밀번호">
+                    <label>샘물 비밀번호</label>
+                    <input type="password" id="pw" name="password" placeholder="샘물 비밀번호">
                 </div>
                 <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
             </form>
