@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
+from sangmyung_univ_auth import completed_courses
+
 from accounts.models import Profile, Department, Statistics
 from config.settings import CULTURES, CULTURES_DIC
 from core.models import Course
@@ -62,6 +64,33 @@ def course_delete(request, course_id):
 # 기이수과목 업로드
 @login_required
 def course_update(request):
+    if request.method == "POST":
+        password = request.POST["password"]
+        result = completed_courses(request.user.username, password)
+        if result.is_auth:
+            # 추가 전 기존 데이터 삭제
+            courses = Course.objects.filter(user=request.user)
+            if courses.exists():
+                courses.delete()
+            # 기이수과목 추가
+            subjects = result.body
+            for sub in subjects:
+                subject, _ = Subject.objects.get_or_create(number=sub['SBJ_NO'], defaults={'name': sub['SBJ_NM'], 'credit': sub['CDT'], 'dept': '커스텀', 'type': sub['CMP_DIV_NM']})
+                domain = sub['CULT_ARA_NM']
+                if domain == '*':
+                    domain = None
+                if sub['GRD_NM'] != 'F':
+                    if not Course.objects.filter(user=request.user, subject=subject):
+                        Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
+            messages.error(request, '기이수과목이 업데이트 되었습니다.')
+            return redirect('core:mypage')
+        messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
+    return redirect('core:mypage')
+
+
+# har 파일 업로드
+@login_required
+def course_update_har(request):
     file, success = request.FILES['file'], False
 
     # har 파일인지 검사

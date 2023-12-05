@@ -158,7 +158,7 @@
             <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
                 내 정보 업데이트
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey">
+            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey;">
                 샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
                 (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
@@ -202,60 +202,28 @@
     <div id='m4' class="modal">
         <div class="update_modal_content">
             <div id='c4' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem; margin-bottom: 2rem;">
-                기이수과목 업로드
+            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+                기이수과목 업데이트
+            </div>
+            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey;">
+                샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
+                (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
-            <div style="margin:0 auto; margin-top:1.5rem; margin-bottom:1.5rem; text-align: left; width:65%">
-                <p>1. 샘물 로그인 → 통합정보 → 학적정보 → 개인정보 수정탭으로 이동합니다.</p>
-                <p>2. 개발자 도구를 엽니다. </p>
-                <p>&nbsp;&nbsp;- Windows : F12 or ctrl + Shift + I</p>
-                <p>&nbsp;&nbsp;- Mac OS : fn + F12 or cmd + option + I</p>
-                <p>3. 개발자 도구에서 <b>Network (네트워크)</b> 탭을 클릭합니다.</p>
-                <p style="margin-bottom: 9px">4. 다시 샘물에서 개인정보 밑에 위치한 <b> 성적사항 탭</b>을 클릭합니다. </p>
-                <p style="margin-top: 0px">5. list.do가 생기면 개발자 도구 내 다운로드 버튼(<img src="{% static 'img/download.png' %}" style="width: 20px; height: 20px;">) 클릭합니다. </p>
-                <p>6. 다운 받은 .har 파일을 업로드합니다.</p>
-                <br>
-                <a class="go_info_btn" href="{% url 'core:info' %}" target='_blank'>자세히</a>
-                <br><br><br>
-                <p><span class="caution_info">※ 반드시 안내된 순서대로 진행해야 합니다!</span></p>
-                <p><span class="caution_info">※ 다운로드한 파일을 수정하지 않고 그대로 업로드해야 합니다.</span></p>
-                <p><span class="caution_info">※ 저장 시 성적 중 학점이 F 인 과목은 인정되지 않고 자동 삭제됩니다.</span></p>
-                <p><span class="caution_info">※ 다운로드한 파일 내 기이수 과목 이외의 정보는 사용되지 않습니다.</span></p>
-                <p><span class="caution_info">※ 샘물 통합정보시스템에서 해당 파일을 다운로드할 수 있도록 현재 협의 중입니다.</span></p>
-            </div>
-
-            <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()" enctype="multipart/form-data">
+            <!-- 폼 -->
+            <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()">
                 {% csrf_token %}
-                <div class="box-file-input">
-                    <label>
-                        <input id="file_input" type="file" name="file" class="file-input" accept=".har">
-                    </label>
-                    <span class="filename">파일을 선택해주세요.</span>
+                <div class="regi_box">
+                    <label>학번</label>
+                    <input type="text" value="{{ user.username }}"
+                        style="background-color:rgb(248,249,250);" disabled>
+                    <label>샘물 비밀번호</label>
+                    <input type="password" id="pw4" name="password" placeholder="샘물 비밀번호">
                 </div>
-                <input type='submit' class='go_result_btn' value='업로드' style="margin:2.5rem 0 0rem 0;">
+                <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
             </form>
         </div>
     </div>
-
-    <!-- 5. 기이수과목 커스텀 모달-->
-{#    <div id='m5' class="modal" style="display:none">#}
-{#        <div class="update_modal_content">#}
-{#            <div id='c5' class="close">&times;</div>#}
-{#            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">#}
-{#                기이수과목 커스텀#}
-{#            </div>#}
-{#            <hr style="width:80%; margin-top:1.3rem;">#}
-{#            <div style="margin:1.5rem 0 2.5rem 0;">#}
-{#                <p>학사정보시스템에서 다운받는 엑셀파일엔 이번 학기 과목들이 반영되지 않으셨죠? 😭</p>#}
-{#                <p>또 다음 학기에 들을 과목을 추가해 검사해보고 싶으신가요? </p>#}
-{#                <p style="font-size :1.3rem; margin-top:2rem;">#}
-{#                    <span style="font-size :1.5rem; font-weight: bold; color : rgb(164, 26, 55)">'커스텀 기능'</span> 으로 원하는 과목을 추가해서 검사해보세요!#}
-{#                </p>#}
-{#            </div>#}
-{#            <button onclick=location.href="{% url 'core:custom' %}" class='login_btn' style="margin:1rem 0 2rem 0;">커스텀 시작</button>#}
-{#        </div>#}
-{#    </div>#}
 
     <!-- 6. 회원탈퇴 모달-->
     <div id='m6' class="modal">
@@ -264,7 +232,7 @@
             <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
                 회원 탈퇴
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color:rgb(199, 199, 199)">
+            <div style="margin-top:1.8rem; font-size:0.9rem; color:grey;">
                 스뮤니티에서 탈퇴합니다. (회원 정보 모두 삭제)
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
@@ -365,7 +333,6 @@
         }
     }
 
-
     // 비번 안쓰거나 일치안하면 빠꾸
     function check_up3() {
         if (!document.getElementById('pw1').value) {
@@ -382,23 +349,15 @@
         return true;
     }
 
-    // 파일 업로드 안하고 버튼 누르면 빠꾸
     function check_up4() {
-        if (!document.getElementById("file_input").value) {
-            alert("엑셀파일을 첨부해주세요.");
+        if (!document.getElementById('pw4').value) {
+            alert('비밀번호를 입력해주세요.');
+            form4.pw4.focus();
             return false;
         }
         pop_modal();
         return true;
     }
-
-    // 파일 업로드 css - jquery 적용
-    $(document).on("change", ".file-input", function () {
-        $filename = $('input[type=file]').val().replace(/.*(\/|\\)/, '');
-        if ($filename == "")
-            $filename = "파일을 선택해주세요.";
-        $(".filename").text($filename);
-    })
 
     function show_table() {
         // 테이블 전환
