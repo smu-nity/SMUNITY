@@ -211,7 +211,7 @@
             </div>
             <hr style="width:80%; margin-top:1.3rem;">
             <!-- 폼 -->
-            <form action="{% url 'accounts:update' %}" method="post" name='form4' onsubmit="return check_up4()">
+            <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()">
                 {% csrf_token %}
                 <div class="regi_box">
                     <label>학번</label>
