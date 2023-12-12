@@ -958,6 +958,7 @@ input[type=checkbox] {
 }
 .caution_info{
     color: red;
+    font-weight:bold;
 }
 .link_site{
     font-size:0.8rem;
@@ -1656,4 +1657,38 @@ body:not(.device-touch) .suc_btn
   color:#6188E8;
   font-weight: bold;
   font-size:1.2rem;
+}
+
+/* ---------------------------------( agree )---------------------------------------- */
+.info_title{
+    font-size : 1.8rem;
+    font-weight: bold;
+    padding-top:2.5rem;
+    padding-left:0.5rem;
+}
+.info_box{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    margin-top:1rem;
+    border:0.001px solid rgb(216, 216, 216);
+    background-color: white;
+}
+.info_box_wrapper{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+}
+.info_content{
+    margin-bottom:1.3rem;
+    margin-top:1.3rem;
+    margin-left:2rem;
+    margin:2rem;
+    font-weight:normal;
+    font-size:0.85rem;
+    text-align:left;
+}
+.info_agree{
+    padding-top:1rem;
+    text-align:right;
 }
