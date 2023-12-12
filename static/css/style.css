@@ -1,20 +1,12 @@
-
-
-.csstest{
-    color:red;
-}
-
 body {
     margin: 0;
     padding: 0;
     font-family: 'Noto Sans KR','sans-serif';
 }
-
 a {
     text-decoration: none;
     color: black;
 }
-
 /* 아이폰에서 input css 적용하기 */
 input[type="submit"],
 input[type="text"],
@@ -27,26 +19,20 @@ input[type="button"]
     -webkit-appearance: none;
 }
 
- 
- 
 /* ---------------------------------( 상단 소개/컨테이너 공통 )---------------------------------------- */
-
 .gray_sec{
     background-color:rgb(248,249,250) ;
     padding-top:1rem;
     padding-bottom: 2rem;
 }
-
 .white_sec{
    background-color: white;
     padding-bottom: 1rem;
 }
-
 .big_title{
     font-size:1.5rem; 
     font-weight:bold;
 }
-
 .small_title{
     margin-top:0.5rem; 
     font-size:1rem; 
@@ -54,7 +40,6 @@ input[type="button"]
 }
 
 /* ---------------------------------( ref - 메뉴바 )---------------------------------------- */
-
 .navbar {
     display: flex;
     justify-content: center;
@@ -63,13 +48,11 @@ input[type="button"]
     background-color: white;
     padding: 10px;
 }
-
 .navbar_logo img {
     position: relative;
     width: 140px;
     height: 60px;
 }
-
 .navbar_menu {
     display: flex;
     font-size: 20px;
@@ -78,30 +61,23 @@ input[type="button"]
     margin: 0;
     margin-left: min(50%, 800px);
 }
-
 .navbar_menu li {
     font-size: 19px;
     padding: 8px 16px;
     cursor: pointer;
 }
-
-.navbar_menu li a:hover,
-.regi_find_pwd a:hover 
+.navbar_menu li a:hover
 {
     font-weight: bold;
     color : #003D91;
 }
-
 .container {
     text-align:center;
     padding-left : 10rem;
     padding-right : 10rem;
 }
 
-
 /* ---------------------------------( ref footer )---------------------------------------- */
-
-
 .footer {
     font-size: 0.7rem;
     background-color:#313131;
@@ -112,12 +88,10 @@ input[type="button"]
     color: gray;
     padding: 0.5rem;
 }
-
 .footer_list {
     list-style: none;
     color: lightgrey;
     letter-spacing: 2px;
-
     border-right: 0.1px solid lightgray;
 }
 .footer_list li {
@@ -168,8 +142,8 @@ input[type="button"]
     animation: fadein 2s;
     -webkit-animation: fadein 2s;
     width:100%;
-    max-width: 1600px;
-    min-height:750px;
+    max-width: 1920px;
+    min-height:1000px;
     background-image: url('../img/main.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -177,12 +151,12 @@ input[type="button"]
 }
 
 .bg_text_btn {
-    width:33rem;
+    width:53rem;
     min-height:20rem;
     clear:right;
     float:right;
-    margin-top:5rem;
-    margin-right:3.0rem;
+    margin-top:18rem;
+    margin-right:3.5rem;
     text-align:center;
     color:white;
 }
@@ -202,35 +176,56 @@ input[type="button"]
 }
 
 .bg_btn_style{
-    font-weight:bold;
+    background: #313131;
     color:white;
-    font-size:1.2rem;
-    border-radius: 3px;
-    border:0;
-    background-color: #313131;
-    width:9rem;
+    border:none;
+    position:relative;
     height:3.5rem;
-    cursor: pointer;
+    width:11rem;
+    font-size:1.3em;
+    border-radius: 2px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    font-weight:bold;
+    letter-spacing: 3px;
 }
 
 .bg_btn_style:hover{
-    background-color: white;
-    font-weight: bold;
-    color:black;
+  background: rgba( 255, 255, 255, 0.5 );
+  color: #003D91;
 }
-
+.bg_btn_style:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #003D91;
+  transition:400ms ease all;
+}
+.bg_btn_style:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.bg_btn_style:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 .num_visit{
-    color:rgb(207, 207, 207);
+    color:black;
     font-size:0.9rem;
     font-weight: bold;
     letter-spacing:0.8px;
-    width:180px;
+    width:11.5rem;
     clear:right;
     float:right;
-    margin-top:4.2rem;
-    margin-right:0.5rem;
+    margin-top:15.5rem;
+    margin-right:2.5rem;
 }
-
 .popup_content{
     margin:0 auto;
     text-align: center;
@@ -238,9 +233,9 @@ input[type="button"]
 }
 .popup_title{
     margin-top:2rem;
-    font-size:2.5rem; 
-    font-weight:bold; 
-    color : rgb(164, 26, 55)
+    font-size:2.5rem;
+    font-weight:bold;
+    color : #003D91;
 }
 .popup_box{
     margin:0 auto;
@@ -259,7 +254,6 @@ input[type="button"]
     text-align: right;
     color:gray;
 }
-
 @keyframes fadein {
     from {opacity:0;}
     to {opacity:1;}
@@ -268,7 +262,6 @@ input[type="button"]
     from { opacity:0;}
     to {opacity:1;}
 }
-
 
 /* ---------------------------------( success )---------------------------------------- */
 
@@ -668,7 +661,6 @@ input[type="button"]
 .total_gbox{
     margin: 8px 8px 5px 8px;
 }
-
 .q {
     position: relative;
     top: -10px;
@@ -705,7 +697,6 @@ input[type="button"]
 .name0 {
     font-size: 29px;
 }
-
 strong {
     position: relative;
     top: -65px;
@@ -713,75 +704,57 @@ strong {
     text-decoration: none;
     font-size: 18px;
 }
-
 .r {
     width: 50px;
 }
 .l{
     font-size:17px;
 }
-
 .grade {
     color: #424242;
     font-weight: 500;
-
     position: relative;
     top: 1px;
     font-size: 18px;
     margin-right: 18px;
-
 }
 .p {
     position: relative;
     font-weight: 600;
-
     font-size: 17px;
-
     top: 5px;
     right: -50px;
     letter-spacing: 5px;
-
 }
-
 .y {
     width: 60px;
     top: 1px;
-
     margin: 0 10px 0 0;
-
 }
-
 .Y {
     position: relative;
     width: auto;
-
     top: -17px;
 }
 .book {
     color: #424242;
     margin: 0;
-
     font-weight: 500;
     position: relative;
     top: 1px;
-
     font-size: 18px;
     margin-left: 10px;
     margin-right: 10px;
-
 }
-
 .name title {
     font-size: 50px;
 }
-
 .Gbox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .cap {
 
     position: relative;
@@ -792,25 +765,21 @@ strong {
     margin: 0;
     font-size: 35px;
 }
-
 .p_div {
     width: 100%;
 }
-
-
-
 .mytd {
-    border-right :1px solid #dadada;
+    border-right: 1px solid #dadada;
     border-bottom: 1px solid #dadada;
 }
 
 .mytable {
-    margin:0 auto;
+    margin: 0 auto;
     width: 80%;
     text-align: center;
     font-size: 1rem;
-    padding-top : 2rem;
-    padding-bottom : 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
 }
 
 .myth {
@@ -823,7 +792,7 @@ strong {
 
 .mytr {
     color: black;
-    height: 2.5rem ;
+    height: 2.5rem;
     border-bottom: 1px solid #dadada;
 }
 
@@ -831,43 +800,41 @@ strong {
     background-color: #f1f1f1;
 }
 
-.mydiv{
-    padding : 0.5rem;
+.mydiv {
+    padding: 0.5rem;
     font-size: 1rem;
-    color :rgb(199, 199, 199)
+    color: rgb(199, 199, 199)
 }
 
-.partdiv{
-    padding-top : 2rem; 
-    padding-bottom: 5rem; 
-    font-size : 1.5rem;
+.partdiv {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    font-size: 1.5rem;
     letter-spacing: 1.5px;
 }
 
-.gear{
+.gear {
     animation: i 5s linear infinite;
     font-size: 60px;
     transform-origin: 50% 50%;
 }
 
-@keyframes i{
+@keyframes i {
     100% {
         transform: rotate(360deg);
-     }
- }
+    }
+}
 
-
- .tip_div{
+.tip_div {
     background-color: black;
-    color:white;
-    font-size:0.8rem;
-    padding:0.1rem 0.3rem 0.1rem 0.3rem;
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.3rem 0.1rem 0.3rem;
     border-radius: 5px;
     display: table-cell;
     vertical-align: middle;
 }
 
- 
 /* ---------------------------------( 모달 )---------------------------------------- */
 
 .modal {
@@ -879,8 +846,8 @@ strong {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal-content {
@@ -901,16 +868,16 @@ strong {
     border: 1px solid #888;
     width: 40%;
     height: auto;
-    margin:0;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    -webkit-transform:translate(-50%, -50%);
-    -ms-transform:translate(-50%, -50%);
+    margin: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 }
 
-.update_modal_content{
+.update_modal_content {
     line-height: 10px;
     text-align: center;
     background-color: #fefefe;
@@ -920,18 +887,18 @@ strong {
     width: 60%;
     max-width: 900px;
     height: auto;
-    margin:0;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    -webkit-transform:translate(-50%, -50%);
-    -ms-transform:translate(-50%, -50%);
+    margin: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 }
 
 .modal_div {
     padding: 1rem;
-    display : flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
@@ -939,6 +906,21 @@ strong {
     text-align: center;
 }
 
+.modal_div_content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    line-height: 40px;
+    font-size: 25px;
+}
+.caution {
+    color: red;
+}
 .login-content {
     margin: 2% auto;
     width: 30%;
@@ -948,7 +930,77 @@ strong {
     justify-content: flex-start;
     align-items: center;
 }
-
+input[type=radio] + label {
+    display:inline-block;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000000;
+    cursor:pointer;
+}
+input[type=radio]:checked + label {
+    background-image: url('../img/checker-on.svg');
+}
+input[type=radio] {
+    display: none;
+}
+input[type=checkbox] + label {
+    display:inline-block;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000000;
+    cursor:pointer;
+}
+input[type=checkbox]:checked + label {
+    background-image: url('../img/checker-on.svg');
+}
+input[type=checkbox] {
+    display: none;
+}
+.link_site{
+    font-size:0.8rem;
+    padding:0.1rem 0.3rem 0.1rem 0.3rem;
+    color:white;
+    border-radius: 3px;
+    background-color: #6188E8;
+}
+.target_color_span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6188E8
+}
+.target_num_div {
+    font-size:1.5rem;
+    margin : 2rem 0 2rem 0;
+}
+.target_table {
+    font-size:1rem;
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.target_table_th {
+    text-align: center;
+    height: 2.5rem;
+    background-color: #f8f8f8;
+    border-top: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+.target_table_td {
+    text-align: left;
+    padding : 0.3rem 0.7rem 0.3rem 0.7rem;
+    height: 2rem;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+.card {
+    background-color: rgba( 255, 255, 255, 0.5 );
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
 /* The Close Button */
 .close {
     color: #aaa;
@@ -956,7 +1008,6 @@ strong {
     font-size: 2.5rem;
     font-weight: bold;
 }
-
 .close:focus,
 .close:hover {
     color: black;
