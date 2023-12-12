@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/head.css' %}">
-{% endblock %}
 {% block main_area %}
     <div class="bg_wrapper">
         <!-- 메인 -->
@@ -119,7 +116,5 @@
     </div>
 {% endblock %}
 {% block js %}
-    <script src="{% static 'js/modal.js' %}"></script>
     <script src="{% static 'js/head.js' %}"></script>
-</script>
 {% endblock %}

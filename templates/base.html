@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% block css %}
     {% endblock %}
 </head>
@@ -42,13 +42,7 @@
     {% endfor %}
     {% endif %}
 </body>
-<script>
-    //모달 끄기
-    function modal_close(e){
-        var target = document.getElementById(e.getAttribute('close')).getAttribute('id');
-        document.getElementById(target).style.display = "none";
-    }
-</script>
+<script src="{% static 'js/modal.js' %}"></script>
 {% block js %}
 {% endblock %}
 {% if user.is_authenticated %}
