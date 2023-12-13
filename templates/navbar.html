@@ -1,37 +1,44 @@
 {% load static %}
-<nav class="navbar">
-    <div class="navbar_logo">
-        <a href="{% url 'home' %}" ><img src="{% static 'img/smunity.png' %}"></a>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-nav px-1 py-1">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="{% static 'img/smunity.png' %}" class="logo_img">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 a_tag" href="https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI" target="_blank">
+                        {% if user.is_superuser %}
+                            피드백보기
+                        {% else %}
+                            피드백하기
+                        {% endif %}
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 a_tag" href="/admin/">관리자 페이지</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 a_tag" href="{% url 'core:mypage' %}">마이페이지</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 a_tag" href="javascript:logout();">로그아웃</a>
+                    </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link fs-5 a_tag" href="{% url 'accounts:login' %}">로그인</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-
-    <ul class="navbar_menu">
-        {% if user.is_superuser %}
-            <li>
-                <a href='https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI' target="_blank">피드백보기</a>
-            </li>
-            <li>
-                <a href="/admin/">관리자 페이지</a>
-            </li>
-        {% else %}
-            <li>
-                <a href='https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI' target="_blank">피드백하기</a>
-            </li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li>
-            <a href="{% url 'core:mypage' %}">마이페이지</a>
-        </li>
-        <li>
-            <a href='javascript:logout();'>로그아웃</a>
-        </li>
-        {% else %}
-        <li>
-            <a href="{% url 'accounts:login' %}">로그인</a>
-        </li>
-
-        <li>
-            <a href="{% url 'accounts:agree' %}">회원가입</a>
-        </li>
-        {% endif %}
-    </ul>
 </nav>
