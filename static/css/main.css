@@ -1,3 +1,6 @@
+:root {
+    --sangmyung: rgb(1, 42, 127);
+}
 body {
     margin: 0;
     padding: 0;
@@ -1570,4 +1573,17 @@ body:not(.device-touch) .suc_btn
 .info_agree{
     padding-top:1rem;
     text-align:right;
+}
+.logo_img {
+    height: 60px;
+}
+@media screen and (max-width: 1024px) {
+    .logo_img {
+        height: 55px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .logo_img {
+        height: 50px;
+    }
 }
