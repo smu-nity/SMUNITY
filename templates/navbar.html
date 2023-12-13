@@ -13,30 +13,28 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link fs-5 a_tag" href="https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI" target="_blank">
-                        {% if user.is_superuser %}
-                            피드백보기
-                        {% else %}
-                            피드백하기
-                        {% endif %}
+                        피드백하기
                     </a>
                 </li>
+                {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 a_tag" href="/admin/">관리자페이지</a>
+                    </li>
+                {% endif %}
                 {% if user.is_authenticated %}
-                    {% if user.is_superuser %}
-                        <li class="nav-item">
-                            <a class="nav-link fs-5 a_tag" href="/admin/">관리자 페이지</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link fs-5 a_tag" href="{% url 'core:mypage' %}">마이페이지</a>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 a_tag" href="{% url 'core:mypage' %}">마이페이지</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link fs-5 a_tag" href="javascript:logout();">로그아웃</a>
                     </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link fs-5 a_tag" href="{% url 'accounts:login' %}">로그인</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 a_tag" href="{% url 'accounts:login' %}">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 a_tag" href="{% url 'accounts:agree' %}">회원가입</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
