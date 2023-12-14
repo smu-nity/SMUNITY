@@ -159,11 +159,12 @@ input[type="button"]
     color:white;
 }
 .bg_small_text{
-    letter-spacing:-3px;
+    letter-spacing:1px;
     font-size:2rem;
 }
 .bg_big_text{
     font-size:4rem;
+    letter-spacing:8px;
     width:100%;
 }
 .bg_btn{
@@ -1235,7 +1236,7 @@ input[type=checkbox] {
 /* ---------------------------------( navbar )---------------------------------------- */
 .navbar-img {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
 }
 .navbar-img-image {
@@ -1245,7 +1246,7 @@ input[type=checkbox] {
 .navbar-img__text {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
     position: absolute;
     color: white;
 }
@@ -1577,9 +1578,30 @@ body:not(.device-touch) .suc_btn
 .logo_img {
     height: 60px;
 }
+.main-img-image {
+    position: relative;
+    filter: brightness(100%);
+    width: 100%;
+    height: auto;
+    object-fit:cover;
+    content: url("/static/img/main.jpg");
+}
+.main-img__text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    color: white;
+    margin-right: 10rem;
+    margin-bottom: 5rem;
+}
+
 @media screen and (max-width: 1024px) {
     .logo_img {
         height: 55px;
+    }
+    .main-img__text {
+        display: none !important
     }
 }
 @media screen and (max-width: 767px) {
