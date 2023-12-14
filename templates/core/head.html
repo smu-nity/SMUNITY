@@ -4,7 +4,7 @@
     <div class="bg_wrapper">
         <div class="navbar-img">
             <img class="main-img-image"/>
-            <div class="main-img__text">
+            <div class="navbar-img__text main-margin">
                 <div class="bg_small_text fadein_text">
                     상명대 졸업요건 검사 사이트
                 </div>
@@ -15,34 +15,20 @@
                     <button class="bg_btn_style" onclick="location.href={% url 'core:mypage' %}">검사하기</button>
                 </div>
             </div>
+            <div class="navbar-img__text card-margin">
+                <div class="num_visit cards">
+                    <div>
+                        <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : {{visit_today}}
+                    </div>
+                    <div style="margin-top:0.4rem;">
+                        <i class="fas fa-mouse" style="margin-right:0.1rem;"></i>&nbsp;&nbsp;총 방문자 수 : {{visit_total}}
+                    </div>
+                    <div style="margin-top:0.4rem;">
+                        <i class="fas fa-user"></i>&nbsp;&nbsp;총 회원 수 : {{user_num}}
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- 메인 -->
-{#        <header class="main_bg">#}
-{#            <!-- 소개 문구 -->#}
-{#            <div class="bg_text_btn">#}
-{#                <div class="bg_small_text fadein_text" style="letter-spacing:1px;">#}
-{#                    상명대 졸업요건 검사 사이트#}
-{#                </div>#}
-{#                <div class="bg_big_text fadein_text" style="letter-spacing:8px;">#}
-{#                    SMUNITY#}
-{#                </div>#}
-{#                <div class="bg_btn">#}
-{#                    <button class="bg_btn_style" onclick="location.href={% url 'core:mypage' %}">검사하기</button>#}
-{#                </div>#}
-{#            </div>#}
-{#            <!-- 방문자 + 검사횟수 -->#}
-{#            <div class="num_visit card">#}
-{#                <div>#}
-{#                    <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : {{visit_today}}#}
-{#                </div>#}
-{#                <div style="margin-top:0.4rem;">#}
-{#                    <i class="fas fa-mouse" style="margin-right:0.1rem;"></i>&nbsp;&nbsp;총 방문자 수 : {{visit_total}}#}
-{#                </div>#}
-{#                <div style="margin-top:0.4rem;">#}
-{#                    <i class="fas fa-user"></i>&nbsp;&nbsp;총 회원 수 : {{user_num}}#}
-{#                </div>#}
-{#            </div>#}
-{#        </header>#}
     </div>
     <!-- 업데이트 공지 -->
     <div id='myModal' class="modal" style="display: none;">
@@ -131,4 +117,5 @@
 {% endblock %}
 {% block js %}
     <script src="{% static 'js/head.js' %}"></script>
+    <script src="{% static 'js/result.js' %}"></script>
 {% endblock %}
