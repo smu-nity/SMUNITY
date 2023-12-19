@@ -43,14 +43,6 @@ input[type="button"]
 }
 
 /* ---------------------------------( ref - 메뉴바 )---------------------------------------- */
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: white;
-    padding: 10px;
-}
 .navbar_logo img {
     position: relative;
     width: 140px;
@@ -1609,28 +1601,21 @@ body:not(.device-touch) .suc_btn
     width: 50%;
 }
 @media screen and (max-width: 1024px) {
+    .navbar-img {
+        justify-content: center;
+    }
     .logo_img {
         height: 55px;
     }
-    .bg_small_text {
-        font-size: 1.5rem;
-    }
-    .bg_big_text {
-        font-size: 3rem;
-    }
     .main-margin {
-        margin-right: 8rem;
-    }
-    .bg_btn{
-        padding-top : 1.5rem;
-    }
-    .bg_btn_style{
-        height:2.8rem;
-        width:8.8rem;
-        font-size:1em;
+        margin-right: 0;
+        margin-bottom: 40rem;
     }
     .card-margin {
         display: none;
+    }
+    .main-img-image {
+        content: url("/static/img/tablet.jpg");
     }
 }
 @media screen and (max-width: 767px) {
@@ -1638,6 +1623,25 @@ body:not(.device-touch) .suc_btn
         height: 50px;
     }
     .main-margin {
-        display: none;
+        margin: 0;
+    }
+    .main-img-image {
+        content: url("/static/img/mobile.jpg");
+    }
+}
+@media screen and (max-width: 400px) {
+    .bg_small_text {
+        font-size: 1.4em;
+    }
+    .bg_big_text {
+        font-size: 2.8rem;
+    }
+    .bg_btn{
+        padding-top : 1.4rem;
+    }
+    .bg_btn_style{
+        height:2.6rem;
+        width:7.8rem;
+        font-size:1em;
     }
 }
