@@ -2,9 +2,9 @@
 {% load static %}
 {% block main_area %}
     <div class="bg_wrapper">
-        <div class="navbar-img">
+        <div class="main-img">
             <img class="main-img-image"/>
-            <div class="navbar-img__text main-margin">
+            <div class="main-img__text main-margin">
                 <div class="bg_small_text fadein_text">
                     상명대 졸업요건 검사 사이트
                 </div>
@@ -15,7 +15,7 @@
                     <button class="bg_btn_style" onclick="location.href={% url 'core:mypage' %}">검사하기</button>
                 </div>
             </div>
-            <div class="navbar-img__text card-margin">
+            <div class="main-img__text card-margin">
                 <div class="num_visit cards">
                     <div>
                         <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;오늘 방문자 수 : {{visit_today}}

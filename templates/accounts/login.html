@@ -1,26 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_area %}
+    <div class="navbar-img">
+        <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
+        <div class="navbar-img__text">
+            <span class="navbar-img__text--title">로그인</span>
+            <span class="navbar-img__text--subtitle">학번과 스뮤니티 비밀번호를 입력해 주세요.</span>
+        </div>
+    </div>
    <!-- 로그인 박스 -->
     <div class="login-container">
         <div class="login-form">
             <div class="login_logo">
-                <img id="login_logo" src="{% static 'img/deericon.png' %}" >
+                <img id="login_logo" src="{% static 'img/smunity.png' %}" >
             </div>
             <form onsubmit="return check_up1();" method="post" action="{% url 'accounts:login' %}">
                 {% csrf_token %}
-                <h1>로그인</h1>
-                <span class="login_gray">학번과 스뮤니티 비밀번호를 입력해 주세요.</span>
                 <div class="content">
-                    <div class="regi_box">
-                        <input type="text" name="username" id="id" placeholder='학번'>
-                        <input type="password" name="password" id="pw" placeholder="비밀번호">
+                    <div class="input-group flex-nowrap">
+                      <input type="text" class="form-control" name="username" id="id" placeholder="학번">
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                      <input type="password" class="form-control" name="password" id="pw" placeholder="비밀번호">
                     </div>
                     <a id="b2" class="link">비밀번호를 잊어버리셨나요?</a>
                 </div>
                 <div class="action">
-                    <button id="login_button" type='submit'>로그인</button>
-                    <button id="register_button" type="button" onclick="location.href='{% url 'accounts:agree' %}';">회원가입</button>
+                    <button class="button-text" id="login_button" type='submit'>로그인</button>
+                    <button class="button-text" id="register_button" type="button" onclick="location.href='{% url 'accounts:agree' %}';">회원가입</button>
                 </div>
             </form>
         </div>
@@ -61,24 +68,26 @@
     <div id='m2' class="modal">
         <div class="update_modal_content">
             <div id='c2' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            <div class="modal-title">
                 비밀번호 찾기
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color:grey">
-                샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
-                (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
+            <div class="modal-expl" style="color: grey;">
+                샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br>
+                (<a href="https://portal.smu.ac.kr/" style="font-weight: bold; color: grey; text-decoration: none;" target="_blank";>상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
-            <hr style="width:80%; margin-top:1.3rem;">
+            <hr style="width:100%; margin-top:1.3rem;">
             <!-- 폼 -->
-            <form onsubmit="return check_up2();" method="post" action="{% url 'accounts:find' %}" name='form2' >
+            <form onsubmit="return check_up2();" method="post" action="{% url 'accounts:find' %}" name='form2'>
                 {% csrf_token %}
-                <div class="regi_box">
-                    <label>학번</label>
-                    <input type="text" id="id2" name="id" placeholder='학번'>
-                    <label>샘물 비밀번호</label>
-                    <input type="password" id="pw2" name="password1" placeholder="샘물 비밀번호">
+                <div class="form-login">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control" type="text" id="id2" name="id" placeholder='학번'>
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                        <input class="form-control" type="password" id="pw2" name="password1" placeholder="샘물 비밀번호">
+                    </div>
                 </div>
-                <input type='submit' class='login_btn' value='인증하기' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='btn btn-primary button-sm' value='인증하기'>
             </form>
         </div>
     </div>
