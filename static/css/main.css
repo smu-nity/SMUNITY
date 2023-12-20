@@ -30,7 +30,6 @@ input[type="button"]
 }
 .white_sec{
    background-color: white;
-    padding-bottom: 1rem;
 }
 .big_title{
     font-size:1.5rem; 
@@ -1635,6 +1634,9 @@ body:not(.device-touch) .suc_btn
 .form-login {
     padding: 30px 60px 30px 60px;
 }
+.table_grade {
+    padding: 2.5rem 2.5rem 0 2.5rem;
+}
 @media screen and (max-width: 1024px) {
     .main-img {
         justify-content: center;
@@ -1669,6 +1671,22 @@ body:not(.device-touch) .suc_btn
     }
     .close {
         font-size: 2.3rem;
+    }
+    .my_box_wrap {
+        display: block;
+        padding: 0;
+        margin: 1rem 0;
+    }
+    .my_box_width {
+        width: 80%;
+        margin: auto;
+        padding: 1.5rem;
+    }
+    .table_grade {
+        padding: 0;
+    }
+    .grade_table_td {
+        font-size: 0.8rem;
     }
 }
 @media screen and (max-width: 767px) {
@@ -1713,6 +1731,9 @@ body:not(.device-touch) .suc_btn
     }
     .close {
         font-size: 2.1rem;
+    }
+    .grade_table_td {
+        font-size: 0.7rem;
     }
 }
 @media screen and (max-width: 400px) {
