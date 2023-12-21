@@ -5,10 +5,7 @@
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
         <div class="navbar-img__text">
             <span class="navbar-img__text--title">
-                <div style="font-size:4rem;">
-                    <img src="{% static 'img/logo.png' %}" style="width:100px; height:100px;">
-                </div>
-                <div class="big_title">마이페이지</div>
+                <span class="navbar-img__text--title">마이페이지</span>
             </span>
             <span class="navbar-img__text--subtitle">
                 <button onclick="go_result()" class="go_result_btn">졸업요건 검사하기</button>
@@ -18,7 +15,7 @@
 
     <div class="white_sec">
         <div class="my_box_wrap">
-            <div class="my_box">
+            <div class="my_box my_box_width">
                 <div class="my_box_title">
                     <div><i class="fas fa-user"></i>내 정보</div>
                     <button id='b1' class="my_box_mod_btn">업데이트</button>
@@ -69,8 +66,8 @@
             </div>
 
             <!-- 기이수과목 -->
-            <div class="my_box_grade">
-                <div style="padding:2.5rem 2.5rem 0 2.5rem">
+            <div class="my_box_grade my_box_width" style="margin-top: 1rem;">
+                <div class="table_grade">
                     <div class="my_box_title">
                         <div><i class="fas fa-graduation-cap"></i>내 기이수과목</div>
                         <div>
@@ -81,7 +78,7 @@
                     <hr>
 
                     <!-- 7개 -->
-                    <table id="short_table" class="grade_table" style="margin-top:2rem;">
+                    <table id="short_table" class="grade_table" style="display: table; margin-top:1rem;">
                         <tr>
                             <th class="grade_table_th" style="width:10%">년도</th>
                             <th class="grade_table_th" style="width:10%">학기</th>
@@ -109,7 +106,7 @@
                     </table>
 
                     <!-- 전체보기 -->
-                    <table id="long_table" class="grade_table" style="display:none; ">
+                    <table id="long_table" class="grade_table" style="display:none; margin-top:1rem;">
                         <tr>
                             <th class="grade_table_th" style="width:10%">년도</th>
                             <th class="grade_table_th" style="width:10%">학기</th>
