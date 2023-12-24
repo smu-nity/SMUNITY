@@ -1816,7 +1816,7 @@ body:not(.device-touch) .suc_btn
         font-size: 1rem;
     }
     .mydiv {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         line-height: 1.2;
     }
     .target_num_div {
@@ -1882,12 +1882,12 @@ body:not(.device-touch) .suc_btn
         font-size: 0.8rem;
     }
     .partdiv {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     .mytable {
         width: 100%;
         padding-top: 1rem;
-        font-size: 0.45rem;
+        font-size: 0.5rem;
     }
     .myth {
         font-size: 0.6rem;
