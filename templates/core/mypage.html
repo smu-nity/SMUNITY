@@ -75,65 +75,34 @@
                         </div>
                     </div>
                     <hr>
-                    <!-- 7개 -->
-                    <table id="short_table" class="grade_table" style="display: table; margin-top:1rem;">
-                        <tr>
-                            <th class="grade_table_th" style="width:10%">년도</th>
-                            <th class="grade_table_th" style="width:10%">학기</th>
-                            <th class="grade_table_th" style="width:14%">학수번호</th>
-                            <th class="grade_table_th" style="width:30%">과목명</th>
-                            <th class="grade_table_th" style="width:14%">이수구분</th>
-                            <th class="grade_table_th" style="width:14%">선택영역</th>
-                            <th class="grade_table_th" style="width:8%; border-right :0px">학점</th>
-                        </tr>
-                        {% for course in short %}
-                        <tr>
-                            <td class="grade_table_td">{{ course.year }}</td>
-                            <td class="grade_table_td">{{ course.semester }}</td>
-                            <td class="grade_table_td">{{ course.subject.number }}</td>
-                            <td class="grade_table_td">{{ course.subject.name }}</td>
-                            <td class="grade_table_td">{{ course.type }}</td>
-                            <td class="grade_table_td">
-                                {% if course.domain  %}
-                                    {{ course.domain }}
-                                {% endif %}
-                            </td>
-                            <td class="grade_table_td" style="border-right :0px">{{ course.credit }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                    <!-- 전체보기 -->
-                    <table id="long_table" class="grade_table" style="display:none; margin-top:1rem;">
-                        <tr>
-                            <th class="grade_table_th" style="width:10%">년도</th>
-                            <th class="grade_table_th" style="width:10%">학기</th>
-                            <th class="grade_table_th" style="width:14%">학수번호</th>
-                            <th class="grade_table_th" style="width:30%">과목명</th>
-                            <th class="grade_table_th" style="width:14%">이수구분</th>
-                            <th class="grade_table_th" style="width:14%">선택영역</th>
-                            <th class="grade_table_th" style="width:8%; border-right :0px">학점</th>
-                        </tr>
-                        {% for course in courses %}
-                        <tr>
-                            <td class="grade_table_td">{{ course.year }}</td>
-                            <td class="grade_table_td">{{ course.semester }}</td>
-                            <td class="grade_table_td">{{ course.subject.number }}</td>
-                            <td class="grade_table_td">{{ course.subject.name }}</td>
-                            <td class="grade_table_td">{{ course.type }}</td>
-                            <td class="grade_table_td">
-                                {% if course.domain  %}
-                                    {{ course.domain }}
-                                {% endif %}
-                            </td>
-                            <td class="grade_table_td" style="border-right :0px">{{ course.credit }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-                <div id="show_btn" onclick="show_table()" class="show_table"><i class="fas fa-chevron-down"></i>&nbsp;펼치기
-                </div>
-                <div id="hide_btn" onclick="hide_table()" class="show_table" style="display:none"><i
-                        class="fas fa-chevron-up"></i>&nbsp;접기</div>
+                    <div class="scroll">
+                        <table id="long_table" class="grade_table">
+                            <tr>
+                                <th class="grade_table_th" style="width:10%">년도</th>
+                                <th class="grade_table_th" style="width:10%">학기</th>
+                                <th class="grade_table_th" style="width:14%">학수번호</th>
+                                <th class="grade_table_th" style="width:30%">과목명</th>
+                                <th class="grade_table_th" style="width:14%">이수구분</th>
+                                <th class="grade_table_th" style="width:14%">선택영역</th>
+                                <th class="grade_table_th" style="width:8%; border-right :0px">학점</th>
+                            </tr>
+                            {% for course in courses %}
+                            <tr>
+                                <td class="grade_table_td">{{ course.year }}</td>
+                                <td class="grade_table_td">{{ course.semester }}</td>
+                                <td class="grade_table_td">{{ course.subject.number }}</td>
+                                <td class="grade_table_td">{{ course.subject.name }}</td>
+                                <td class="grade_table_td">{{ course.type }}</td>
+                                <td class="grade_table_td">
+                                    {% if course.domain  %}
+                                        {{ course.domain }}
+                                    {% endif %}
+                                </td>
+                                <td class="grade_table_td" style="border-right :0px">{{ course.credit }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,22 +313,6 @@
             }
             pop_modal();
             return true;
-        }
-
-        function show_table() {
-            // 테이블 전환
-            document.getElementById("short_table").style.display = "none";
-            document.getElementById("long_table").style.display = "table";
-            // 버튼 전환
-            document.getElementById("show_btn").style.display = "none";
-            document.getElementById("hide_btn").style.display = "block";
-        }
-
-        function hide_table() {
-            document.getElementById("short_table").style.display = "table";
-            document.getElementById("long_table").style.display = "none";
-            document.getElementById("show_btn").style.display = "block";
-            document.getElementById("hide_btn").style.display = "none";
         }
 
         // 모달 켜는 버튼 id

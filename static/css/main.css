@@ -1222,8 +1222,6 @@ input[type=checkbox] {
     width: 100%;
     text-align: center;
     margin:0 auto;
-    margin-top:1rem;
-    margin-bottom:1rem;
 }
 .grade_table_th {
     font-size: 1rem;
@@ -1650,6 +1648,13 @@ body:not(.device-touch) .suc_btn
 .modal-scroll {
     max-height: 300px;
     overflow-y: auto;
+}
+.scroll {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .box-margin1 {
     margin-top: 1rem;
