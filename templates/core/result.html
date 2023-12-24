@@ -9,11 +9,10 @@
 {% block main_area %}
     <div class="lcontainer">
         <div class="rcontainer">
-            <!-- 이수학점 -->
+            <!-- 이수학점 데스크탑 -->
             <div class="resultbox-main">
                 <div class="result_name">
                     <i class="fa-solid fa-user"></i> &nbsp;이수학점 &emsp;<span class="small">{{ profile.tostring }}</span>
-{#                    <a href="{% url 'core:custom' %}" title="내 기이수과목 수정"><i class="fa-solid fa-circle-plus"></i></a>#}
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -53,6 +52,35 @@
             </div>
         </div>
         <div class="rcontainer">
+            <!-- 이수학점 모바일 -->
+            <div class="resultbox resultbox-mobile">
+                <div class="result_name">
+                    <i class="fa-solid fa-user"></i> &nbsp;이수학점 &emsp;<span class="small">{{ profile.tostring }}</span>
+                </div>
+                <div class="result_container">
+                    <div class="result_content">
+                        <div class="result_content_number">{{ profile.year.all }}</div>
+                        <div class="result_content_info">총 기준 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count" data-count="{{ subjects_all|zero_filter }}" style="border-right: 2px solid lightgray;"></div>
+                        <div class="result_content_info">총 이수 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="result_content_number count rednumber" data-count="{{ profile.year.all|sub:subjects_all }}"></div>
+                        <div class="result_content_info" >필요 학점</div>
+                    </div>
+                    <div class="result_content">
+                        <div class="pie-chart">
+                            <div class="pie-chart-color pie-all-mobile">
+                                <div class="pie-chart-inner">
+                                    <span class="center percent" percent="{{ subjects_all|div:profile.year.all }}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- 전공심화 -->
             <div class="resultbox">
                 <div class="result_name">
@@ -83,7 +111,6 @@
                     </div>
                 </div>
             </div>
-            <div class="test"></div>
             <!-- 전공선택 -->
             <div class="resultbox">
                 <div class="result_name">
@@ -118,12 +145,6 @@
             <div class="resultbox">
                 <div class="result_name">
                     <i class="fa-solid fa-book"></i> &nbsp;교양
-{#                    <i open="gyo" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="gyo" class="result_info">#}
-{#                        교양 <br><br>#}
-{#                        설명설명#}
-{#                    </div>명#}
-{#                    <div class="recommend" onclick="info_in(this)" open="modal-culture-b">추천 과목 보기</div>#}
                 </div>
                 <div class="result_container">
                     <div class="result_content">
@@ -183,11 +204,6 @@
             <div class="resultbox">
                 <div class="result_name">
                     <i class="fa-solid fa-book-open"></i> &nbsp;상명핵심역량교양
-{#                    <i open="hgyo" class="fa-solid fa-circle-question result_info_icon" onmouseenter="info_in(this)" onmouseleave="info_out(this)"></i>#}
-{#                    <div id="hgyo" class="result_info">#}
-{#                        상명핵심역량교양 <br><br>#}
-{#                        설명설명#}
-{#                    </div>#}
                     <div class="recommend" onclick="info_in(this)" open="modal-culture-e">추천 과목 보기</div>
                 </div>
                 <div class="result_container">
@@ -245,8 +261,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <!-- 추천 모달 -->
         <!-- 전공심화 -->
@@ -511,7 +525,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}
 
@@ -520,6 +533,7 @@
 <script>
     $(window).ready(function() {
         draw(Number({{ subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
+        draw(Number({{ subjects_all|div:profile.year.all }}), '.pie-all-mobile', '#6188E8');
         draw(Number({{ subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
         draw(Number({{ subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
         draw(Number({{ subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
