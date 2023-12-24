@@ -1829,6 +1829,14 @@ body:not(.device-touch) .suc_btn
     .white-box {
         width: 80%;
     }
+    .resultbox {
+        width: 95%;
+        box-sizing: border-box;
+        margin: 1rem auto;
+    }
+    .lcontainer {
+        padding-bottom : 1.5rem;
+    }
 }
 @media screen and (max-width: 400px) {
     .bg_small_text {
