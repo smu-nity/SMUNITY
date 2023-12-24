@@ -2,44 +2,64 @@
 {% load static %}
 {% block main_area %}
     <div class="navbar-img">
-        <img class="navbar-img-image" src="{% static 'img/main.jpg' %}"  style="width: 100%; height: 300px; object-fit:cover"/>
+        <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
         <div class="navbar-img__text">
-            <span class="navbar-img__text--title">
-                <div style="font-size:4rem;">
-                    <img src="{% static 'img/logo.png' %}" style="width:100px; height:100px;">
-                </div>
-            </span>
-            <div class="big_title">회원가입</div>
+            <span class="navbar-img__text--title">회원가입</span>
+            <span class="navbar-img__text--subtitle">스뮤니티 사이트의 고유 비밀번호를 설정해주세요.</span>
         </div>
     </div>
     <div class="white_sec">
-        <div class="container">
-            <form method="post" name='regi_form' onsubmit="return check_up()">
+        <div class="container white-box">
+            <form method="post" name='regi_form' onsubmit="return check_up();">
                 {% csrf_token %}
-                <div class="regi_box" style="width:400px">
+                <div class="box-margin3">
                     <label>이름</label>
-                    <input type="text" name="name" value="{{ name }}" style="background-color:rgb(248,249,250);" readonly>
-
+                    <input class="form-control form-readonly" type="text" name="name" value="{{ name }}" readonly>
+                </div>
+                <div class="box-margin1">
                     <label>학번</label>
-                    <input type="text" name="username" value='{{ form.username.value|default_if_none:id }}' style="background-color:rgb(248,249,250);" readonly>
-
+                    <input class="form-control form-readonly" type="text" name="username" value="{{ form.username.value|default_if_none:id }}" readonly>
+                </div>
+                <div class="box-margin1">
                     <label>학과</label>
-                    <input type="text" name="department" value="{{ department }}" style="background-color:rgb(248,249,250);" readonly>
-
+                    <input class="form-control form-readonly" type="text" name="department" value="{{ department }}" readonly>
+                </div>
+                <div class="box-margin1">
                     <label>이메일</label>
-                    <input type="text" name="email" value='{{ form.email.value|default_if_none:email }}' style="background-color:rgb(248,249,250);" readonly>
-
-
+                    <input class="form-control form-readonly" type="text" name="email" value="{{ form.email.value|default_if_none:email }}" readonly>
+                </div>
+                <div class="box-margin1">
                     <label>비밀번호</label>
-                    <input id="pw1" type="password" name="password1" value="{{ form.password1.value|default_if_none:'' }}">
-                    <div class='regi_guide'>
+                    <input class="form-control" id="pw1" type="password" name="password1" value="{{ form.password1.value|default_if_none:'' }}">
+                    <div class='regi_guide' style="color: rgb(1, 42, 127);">
                         - 스뮤니티 사이트의 고유 비밀번호를 설정해주세요.
                     </div>
-                    <label>비밀번호 재확인</label>
-                    <input id="pw2" type="password" name="password2" value="{{ form.password2.value|default_if_none:'' }}">
                 </div>
-                <input type='submit' class='regi_btn' value='가입하기'>
+                <div class="box-margin1">
+                    <label>비밀번호 재확인</label>
+                    <input class="form-control" id="pw2" type="password" name="password2" value="{{ form.password2.value|default_if_none:'' }}">
+                </div>
+                <div style="text-align: center;">
+                    <input type='submit' class='btn btn-primary button-sm' style="margin-top:2.5rem; margin-bottom: 3rem;" value='가입하기'>
+                </div>
             </form>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script>
+        function check_up(){
+            if(!document.getElementById('pw1').value){
+                alert('😢 비밀번호를 입력해주세요.') ;
+                regi_form.pw1.focus();
+                return false;
+            }
+            if(document.getElementById('pw1').value !== document.getElementById('pw2').value){
+                alert('😢 비밀번호가 일치하지 않습니다.') ;
+                regi_form.pw1.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}

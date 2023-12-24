@@ -1648,6 +1648,21 @@ body:not(.device-touch) .suc_btn
     max-height: 600px;
     overflow-y: auto;
 }
+.box-margin1 {
+    margin-top: 1rem;
+}
+.box-margin3 {
+    margin-top: 3rem;
+}
+.white-box {
+    width: 40%;
+}
+.form-control {
+    box-sizing: border-box;
+}
+.form-readonly {
+    background-color:rgb(248,249,250);
+}
 @media screen and (max-width: 1024px) {
     .main-img {
         justify-content: center;
@@ -1794,6 +1809,9 @@ body:not(.device-touch) .suc_btn
     }
     .modal-test {
         max-height: 400px;
+    }
+    .white-box {
+        width: 80%;
     }
 }
 @media screen and (max-width: 400px) {
