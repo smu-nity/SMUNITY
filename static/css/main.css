@@ -1832,20 +1832,45 @@ body:not(.device-touch) .suc_btn
     .resultbox {
         width: 95%;
         box-sizing: border-box;
-        margin: 1rem auto;
+        margin: 0.8rem auto;
+        height: auto;
     }
     .lcontainer {
         padding-bottom : 1.5rem;
     }
     .result_name {
         margin: 0.5rem 1rem 0 1rem;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     .small {
         font-size: 1rem;
     }
     .result_container {
         margin: 1rem;
+    }
+    .result_content {
+        width: 100px;
+        height: 100px;
+        align-items: center;
+        display: grid;
+    }
+    .result_content_number {
+        font-size: 2rem;
+        height: 60px;
+    }
+    .pie-chart {
+        margin-left: 5px;
+        width: 90px;
+        height: 90px;
+    }
+    .result_content_info {
+        font-size: 0.7rem;
+    }
+    .recommend {
+        left: 70%;
+        height: 2rem;
+        width: 6rem;
+        font-size: 0.8rem;
     }
 }
 @media screen and (max-width: 400px) {
