@@ -1837,6 +1837,16 @@ body:not(.device-touch) .suc_btn
     .lcontainer {
         padding-bottom : 1.5rem;
     }
+    .result_name {
+        margin: 0.5rem 1rem 0 1rem;
+        font-size: 1.3rem;
+    }
+    .small {
+        font-size: 1rem;
+    }
+    .result_container {
+        margin: 1rem;
+    }
 }
 @media screen and (max-width: 400px) {
     .bg_small_text {
