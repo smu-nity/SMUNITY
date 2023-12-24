@@ -56,12 +56,12 @@
                 <hr style="margin-bottom:0.8rem; margin-top:1.6rem;">
                 <div class="my_box_title">
                     <div><i class="fas fa-key"></i>비밀번호 변경</div>
-                    <button id='b3' class="my_box_mod_btn">변경하기</button>
+                    <button id='b2' class="my_box_mod_btn">변경하기</button>
                 </div>
                 <hr style="margin-bottom:0.8rem; margin-top:0.8rem;">
                 <div class="my_box_title">
                     <div><i class="fas fa-exclamation-triangle"></i>회원 탈퇴</div>
-                    <button id='b6' class="my_box_mod_btn">탈퇴하기</button>
+                    <button id='b3' class="my_box_mod_btn">탈퇴하기</button>
                 </div>
             </div>
 
@@ -71,12 +71,10 @@
                     <div class="my_box_title">
                         <div><i class="fas fa-graduation-cap"></i>내 기이수과목</div>
                         <div>
-{#                            <button id='b5' class="my_box_mod_btn" style="margin-right:1.3rem">커스텀하기</button>#}
                             <button id='b4' class="my_box_mod_btn">업데이트</button>
                         </div>
                     </div>
                     <hr>
-
                     <!-- 7개 -->
                     <table id="short_table" class="grade_table" style="display: table; margin-top:1rem;">
                         <tr>
@@ -104,7 +102,6 @@
                         </tr>
                         {% endfor %}
                     </table>
-
                     <!-- 전체보기 -->
                     <table id="long_table" class="grade_table" style="display:none; margin-top:1rem;">
                         <tr>
@@ -146,45 +143,72 @@
     <div id='m1' class="modal">
         <div class="update_modal_content">
             <div id='c1' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            <div class="modal-title">
                 내 정보 업데이트
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey;">
+            <div class="modal-expl">
                 샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
                 (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
-            <hr style="width:80%; margin-top:1.3rem;">
-            <!-- 폼 -->
+            <hr class="modal-hr">
             <form action="{% url 'accounts:update' %}" method="post" name='form1' onsubmit="return check_up1()">
                 {% csrf_token %}
-                <div class="regi_box">
-                    <label>학번</label>
-                    <input type="text" value="{{ user.username }}"
-                        style="background-color:rgb(248,249,250);" disabled>
-                    <label>샘물 비밀번호</label>
-                    <input type="password" id="pw" name="password" placeholder="샘물 비밀번호">
+                <div class="form-login">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control" type="text" value="{{ user.username }}" style="background-color:rgb(248,249,250);" disabled>
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                        <input class="form-control" type="password" id="pw1" name="password" placeholder="샘물 비밀번호">
+                    </div>
                 </div>
-                <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='btn btn-primary button-sm' value='인증하기'>
             </form>
         </div>
     </div>
 
-    <!-- 3. 비번 변경 모달 -->
+    <!-- 2. 비번 변경 모달 -->
+    <div id='m2' class="modal">
+        <div class="update_modal_content">
+            <div id='c2' class="close">&times;</div>
+            <div class="modal-title">비밀번호 변경</div>
+            <hr class="modal-hr">
+            <form action="{% url 'accounts:change' %}" method="post" name='form2' onsubmit="return check_up2()">
+                {% csrf_token %}
+                <div class="form-login">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control" id="password1" type="password" name="password1" placeholder="새 비밀번호">
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                        <input class="form-control" id="password2" type="password" name="password2" placeholder="비밀번호 재확인">
+                    </div>
+                </div>
+                <input type='submit' class='btn btn-primary button-sm' value='변경하기'>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. 회원탈퇴 모달-->
     <div id='m3' class="modal">
         <div class="update_modal_content">
             <div id='c3' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem; margin-bottom: 2rem;">비밀번호 변경</div>
-            <hr style="width:80%; margin-top:1.3rem;">
-            <!-- 폼 -->
-            <form action="{% url 'accounts:change' %}" method="post" name='form3' onsubmit="return check_up3()">
+            <div class="modal-title">
+                회원 탈퇴
+            </div>
+            <div class="modal-expl">
+                스뮤니티에서 탈퇴합니다. (회원 정보 모두 삭제)
+            </div>
+            <hr class="modal-hr">
+            <form action="{% url 'core:member_del' %}" method="POST" name='form3' onsubmit="return check_up3()">
                 {% csrf_token %}
-                <div class="regi_box">
-                    <label>새 비밀번호</label>
-                    <input id="pw1" type="password" name="password1">
-                    <label>비밀번호 재확인</label>
-                    <input id="pw2" type="password" name="password2">
+                <div class="form-login">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control" type="text" name="student_id" value="{{ user.username }}" style="background-color:rgb(248,249,250);" disabled>
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                        <input class="form-control" type="password" id="pw3" name="pw_del" placeholder="비밀번호">
+                    </div>
                 </div>
-                <input type='submit' class='go_result_btn' value='변경하기' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='btn btn-primary button-sm' value='탈퇴하기'>
             </form>
         </div>
     </div>
@@ -193,51 +217,26 @@
     <div id='m4' class="modal">
         <div class="update_modal_content">
             <div id='c4' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
+            <div class="modal-title">
                 기이수과목 업데이트
             </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color: grey;">
+            <div class="modal-expl">
                 샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br><br>
                 (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
-            <hr style="width:80%; margin-top:1.3rem;">
+            <hr class="modal-hr">
             <!-- 폼 -->
             <form action="{% url 'core:course_update' %}" method="post" name='form4' onsubmit="return check_up4()">
                 {% csrf_token %}
-                <div class="regi_box">
-                    <label>학번</label>
-                    <input type="text" value="{{ user.username }}"
-                        style="background-color:rgb(248,249,250);" disabled>
-                    <label>샘물 비밀번호</label>
-                    <input type="password" id="pw4" name="password" placeholder="샘물 비밀번호">
+                <div class="form-login">
+                    <div class="input-group flex-nowrap">
+                        <input class="form-control" type="text" value="{{ user.username }}" style="background-color:rgb(248,249,250);" disabled>
+                    </div>
+                    <div class="input-group flex-nowrap" style="margin-top: 1rem;">
+                        <input class="form-control" type="password" id="pw4" name="password" placeholder="샘물 비밀번호">
+                    </div>
                 </div>
-                <input type='submit' class='go_result_btn' value='로그인' style="margin:2.5rem 0 2rem 0;">
-            </form>
-        </div>
-    </div>
-
-    <!-- 6. 회원탈퇴 모달-->
-    <div id='m6' class="modal">
-        <div class="update_modal_content">
-            <div id='c6' class="close">&times;</div>
-            <div class="login_title" style="font-size:2rem; margin-top:1.7rem;">
-                회원 탈퇴
-            </div>
-            <div style="margin-top:1.8rem; font-size:0.9rem; color:grey;">
-                스뮤니티에서 탈퇴합니다. (회원 정보 모두 삭제)
-            </div>
-            <hr style="width:80%; margin-top:1.3rem;">
-
-            <form action="{% url 'core:member_del' %}" method="POST" name='form6' onsubmit="return check_up6()">
-                {% csrf_token %}
-                <div class="regi_box">
-                    <label>학번</label>
-                    <input type="text" name="student_id" placeholder='{{ user.username }}'
-                        style="background-color:rgb(248,249,250);" disabled>
-                    <label>비밀번호</label>
-                    <input type="password" id="pw6" name="pw_del" placeholder="비밀번호">
-                </div>
-                <input type='submit' class='go_result_btn' value='탈퇴하기' style="margin:2.5rem 0 2rem 0;">
+                <input type='submit' class='btn btn-primary button-sm' value='인증하기'>
             </form>
         </div>
     </div>
@@ -275,167 +274,152 @@
 {% endblock %}
 
 {% block js %}
-<script>
-    // 마이페이지에서 뒤로가기 버튼 클릭시 무조건 home
-    history.pushState(null, null, location.href);
-    window.onpopstate = function (event) {
-        location.href = "{% url 'home' %}";
-    };
+    <script>
+        // 마이페이지에서 뒤로가기 버튼 클릭시 무조건 home
+        history.pushState(null, null, location.href);
+        window.onpopstate = function (event) {
+            location.href = "{% url 'home' %}";
+        };
 
-    // 졸업요건으로 넘어가기
-    function go_result() {
-        {% if courses %}
-            location.href = "{% url 'core:result' %}";
-        {% else %}
-            alert('성적사항 엑셀파일을 먼저 업로드 해주세요!');
-        {% endif %}
-    }
-
-    // 업데이트 클릭시 로딩 모달 띄우기
-    function pop_modal() {
-        document.getElementById('load_madal').style.display = "block";
-    }
-
-    function check_up1() {
-        if (!document.getElementById('pw').value) {
-            alert('비밀번호를 입력해주세요.');
-            form1.pw.focus();
-            return false;
+        // 졸업요건으로 넘어가기
+        function go_result() {
+            {% if courses %}
+                location.href = "{% url 'core:result' %}";
+            {% else %}
+                alert('성적사항 엑셀파일을 먼저 업로드 해주세요!');
+            {% endif %}
         }
-        pop_modal();
-        return true;
-    }
 
-    function check_up6() {
-        if (!document.getElementById('pw6').value) {
-            alert('비밀번호를 입력해주세요.');
-            form6.pw6.focus();
-            return false;
+        // 업데이트 클릭시 로딩 모달 띄우기
+        function pop_modal() {
+            document.getElementById('load_madal').style.display = "block";
         }
-        var con = confirm('😢정말 탈퇴하실건가요?')
-        if(con){
+
+        function check_up1() {
+            if (!document.getElementById('pw1').value) {
+                alert('비밀번호를 입력해주세요.');
+                form1.pw1.focus();
+                return false;
+            }
             pop_modal();
             return true;
         }
-        else{
-            return false;
-        }
-    }
 
-    // 비번 안쓰거나 일치안하면 빠꾸
-    function check_up3() {
-        if (!document.getElementById('pw1').value) {
-            alert('비밀번호를 입력해주세요.');
-            form3.pw1.focus();
-            return false;
-        }
-        if (document.getElementById('pw1').value !== document.getElementById('pw2').value) {
-            alert('비밀번호가 일치하지 않습니다.');
-            form3.pw1.focus();
-            return false;
-        }
-        pop_modal();
-        return true;
-    }
-
-    function check_up4() {
-        if (!document.getElementById('pw4').value) {
-            alert('비밀번호를 입력해주세요.');
-            form4.pw4.focus();
-            return false;
-        }
-        pop_modal();
-        return true;
-    }
-
-    function show_table() {
-        // 테이블 전환
-        document.getElementById("short_table").style.display = "none";
-        document.getElementById("long_table").style.display = "table";
-        // 버튼 전환
-        document.getElementById("show_btn").style.display = "none";
-        document.getElementById("hide_btn").style.display = "block";
-    }
-
-    function hide_table() {
-        document.getElementById("short_table").style.display = "table";
-        document.getElementById("long_table").style.display = "none";
-        document.getElementById("show_btn").style.display = "block";
-        document.getElementById("hide_btn").style.display = "none";
-    }
-
-    // 모달 켜는 버튼 id
-    var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
-    var b3 = document.getElementById("b3");     // 3. 비번 변경
-    var b4 = document.getElementById("b4");     // 4. 기이수성적 업로드
-    {#var b5 = document.getElementById("b5");     // 5. 커스텀#}
-    var b6 = document.getElementById("b6");     // 6. 회원탈퇴
-
-    // 모달 id
-    var m1 = document.getElementById('m1');
-    var m3 = document.getElementById('m3');
-    var m4 = document.getElementById('m4');
-    var m5 = document.getElementById('m5');
-    var m6 = document.getElementById('m6');
-
-    // 모달 끄는 버튼(X) id
-    var c1 = document.getElementById("c1");
-    var c2 = document.getElementById("c2");
-    var c3 = document.getElementById("c3");
-    var c4 = document.getElementById("c4");
-    {#var c5 = document.getElementById("c5");#}
-    var c6 = document.getElementById("c6");
-
-    // 모달 키는 함수 호출
-    Btnclick(b1, m1);
-    Btnclick(b3, m3);
-    Btnclick(b4, m4);
-    {#Btnclick(b5, m5);#}
-    Btnclick(b6, m6);
-    // 모달 끄는 함수 호출
-    Spanclick(c1, m1);
-    Spanclick(c3, m3);
-    Spanclick(c4, m4);
-    {#Spanclick(c5, m5);#}
-    Spanclick(c6, m6);
-    // 모달 밖 화면 누를때 꺼지게하기
-    window.onclick = function (event) {
-        if (event.target == m1) {
-            m1.style.display = "none";
-        }
-        if (event.target == m3) {
-            m3.style.display = "none";
-        }
-        if (event.target == m4) {
-            m4.style.display = "none";
-        }
-        if (event.target == m5) {
-            m5.style.display = "none";
-        }
-        if (event.target == m6) {
-            m6.style.display = "none";
-        }
-    }
-
-    // 툴팁 함수
-    let tooltip_btn = document.querySelectorAll('.tooltip');
-    let tooltip_box = document.querySelectorAll('.tooltip_text2');
-    window.onload = function(){
-
-        for (i = 0; i < tooltip_btn.length; i++) {
-            Tooltipeb(tooltip_btn[i], tooltip_box[i]);
+        function check_up2() {
+            if (!document.getElementById('password1').value) {
+                alert('비밀번호를 입력해주세요.');
+                form2.password1.focus();
+                return false;
+            }
+            if (document.getElementById('password1').value !== document.getElementById('password2').value) {
+                alert('비밀번호가 일치하지 않습니다.');
+                form2.password1.focus();
+                return false;
+            }
+            pop_modal();
+            return true;
         }
 
-        function Tooltipeb(btn, box) {
-            btn.addEventListener('click', () => {
-                box.classList.toggle('active');
-            });송
+        function check_up3() {
+            if (!document.getElementById('pw3').value) {
+                alert('비밀번호를 입력해주세요.');
+                form3.pw3.focus();
+                return false;
+            }
+            var con = confirm('😢정말 탈퇴하실건가요?')
+            if(con){
+                pop_modal();
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-    }
 
-    function under_maintenance(){
-        alert("죄송합니다. 서비스 잠정 중단 상태입니다.")
-    }
+        function check_up4() {
+            if (!document.getElementById('pw4').value) {
+                alert('비밀번호를 입력해주세요.');
+                form4.pw4.focus();
+                return false;
+            }
+            pop_modal();
+            return true;
+        }
+
+        function show_table() {
+            // 테이블 전환
+            document.getElementById("short_table").style.display = "none";
+            document.getElementById("long_table").style.display = "table";
+            // 버튼 전환
+            document.getElementById("show_btn").style.display = "none";
+            document.getElementById("hide_btn").style.display = "block";
+        }
+
+        function hide_table() {
+            document.getElementById("short_table").style.display = "table";
+            document.getElementById("long_table").style.display = "none";
+            document.getElementById("show_btn").style.display = "block";
+            document.getElementById("hide_btn").style.display = "none";
+        }
+
+        // 모달 켜는 버튼 id
+        var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
+        var b2 = document.getElementById("b2");     // 2. 비번 변경
+        var b3 = document.getElementById("b3");     // 3. 회원탈퇴
+        var b4 = document.getElementById("b4");     // 4. 기이수성적 업로드
+
+        // 모달 id
+        var m1 = document.getElementById('m1');
+        var m2 = document.getElementById('m2');
+        var m3 = document.getElementById('m3');
+        var m4 = document.getElementById('m4');
+
+        // 모달 끄는 버튼(X) id
+        var c1 = document.getElementById("c1");
+        var c2 = document.getElementById("c2");
+        var c3 = document.getElementById("c3");
+        var c4 = document.getElementById("c4");
+
+        // 모달 키는 함수 호출
+        Btnclick(b1, m1);
+        Btnclick(b2, m2);
+        Btnclick(b3, m3);
+        Btnclick(b4, m4);
+        // 모달 끄는 함수 호출
+        Spanclick(c1, m1);
+        Spanclick(c2, m2);
+        Spanclick(c3, m3);
+        Spanclick(c4, m4);
+
+        // 모달 밖 화면 누를때 꺼지게하기
+        window.onclick = function (event) {
+            if (event.target == m1) {
+                m1.style.display = "none";
+            }
+            if (event.target == m2) {
+                m2.style.display = "none";
+            }
+            if (event.target == m3) {
+                m3.style.display = "none";
+            }
+            if (event.target == m4) {
+                m4.style.display = "none";
+            }
+        }
+
+        // 툴팁 함수
+        let tooltip_btn = document.querySelectorAll('.tooltip');
+        let tooltip_box = document.querySelectorAll('.tooltip_text2');
+        window.onload = function(){
+            for (i = 0; i < tooltip_btn.length; i++) {
+                Tooltipeb(tooltip_btn[i], tooltip_box[i]);
+            }
+            function Tooltipeb(btn, box) {
+                btn.addEventListener('click', () => {
+                    box.classList.toggle('active');
+                });
+            }
+        }
     </script>
 
     <!-- 지능·데이터융합학부 (핀테크전공, 빅데이터융합전공, 스마트생산전공) -->

@@ -787,7 +787,6 @@ strong {
 .modal-title {
     text-align: center;
     padding-top:2rem;
-    padding-left:0.5rem;
     font-weight: bold;
     font-size:2rem;
     margin-top:1.7rem;
@@ -797,8 +796,12 @@ strong {
 .modal-expl {
     margin-top:1.8rem;
     font-size:0.9rem;
-    color:rgb(199, 199, 199);
-    line-height:normal;
+    color:grey;
+    line-height:1;
+}
+.modal-hr {
+    width:100%;
+    margin-top:1.3rem;
 }
 .modal_div {
     padding: 1rem;
@@ -1688,6 +1691,9 @@ body:not(.device-touch) .suc_btn
     .grade_table_td {
         font-size: 0.8rem;
     }
+    .modal-title {
+        font-size: 1.8rem;
+    }
 }
 @media screen and (max-width: 767px) {
     .logo_img {
@@ -1734,6 +1740,9 @@ body:not(.device-touch) .suc_btn
     }
     .grade_table_td {
         font-size: 0.7rem;
+    }
+    .modal-title {
+        font-size: 1.6rem;
     }
 }
 @media screen and (max-width: 400px) {
