@@ -677,6 +677,7 @@ strong {
     font-size: 1rem;
     padding-top: 2rem;
     padding-bottom: 1rem;
+    line-height: 1.2;
 }
 .myth {
     height: 2.5rem;
@@ -699,10 +700,10 @@ strong {
     color: rgb(199, 199, 199)
 }
 .partdiv {
-    padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding: 2rem 0;
     font-size: 1.5rem;
     letter-spacing: 1.5px;
+    line-height: 1.2;
 }
 .gear {
     animation: i 5s linear infinite;
@@ -781,7 +782,7 @@ strong {
 }
 .modal-title {
     text-align: center;
-    padding-top:2rem;
+    padding-top:1rem;
     font-weight: bold;
     font-size:2rem;
     margin-top:1.7rem;
@@ -1646,8 +1647,8 @@ body:not(.device-touch) .suc_btn
 .modal_title {
     font-size: 1.5rem;
 }
-.modal-test {
-    max-height: 600px;
+.modal-scroll {
+    max-height: 300px;
     overflow-y: auto;
 }
 .box-margin1 {
@@ -1723,7 +1724,9 @@ body:not(.device-touch) .suc_btn
         font-size: 0.8rem;
     }
     .modal-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
     .table_hidden {
         display: none;
@@ -1731,14 +1734,17 @@ body:not(.device-touch) .suc_btn
     .modal_title {
         font-size: 1.4rem;
     }
-    .modal-test {
-        max-height: 500px;
+    .modal-scroll {
+        max-height: 250px;
     }
     .resultbox-main {
         display: none;
     }
     .resultbox-mobile {
         display: block;
+    }
+    .partdiv {
+        font-size: 1.3rem;
     }
 }
 @media screen and (max-width: 767px) {
@@ -1783,6 +1789,7 @@ body:not(.device-touch) .suc_btn
     }
     .update_modal_content {
         width: 70%;
+        padding: 2rem;
     }
     .close {
         font-size: 2.1rem;
@@ -1791,7 +1798,9 @@ body:not(.device-touch) .suc_btn
         font-size: 0.7rem;
     }
     .modal-title {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
     .info_content {
         font-size:0.85rem;
@@ -1823,8 +1832,8 @@ body:not(.device-touch) .suc_btn
     .modal_title {
         font-size: 1.3rem;
     }
-    .modal-test {
-        max-height: 400px;
+    .modal-scroll {
+        max-height: 200px;
     }
     .white-box {
         width: 80%;
@@ -1871,6 +1880,17 @@ body:not(.device-touch) .suc_btn
         height: 2rem;
         width: 6rem;
         font-size: 0.8rem;
+    }
+    .partdiv {
+        font-size: 1rem;
+    }
+    .mytable {
+        width: 100%;
+        padding-top: 1rem;
+        font-size: 0.45rem;
+    }
+    .myth {
+        font-size: 0.6rem;
     }
 }
 @media screen and (max-width: 400px) {
