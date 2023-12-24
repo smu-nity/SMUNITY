@@ -75,7 +75,7 @@ def course_update(request):
                     if not Course.objects.filter(user=request.user, subject=subject):
                         Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
             messages.error(request, '기이수과목이 업데이트 되었습니다.')
-            return redirect('core:mypage')
+            return redirect('core:result')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
     return redirect('core:mypage')
 

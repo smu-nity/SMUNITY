@@ -286,7 +286,7 @@
             {% if courses %}
                 location.href = "{% url 'core:result' %}";
             {% else %}
-                alert('성적사항 엑셀파일을 먼저 업로드 해주세요!');
+                m4.style.display = "block";
             {% endif %}
         }
 
