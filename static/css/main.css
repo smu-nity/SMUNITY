@@ -65,11 +65,6 @@ input[type="button"]
     font-weight: bold;
     color : #003D91;
 }
-.container {
-    text-align:center;
-    padding-left : 10rem;
-    padding-right : 10rem;
-}
 
 /* ---------------------------------( ref footer )---------------------------------------- */
 .footer {
@@ -1559,28 +1554,30 @@ body:not(.device-touch) .suc_btn
     font-size : 1.8rem;
     font-weight: bold;
     padding-top:2.5rem;
-    padding-left:0.5rem;
+    text-align: center;
 }
 .info_box{
     margin: 0 auto;
     width: 100%;
     max-width: 1280px;
-    margin-top:1rem;
     border:0.001px solid rgb(216, 216, 216);
     background-color: white;
 }
 .info_box_wrapper{
     margin: 0 auto;
     width: 100%;
-    max-width: 1280px;
+    max-width: 600px;
+    margin-top: 1rem;
+}
+.info_box_content {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .info_content{
-    margin-bottom:1.3rem;
-    margin-top:1.3rem;
-    margin-left:2rem;
     margin:2rem;
     font-weight:normal;
-    font-size:0.85rem;
+    font-size:1rem;
     text-align:left;
 }
 .info_agree{
@@ -1636,9 +1633,40 @@ body:not(.device-touch) .suc_btn
 }
 .form-login {
     padding: 30px 60px 30px 60px;
+    max-width: 350px;
+    margin: auto;
 }
 .table_grade {
     padding: 2.5rem 2.5rem 0 2.5rem;
+}
+.login-form .agree {
+    padding: 75px 100px;
+    text-align: center;
+}
+.modal_title {
+    font-size: 1.5rem;
+}
+.modal-test {
+    max-height: 600px;
+    overflow-y: auto;
+}
+.box-margin1 {
+    margin-top: 1rem;
+}
+.box-margin3 {
+    margin-top: 3rem;
+}
+.white-box {
+    width: 40%;
+}
+.form-control {
+    box-sizing: border-box;
+}
+.container {
+    box-sizing: border-box;
+}
+.form-readonly {
+    background-color:rgb(248,249,250);
 }
 @media screen and (max-width: 1024px) {
     .main-img {
@@ -1694,6 +1722,15 @@ body:not(.device-touch) .suc_btn
     .modal-title {
         font-size: 1.8rem;
     }
+    .table_hidden {
+        display: none;
+    }
+    .modal_title {
+        font-size: 1.4rem;
+    }
+    .modal-test {
+        max-height: 500px;
+    }
 }
 @media screen and (max-width: 767px) {
     .logo_img {
@@ -1719,6 +1756,9 @@ body:not(.device-touch) .suc_btn
         margin: 0;
         box-shadow: none;
     }
+    .login-margin {
+        margin-bottom: 20px;
+    }
     .login-form .content {
       padding: 20px 30px 30px 30px;
       text-align: center;
@@ -1743,6 +1783,42 @@ body:not(.device-touch) .suc_btn
     }
     .modal-title {
         font-size: 1.6rem;
+    }
+    .info_content {
+        font-size:0.85rem;
+        margin: 1rem;
+    }
+    .login-form .agree {
+        padding: 45px 30px 45px 30px;
+    }
+    .info_box_content {
+        max-height: 250px;
+    }
+    .login_btn_default {
+        font-size: 1rem;
+    }
+    .mydiv {
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+    .target_num_div {
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+    .target_color_span {
+        font-size: 1.4rem;
+    }
+    .target_table {
+        font-size: 0.7rem;
+    }
+    .modal_title {
+        font-size: 1.3rem;
+    }
+    .modal-test {
+        max-height: 400px;
+    }
+    .white-box {
+        width: 80%;
     }
 }
 @media screen and (max-width: 400px) {
