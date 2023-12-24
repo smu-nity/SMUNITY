@@ -226,6 +226,7 @@ input[type="button"]
     text-align:left; 
     padding:1.5rem 2rem 1.5rem 2rem;
     border: 1px solid rgb(216, 216, 216);
+    line-height: 1.2;
 }
 .popup_box li{
     line-height: 2.5rem;
@@ -868,6 +869,7 @@ input[type=checkbox] {
     color:white;
     border-radius: 3px;
     background-color: #6188E8;
+    word-break: keep-all;
 }
 .target_color_span {
     font-size: 1.8rem;
@@ -1677,6 +1679,9 @@ body:not(.device-touch) .suc_btn
 .resultbox-mobile {
     display: none;
 }
+.modal-ul {
+    padding: 0;
+}
 @media screen and (max-width: 1024px) {
     .main-img {
         justify-content: center;
@@ -1750,6 +1755,18 @@ body:not(.device-touch) .suc_btn
     }
     .partdiv {
         font-size: 1.3rem;
+    }
+    .popup_content {
+        width: 90%;
+    }
+    .popup_box {
+        font-size: 0.95rem;
+    }
+    .link_site {
+        font-size: 0.7rem;
+    }
+    .popup_check {
+        font-size: 1rem;
     }
 }
 @media screen and (max-width: 767px) {
@@ -1896,6 +1913,18 @@ body:not(.device-touch) .suc_btn
     }
     .myth {
         font-size: 0.6rem;
+    }
+    .popup_content {
+        width: 95%;
+    }
+    .popup_box {
+        font-size: 0.75rem;
+    }
+    .link_site {
+        font-size: 0.6rem;
+    }
+    .popup_check {
+        font-size: 0.8rem;
     }
 }
 @media screen and (max-width: 400px) {

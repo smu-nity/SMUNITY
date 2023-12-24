@@ -28,21 +28,4 @@ var Spanclick_set_cookie = function (x, y) {
         }
     }
 }
-
-// 검사대상표 모달
-var target_btn = document.getElementById("target_btn");
-var target_modal = document.getElementById('target_modal');
-var target_close = document.getElementById("target_close");
-Btnclick(target_btn, target_modal);
-Spanclick(target_close, target_modal);
 Spanclick_set_cookie(span, modal);
-window.onclick = function (event) {
-    if (event.target == target_modal) {
-        target_modal.style.display = "none";
-    }
-}
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
