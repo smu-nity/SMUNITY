@@ -61,7 +61,7 @@
                 <hr style="margin-bottom:0.8rem; margin-top:0.8rem;">
                 <div class="my_box_title">
                     <div><i class="fas fa-exclamation-triangle"></i>회원 탈퇴</div>
-                    <button id='b6' class="my_box_mod_btn">탈퇴하기</button>
+                    <button id='b3' class="my_box_mod_btn">탈퇴하기</button>
                 </div>
             </div>
 
@@ -151,7 +151,6 @@
                 (<a href="https://portal.smu.ac.kr/" class="footer_link" style="font-weight: bold;" target="_blank">상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
             <hr class="modal-hr">
-            <!-- 폼 -->
             <form action="{% url 'accounts:update' %}" method="post" name='form1' onsubmit="return check_up1()">
                 {% csrf_token %}
                 <div class="form-login">
@@ -159,7 +158,7 @@
                         <input class="form-control" type="text" value="{{ user.username }}" style="background-color:rgb(248,249,250);" disabled>
                     </div>
                     <div class="input-group flex-nowrap" style="margin-top: 1rem;">
-                        <input class="form-control" type="password" id="pw" name="password" placeholder="샘물 비밀번호">
+                        <input class="form-control" type="password" id="pw1" name="password" placeholder="샘물 비밀번호">
                     </div>
                 </div>
                 <input type='submit' class='btn btn-primary button-sm' value='인증하기'>
@@ -170,18 +169,17 @@
     <!-- 2. 비번 변경 모달 -->
     <div id='m2' class="modal">
         <div class="update_modal_content">
-            <div id='c3' class="close">&times;</div>
+            <div id='c2' class="close">&times;</div>
             <div class="modal-title">비밀번호 변경</div>
             <hr class="modal-hr">
-            <!-- 폼 -->
-            <form action="{% url 'accounts:change' %}" method="post" name='form3' onsubmit="return check_up3()">
+            <form action="{% url 'accounts:change' %}" method="post" name='form2' onsubmit="return check_up2()">
                 {% csrf_token %}
                 <div class="form-login">
                     <div class="input-group flex-nowrap">
-                        <input class="form-control" id="pw1" type="password" name="password1" placeholder="새 비밀번호">
+                        <input class="form-control" id="password1" type="password" name="password1" placeholder="새 비밀번호">
                     </div>
                     <div class="input-group flex-nowrap" style="margin-top: 1rem;">
-                        <input class="form-control" id="pw2" type="password" name="password2" placeholder="비밀번호 재확인">
+                        <input class="form-control" id="password2" type="password" name="password2" placeholder="비밀번호 재확인">
                     </div>
                 </div>
                 <input type='submit' class='btn btn-primary button-sm' value='변경하기'>
@@ -190,9 +188,9 @@
     </div>
 
     <!-- 3. 회원탈퇴 모달-->
-    <div id='m6' class="modal">
+    <div id='m3' class="modal">
         <div class="update_modal_content">
-            <div id='c6' class="close">&times;</div>
+            <div id='c3' class="close">&times;</div>
             <div class="modal-title">
                 회원 탈퇴
             </div>
@@ -200,15 +198,14 @@
                 스뮤니티에서 탈퇴합니다. (회원 정보 모두 삭제)
             </div>
             <hr class="modal-hr">
-            <form action="{% url 'core:member_del' %}" method="POST" name='form6' onsubmit="return check_up6()">
+            <form action="{% url 'core:member_del' %}" method="POST" name='form3' onsubmit="return check_up3()">
                 {% csrf_token %}
-
                 <div class="form-login">
                     <div class="input-group flex-nowrap">
                         <input class="form-control" type="text" name="student_id" value="{{ user.username }}" style="background-color:rgb(248,249,250);" disabled>
                     </div>
                     <div class="input-group flex-nowrap" style="margin-top: 1rem;">
-                        <input class="form-control" type="password" id="pw6" name="pw_del" placeholder="비밀번호">
+                        <input class="form-control" type="password" id="pw3" name="pw_del" placeholder="비밀번호">
                     </div>
                 </div>
                 <input type='submit' class='btn btn-primary button-sm' value='탈퇴하기'>
@@ -299,19 +296,34 @@
         }
 
         function check_up1() {
-            if (!document.getElementById('pw').value) {
+            if (!document.getElementById('pw1').value) {
                 alert('비밀번호를 입력해주세요.');
-                form1.pw.focus();
+                form1.pw1.focus();
                 return false;
             }
             pop_modal();
             return true;
         }
 
-        function check_up6() {
-            if (!document.getElementById('pw6').value) {
+        function check_up2() {
+            if (!document.getElementById('password1').value) {
                 alert('비밀번호를 입력해주세요.');
-                form6.pw6.focus();
+                form2.password1.focus();
+                return false;
+            }
+            if (document.getElementById('password1').value !== document.getElementById('password2').value) {
+                alert('비밀번호가 일치하지 않습니다.');
+                form2.password1.focus();
+                return false;
+            }
+            pop_modal();
+            return true;
+        }
+
+        function check_up3() {
+            if (!document.getElementById('pw3').value) {
+                alert('비밀번호를 입력해주세요.');
+                form3.pw3.focus();
                 return false;
             }
             var con = confirm('😢정말 탈퇴하실건가요?')
@@ -322,22 +334,6 @@
             else{
                 return false;
             }
-        }
-
-        // 비번 안쓰거나 일치안하면 빠꾸
-        function check_up3() {
-            if (!document.getElementById('pw1').value) {
-                alert('비밀번호를 입력해주세요.');
-                form3.pw1.focus();
-                return false;
-            }
-            if (document.getElementById('pw1').value !== document.getElementById('pw2').value) {
-                alert('비밀번호가 일치하지 않습니다.');
-                form3.pw1.focus();
-                return false;
-            }
-            pop_modal();
-            return true;
         }
 
         function check_up4() {
@@ -369,34 +365,32 @@
         // 모달 켜는 버튼 id
         var b1 = document.getElementById("b1");     // 1. 내 정보 업데이트
         var b2 = document.getElementById("b2");     // 2. 비번 변경
+        var b3 = document.getElementById("b3");     // 3. 회원탈퇴
         var b4 = document.getElementById("b4");     // 4. 기이수성적 업로드
-        var b6 = document.getElementById("b6");     // 6. 회원탈퇴
 
         // 모달 id
         var m1 = document.getElementById('m1');
         var m2 = document.getElementById('m2');
+        var m3 = document.getElementById('m3');
         var m4 = document.getElementById('m4');
-        var m5 = document.getElementById('m5');
-        var m6 = document.getElementById('m6');
 
         // 모달 끄는 버튼(X) id
         var c1 = document.getElementById("c1");
         var c2 = document.getElementById("c2");
         var c3 = document.getElementById("c3");
         var c4 = document.getElementById("c4");
-        {#var c5 = document.getElementById("c5");#}
-        var c6 = document.getElementById("c6");
 
         // 모달 키는 함수 호출
         Btnclick(b1, m1);
         Btnclick(b2, m2);
+        Btnclick(b3, m3);
         Btnclick(b4, m4);
-        Btnclick(b6, m6);
         // 모달 끄는 함수 호출
         Spanclick(c1, m1);
-        Spanclick(c3, m2);
+        Spanclick(c2, m2);
+        Spanclick(c3, m3);
         Spanclick(c4, m4);
-        Spanclick(c6, m6);
+
         // 모달 밖 화면 누를때 꺼지게하기
         window.onclick = function (event) {
             if (event.target == m1) {
@@ -405,14 +399,11 @@
             if (event.target == m2) {
                 m2.style.display = "none";
             }
+            if (event.target == m3) {
+                m3.style.display = "none";
+            }
             if (event.target == m4) {
                 m4.style.display = "none";
-            }
-            if (event.target == m5) {
-                m5.style.display = "none";
-            }
-            if (event.target == m6) {
-                m6.style.display = "none";
             }
         }
 
@@ -420,11 +411,9 @@
         let tooltip_btn = document.querySelectorAll('.tooltip');
         let tooltip_box = document.querySelectorAll('.tooltip_text2');
         window.onload = function(){
-
             for (i = 0; i < tooltip_btn.length; i++) {
                 Tooltipeb(tooltip_btn[i], tooltip_box[i]);
             }
-
             function Tooltipeb(btn, box) {
                 btn.addEventListener('click', () => {
                     box.classList.toggle('active');
