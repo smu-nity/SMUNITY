@@ -1753,9 +1753,6 @@ body:not(.device-touch) .suc_btn
     .login-form .agree {
         padding: 45px 30px 45px 30px;
     }
-    .info_title {
-        padding-top: 2rem;
-    }
     .info_box_content {
         max-height: 250px;
     }
