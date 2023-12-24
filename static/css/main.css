@@ -1662,6 +1662,9 @@ body:not(.device-touch) .suc_btn
 .form-control {
     box-sizing: border-box;
 }
+.container {
+    box-sizing: border-box;
+}
 .form-readonly {
     background-color:rgb(248,249,250);
 }
