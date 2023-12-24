@@ -1641,6 +1641,13 @@ body:not(.device-touch) .suc_btn
     padding: 75px 100px;
     text-align: center;
 }
+.modal_title {
+    font-size: 1.5rem;
+}
+.modal-test {
+    max-height: 600px;
+    overflow-y: auto;
+}
 @media screen and (max-width: 1024px) {
     .main-img {
         justify-content: center;
@@ -1694,6 +1701,15 @@ body:not(.device-touch) .suc_btn
     }
     .modal-title {
         font-size: 1.8rem;
+    }
+    .table_hidden {
+        display: none;
+    }
+    .modal_title {
+        font-size: 1.4rem;
+    }
+    .modal-test {
+        max-height: 500px;
     }
 }
 @media screen and (max-width: 767px) {
@@ -1758,6 +1774,26 @@ body:not(.device-touch) .suc_btn
     }
     .login_btn_default {
         font-size: 1rem;
+    }
+    .mydiv {
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+    .target_num_div {
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+    .target_color_span {
+        font-size: 1.4rem;
+    }
+    .target_table {
+        font-size: 0.7rem;
+    }
+    .modal_title {
+        font-size: 1.3rem;
+    }
+    .modal-test {
+        max-height: 400px;
     }
 }
 @media screen and (max-width: 400px) {

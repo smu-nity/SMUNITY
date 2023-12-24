@@ -57,6 +57,43 @@
             </div>
         </div>
     </div>
+    <!-- 검사대상표 모달 -->
+    <div id="target_modal" class="modal" >
+        <div class="update_modal_content modal-test">
+            <span class="close" id="target_close">&times;</span>
+            <br>
+            <div class="modal_div">
+                <div class="p_div">
+                    <!-- 추천과목 -->
+                    <div class="modal_title"><i class="my_i fas fa-check-circle"></i> 검사대상표
+                    </div>
+                    <div class="mydiv">아래 표에 해당하는 학과만 회원가입 가능합니다.</div>
+                    <hr>
+
+                    <div class='target_num_div'>
+                        현재 총 <span class='target_color_span'>{{ dept_num }}</span>개 학과 검사 가능
+                    </div>
+
+                    <table class="target_table" style="width: 100%;">
+                        <tr>
+                            <th class="target_table_th" style='border-left: 1px solid #dadada;'>학과</th>
+                            <th class="target_table_th table_hidden">단과대학</th>
+                            <th class="target_table_th">학번</th>
+                            <th class="target_table_th table_hidden">교육과정</th>
+                        </tr>
+                        {% for department in departments %}
+                        <tr>
+                            <td class="target_table_td" style='border-left: 1px solid #dadada;'>{{ department.name }}</td>
+                            <td class="target_table_td table_hidden">{{ department.college }}</td>
+                            <td class="target_table_td">23, 22, 21, 20, 19, 18, 17</td>
+                            <td class="target_table_td table_hidden"><a class="link_site" href="{{ department.url }}" target="_blank">교육과정</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 로딩 모달 창 -->
     <div id='m1' class="modal">
         <div class="load-modal-content">
@@ -117,6 +154,18 @@
         }
         pop_modal();
         return true;
+    }
+
+    // 검사대상표 모달
+    var target_btn = document.getElementById("target_btn");
+    var target_modal = document.getElementById('target_modal');
+    var target_close = document.getElementById("target_close");
+    Btnclick(target_btn, target_modal);
+    Spanclick(target_close, target_modal);
+    window.onclick = function (event) {
+        if (event.target == target_modal) {
+            target_modal.style.display = "none";
+        }
     }
 </script>
 {% endblock %}
