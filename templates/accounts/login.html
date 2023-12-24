@@ -71,11 +71,11 @@
             <div class="modal-title">
                 비밀번호 찾기
             </div>
-            <div class="modal-expl" style="color: grey;">
+            <div class="modal-expl">
                 샘물 통합로그인을 통해 재학생 인증을 진행합니다.<br>
                 (<a href="https://portal.smu.ac.kr/" style="font-weight: bold; color: grey; text-decoration: none;" target="_blank";>상명대학교 샘물포털시스템</a> 학번/비밀번호)
             </div>
-            <hr style="width:100%; margin-top:1.3rem;">
+            <hr class="modal-hr">
             <!-- 폼 -->
             <form onsubmit="return check_up2();" method="post" action="{% url 'accounts:find' %}" name='form2'>
                 {% csrf_token %}
