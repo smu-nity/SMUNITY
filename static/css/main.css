@@ -1633,6 +1633,8 @@ body:not(.device-touch) .suc_btn
 }
 .form-login {
     padding: 30px 60px 30px 60px;
+    max-width: 350px;
+    margin: auto;
 }
 .table_grade {
     padding: 2.5rem 2.5rem 0 2.5rem;
@@ -1749,8 +1751,10 @@ body:not(.device-touch) .suc_btn
     .login-form {
         width: 100%;
         margin: 0;
-        margin-bottom: 20px;
         box-shadow: none;
+    }
+    .login-margin {
+        margin-bottom: 20px;
     }
     .login-form .content {
       padding: 20px 30px 30px 30px;
