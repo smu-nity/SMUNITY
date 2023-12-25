@@ -1762,9 +1762,6 @@ body:not(.device-touch) .suc_btn
     .popup_box {
         font-size: 0.95rem;
     }
-    .link_site {
-        font-size: 0.7rem;
-    }
     .popup_check {
         font-size: 1rem;
     }
@@ -1919,9 +1916,6 @@ body:not(.device-touch) .suc_btn
     }
     .popup_box {
         font-size: 0.75rem;
-    }
-    .link_site {
-        font-size: 0.6rem;
     }
     .popup_check {
         font-size: 0.8rem;
