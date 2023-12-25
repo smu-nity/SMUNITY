@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load filter %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" media="screen">
+{% endblock %}
 {% block main_area %}
     <div class="navbar-img">
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
