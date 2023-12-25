@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/board.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" media="screen">
+{% endblock %}
+{% block main_area %}
+    <div class="navbar-img">
+        <img class="navbar-img-image" src="{% static 'img/main.jpg' %}"/>
+
+        <div class="navbar-img__text">
+            <span class="navbar-img__text--title">QnA 게시판</span>
+            <span class="navbar-img__text--subtitle">상명대학교 제46대 총학생회 선[先]</span>
+            <span class="navbar-img__text--subtitle">QnA 게시판입니다.</span>
+        </div>
+    </div>
+    <section id="cont_view" class="cs_wrap">
+        <div class="cs_tab">
+            <div class="tab div3">
+                <ul>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:terms' %}">이용약관</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:privacy' %}">개인정보처리방침</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}" class="on" title="현재">QnA 게시판</a></li>
+                </ul>
+            </div>
+        </div>
+		<div class="cs_area">
+			<div class="cs_body ">
+				<div class="wrap">
+					<div class="ct_petitions">
+						<div class="ct_petitions_area  ct_txt_left">
+							<!-- 전체목록 -->
+							<div class="ct_list1">
+								<div class="board text">
+									<div class="b_title">
+                                        <a href="{% url 'qna:question_create' %}" class="btn btn-primary button-sm" style="float: right; margin-bottom: 5px;">질문 등록</a>
+									</div>
+
+									<div class="b_list category b_list2 board-text">
+										<div class="bl_head cb" aria-hidden="true">
+											<div class="bl_wrap">
+												<div class="bl_category">상태</div>
+												<div class="bl_subject">제목</div>
+												<div class="bl_date">작성일</div>
+												<div class="bl_agree">작성자</div>
+											</div>
+										</div>
+										<div class="bl_body">
+											<ul class="petition_list">
+                                                {% if question_list %}
+                                                    {% for question in question_list %}
+                                                        <li style="padding:20px 0;">
+                                                            <div class="bl_wrap">
+                                                                <div class="bl_category ccategory cs wv_category">
+                                                                    <span class="sound_only">상태 </span>
+                                                                    {% if question.answer_set.count == 0 %}
+                                                                        <p class="table-body__proceeding" style="margin: 0;">접수</p>
+                                                                    {% else %}
+                                                                        <p class="table-body__complete" style="margin: 0;">답변완료</p>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="bl_subject">
+                                                                    <a href="{% url 'qna:question_detail' question.pk %}" class="cb relpy_w">
+                                                                        <span class="sound_only">제목 </span>{{ question.subject }}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="bl_date light">
+                                                                    <span class="sound_only" >작성일 </span><span style="color: gray;">{{ question.date_str }}</span>
+                                                                </div>
+                                                                <div class="bl_agree cs">
+                                                                    <span class="sound_only">작성자 </span>{{ question.author_name }}
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li style="padding:20px 0;">
+                                                        <div class="bl_wrap">
+                                                            <div class="bl_category ccategory cs wv_category">
+                                                                <span class="sound_only">상태 </span>
+                                                            </div>
+                                                            <div class="bl_subject">
+                                                                <a href="#" class="cb relpy_w">
+                                                                    <span class="sound_only">제목 </span>질문이 없습니다.
+                                                                </a>
+                                                            </div>
+                                                            <div class="bl_date light">
+                                                                <span class="sound_only">작성자 </span></div>
+                                                            <div class="bl_agree cs">
+                                                                <span class="sound_only">작성일 </span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- 페이징처리 시작 -->
+            <ul class="pagination justify-content-center" style="margin-bottom: 60px;">
+                <!-- 이전페이지 -->
+                {% if question_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="changePage({{ question_list.previous_page_number }});">이전</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in question_list.paginator.page_range %}
+                    {% if page_number >= question_list.number|add:-3 and page_number <= question_list.number|add:3 %}
+                        {% if page_number == question_list.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="javascript:void(0);" onclick="changePage({{ page_number }});">{{ page_number }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0);" onclick="changePage({{ page_number }});">{{ page_number }}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if question_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);" onclick="changePage({{ question_list.next_page_number }});">다음</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+                {% endif %}
+            </ul>
+            <!-- 페이징처리 끝 -->
+		</div>
+	</section>
+{% endblock %}
+{% block script %}
+    <script>
+        function changeValue() {
+            var value = document.getElementById("categorys");
+            let params = new URLSearchParams(location.search);
+            params.set("category", value.options[value.selectedIndex].value);
+            params.set("page", 1);
+            window.open(location.pathname + '?' + params, '_self');
+        }
+
+        function changeSort() {
+            var value = document.getElementById("sort");
+            let params = new URLSearchParams(location.search);
+            params.set("sort", value.options[value.selectedIndex].value);
+            params.set("page", 1);
+            window.open(location.pathname + '?' + params, '_self');
+        }
+
+        function changePage(page) {
+            let params = new URLSearchParams(location.search);
+            params.set("page", page);
+            window.open(location.pathname + '?' + params, '_self');
+        }
+
+        function searchParam(key) {
+          return new URLSearchParams(location.search).get(key);
+        }
+
+        const category = searchParam("category");
+        const sort = searchParam("sort")
+        if (category) {
+            $('#categorys').val(category).prop("selected",true);
+        }
+        if (sort) {
+            $('#sort').val(sort).prop("selected",true);
+        }
+    </script>
+{% endblock %}

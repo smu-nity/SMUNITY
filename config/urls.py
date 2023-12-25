@@ -20,11 +20,12 @@ from core import views
 
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('mypage/', include('core.urls')),
+    path('qna/', include('qna.urls')),
     path('api/', include('api.urls')),
     path('team/', views.team, name='team'),
-    path('', views.home, name='home'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
 ]

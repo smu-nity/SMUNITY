@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/terms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/board.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" media="screen">
+{% endblock %}
+{% block main_area %}
+    <div class="navbar-img">
+        <img class="navbar-img-image" src="{% static 'img/main.jpg' %}" />
+
+        <div class="navbar-img__text">
+            <span class="navbar-img__text--title">이용약관</span>
+            <span class="navbar-img__text--subtitle">상명대학교 청원 서비스 이용약관은</span>
+            <span class="navbar-img__text--subtitle">다음과 같은 내용을 담고 있습니다.</span>
+        </div>
+    </div>
+    <section id="cont_view" class="cs_wrap">
+        <div class="cs_tab">
+            <div class="tab div3">
+                <ul>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:terms' %}" class="on" title="현재">이용약관</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:privacy' %}">개인정보처리방침</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}">QnA 게시판</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="login-container" style="display: block; padding:100px 0 40px 0;">
+            <div class="white_sec">
+                <div class="container">
+                    <div class="info_box_wrapper">
+                        {% include "accounts/info.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
