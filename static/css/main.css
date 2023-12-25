@@ -1679,6 +1679,9 @@ body:not(.device-touch) .suc_btn
 .container {
     box-sizing: border-box;
 }
+.row>* {
+    box-sizing: border-box;
+}
 .form-readonly {
     background-color:rgb(248,249,250);
 }
@@ -1687,6 +1690,18 @@ body:not(.device-touch) .suc_btn
 }
 .modal-ul {
     padding: 0;
+}
+.form-check {
+    align-self: center;
+    margin-top: 0 !important;
+}
+.table-body__proceeding {
+    color: rgb(42, 80, 135);
+    font-weight: bold;
+}
+.table-body__complete {
+    color: rgb(191, 72, 84);
+    font-weight: bold;
 }
 @media screen and (max-width: 1024px) {
     .main-img {
@@ -1925,6 +1940,12 @@ body:not(.device-touch) .suc_btn
     }
     .popup_check {
         font-size: 0.8rem;
+    }
+}
+@media screen and (max-width: 575px){
+    .form-check {
+        padding: 1rem;
+        margin: 0.5rem 0 0 0.5rem !important;
     }
 }
 @media screen and (max-width: 400px) {
