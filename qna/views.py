@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+from accounts.models import Department
 from qna.decorators import superuser_required
 from qna.forms import QuestionForm, AnswerForm
 from qna.models import Question, Answer
@@ -112,7 +113,9 @@ def answer_delete(request, answer_id):
 
 
 def terms(request):
-    return render(request, 'qna/terms.html')
+    departments = Department.objects.filter(url__isnull=False)
+    dept_num = departments.count()
+    return render(request, 'qna/terms.html', {'departments': departments, 'dept_num': dept_num})
 
 
 def privacy(request):

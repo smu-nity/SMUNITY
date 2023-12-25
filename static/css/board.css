@@ -20,6 +20,7 @@
 .board .btn_wrap {margin-top:15px;}
 .board .b_write {display:inline-block; vertical-align:middle; width:100%; max-width:800px;}
 .board .b_write .form {padding-top:15px; border-top:#4c4c4c solid 2px; border-bottom:#efefef solid 1px;}
+.board {box-sizing: border-box;}
 
 @media all and (max-width:1000px) {
 	/* 게시판 */
