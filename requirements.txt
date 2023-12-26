@@ -21,3 +21,4 @@ psycopg2-binary==2.9.3
 mysqlclient==2.1.1
 djangorestframework==3.14.0
 sangmyung-univ-auth==1.1.1
+Markdown==3.4.1
