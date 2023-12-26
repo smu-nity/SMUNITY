@@ -12,9 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link fs-5 a_tag" href="https://docs.google.com/forms/d/1a5feD1i5Cg4Oaev01C5zv__iGSWvAW6UdjGqcyguSlI" target="_blank">
-                        피드백하기
-                    </a>
+                    <a class="nav-link fs-5 a_tag" href="{% url 'qna:terms' %}">이용안내</a>
                 </li>
                 {% if user.is_superuser %}
                     <li class="nav-item">

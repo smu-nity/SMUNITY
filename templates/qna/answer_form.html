@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+{% block main_area %}
+    <div class="navbar-img">
+        <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
+        <div class="navbar-img__text">
+            <span class="navbar-img__text--title">답변 등록</span>
+            <span class="navbar-img__text--subtitle">상명대학교 학우 여러분들의 의견에</span>
+            <span class="navbar-img__text--subtitle">귀를 기울이는 학생회가 되겠습니다.</span>
+        </div>
+    </div>
+    <div class="post_detail__body_container container my-3" style="margin-bottom: 3rem !important;">
+        <div class="post_detail__body-title border-bottom">
+            <h4 class="post_detail__title-title my-3 py-2">청원내용</h4>
+        </div>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="post_detail__body-text card-text">
+                    {{ question.content|mark }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-end" style="margin-bottom: 0.5rem;">
+                <div class="badge bg-light text-dark p-2 text-start">
+                    {{ question.author_name }}
+                </div>
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    {% if question.modify_date %}
+                        {{ question.modify_date_str }} (수정)
+                    {% else %}
+                        {{ question.create_date_str }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="post_detail__body-title border-bottom">
+            <h4 class="post_detail__title-title my-3 py-2">청원내용</h4>
+        </div>
+        <form method="post" class="my-3">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="mb-3">
+                <textarea class="form-control" name="content" id="content"
+                          rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+            </div>
+            <div class="button">
+                <button type="submit" class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #273295;">작성완료</button>
+                <button class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #343a40;" type="button" onclick="location.href='{% url 'qna:question_detail' question.id %}';">취소하기</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
