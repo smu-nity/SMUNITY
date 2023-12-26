@@ -7,11 +7,10 @@
 {% block main_area %}
     <div class="navbar-img">
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
-
         <div class="navbar-img__text">
-            <span class="navbar-img__text--title">QnA 게시판</span>
-            <span class="navbar-img__text--subtitle">상명대학교 제46대 총학생회 선[先]</span>
-            <span class="navbar-img__text--subtitle">QnA 게시판입니다.</span>
+            <span class="navbar-img__text--title">Q&A 게시판</span>
+            <span class="navbar-img__text--subtitle">상명대 졸업요건 검사 사이트</span>
+            <span class="navbar-img__text--subtitle">Q&A 게시판입니다.</span>
         </div>
     </div>
     <section id="cont_view" class="cs_wrap">
@@ -20,7 +19,7 @@
                 <ul>
                     <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:terms' %}">이용약관</a></li>
                     <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:privacy' %}">개인정보처리방침</a></li>
-                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}" class="on" title="현재">QnA 게시판</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}" class="on" title="현재">Q&A 게시판</a></li>
                 </ul>
             </div>
         </div>

@@ -96,6 +96,7 @@
     width: 100%;
     line-height: 58px;
 	color: #8e8e8e;
+	box-sizing: border-box;
 }
 .tab a:hover {
 	border-bottom: 5px solid var(--sangmyung);

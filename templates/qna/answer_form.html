@@ -4,7 +4,6 @@
 {% block main_area %}
     <div class="navbar-img">
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
-
         <div class="navbar-img__text">
             <span class="navbar-img__text--title">답변 등록</span>
             <span class="navbar-img__text--subtitle">상명대학교 학우 여러분들의 의견에</span>
@@ -45,8 +44,8 @@
                           rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
             </div>
             <div class="button">
-                <button type="submit" class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #273295;">작성 완료</button>
-                <button class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #343a40;" type="button" onclick="location.href='{% url 'qna:question_detail' question.id %}';">취소 하기</button>
+                <button type="submit" class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #273295;">작성완료</button>
+                <button class="btn btn-post_list btn-primary btn-lg rounded-pill" style="background-color: #343a40;" type="button" onclick="location.href='{% url 'qna:question_detail' question.id %}';">취소하기</button>
             </div>
         </form>
     </div>

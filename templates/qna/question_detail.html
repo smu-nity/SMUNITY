@@ -1,43 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load filter %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" media="screen">
-{% endblock %}
 {% block main_area %}
     <div class="navbar-img">
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}"/>
-
         <div class="navbar-img__text">
-            <span class="navbar-img__text--title">청원 게시판</span>
-            <span class="navbar-img__text--subtitle">상명대학교 학우 여러분들의 의견에</span>
-            <span class="navbar-img__text--subtitle">귀를 기울이는 학생회가 되겠습니다.</span>
+            <span class="navbar-img__text--title">Q&A 게시판</span>
+            <span class="navbar-img__text--subtitle">상명대 졸업요건 검사 사이트</span>
+            <span class="navbar-img__text--subtitle">Q&A 게시판입니다.</span>
         </div>
     </div>
-    <div>
-        <div class="post_detail__title_container container my-3">
-            <!-- message 표시 -->
-            {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'error' %}
-                <div class="alert alert-danger my-3" role="alert">
-                    <strong>{{ message.tags }}</strong>
-                    <ul><li>{{ message.message }}</li></ul>
-                </div>
-                {% endif %}
-            {% endfor %}
-            {% endif %}
-            <!-- 청원 -->
-            <div class="post_detail__title">
-                {% if question.answer_set.count == 0 %}
-                    <h4 class="py-2 post_detail__title-status table-body__proceeding" style="margin-bottom: 0;">[접수]</h4>
-                {% else %}
-                    <h4 class="py-2 post_detail__title-status table-body__complete" style="margin-bottom: 0;">[답변완료]</h4>
-                {% endif %}
-                <h3 class="py-2 post_detail__title-title" style="text-align: center; margin-top: 16px; margin-bottom: 0;">{{ question.subject }}</h3>
+    <div class="post_detail__title_container container my-3">
+        <!-- message 표시 -->
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger my-3" role="alert">
+                <strong>{{ message.tags }}</strong>
+                <ul><li>{{ message.message }}</li></ul>
             </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="post_detail__title">
+            {% if question.answer_set.count == 0 %}
+                <h4 class="py-2 post_detail__title-status table-body__proceeding" style="margin-bottom: 0;">[접수]</h4>
+            {% else %}
+                <h4 class="py-2 post_detail__title-status table-body__complete" style="margin-bottom: 0;">[답변완료]</h4>
+            {% endif %}
+            <h3 class="py-2 post_detail__title-title" style="text-align: center; margin-top: 16px; margin-bottom: 0;">{{ question.subject }}</h3>
         </div>
-
+    </div>
     <div class="post_detail__body_container container my-3" style="margin-bottom: 3rem !important;">
         <div class="post_detail__body-title border-bottom">
             <h4 class="post_detail__title-title my-3 py-2">청원내용</h4>

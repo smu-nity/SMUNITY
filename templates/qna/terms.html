@@ -7,7 +7,6 @@
 {% block main_area %}
     <div class="navbar-img">
         <img class="navbar-img-image" src="{% static 'img/home.jpg' %}" />
-
         <div class="navbar-img__text">
             <span class="navbar-img__text--title">이용약관</span>
             <span class="navbar-img__text--subtitle">상명대 졸업요건 검사 사이트 이용약관은</span>
@@ -20,7 +19,7 @@
                 <ul>
                     <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:terms' %}" class="on" title="현재">이용약관</a></li>
                     <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:privacy' %}">개인정보처리방침</a></li>
-                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}">QnA 게시판</a></li>
+                    <li class="motion fadeInLeft visible" data-animation="fadeInLeft"><a href="{% url 'qna:question_list' %}">Q&A 게시판</a></li>
                 </ul>
             </div>
         </div>
