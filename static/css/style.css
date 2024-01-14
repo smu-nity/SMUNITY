@@ -1787,6 +1787,12 @@ body:not(.device-touch) .suc_btn
     font-weight: 300;
     font-size: 1rem;
 }
+.form-font {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+.h4-font {
+    font-size: calc(1.275rem + .3vw);
+}
 @media screen and (max-width: 1024px) {
     .main-img {
         justify-content: center;

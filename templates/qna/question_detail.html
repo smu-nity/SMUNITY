@@ -24,16 +24,16 @@
         {% endif %}
         <div class="post_detail__title">
             {% if question.answer_set.count == 0 %}
-                <h4 class="py-2 post_detail__title-status table-body__proceeding" style="margin-bottom: 0;">[접수]</h4>
+                <h4 class="py-2 post_detail__title-status table-body__proceeding h4-font" style="margin-bottom: 0;">[접수]</h4>
             {% else %}
-                <h4 class="py-2 post_detail__title-status table-body__complete" style="margin-bottom: 0;">[답변완료]</h4>
+                <h4 class="py-2 post_detail__title-status table-body__complete h4-font" style="margin-bottom: 0;">[답변완료]</h4>
             {% endif %}
             <h3 class="py-2 post_detail__title-title" style="text-align: center; margin-top: 16px; margin-bottom: 0;">{{ question.subject }}</h3>
         </div>
     </div>
     <div class="post_detail__body_container container my-3" style="margin-bottom: 3rem !important;">
         <div class="post_detail__body-title border-bottom">
-            <h4 class="post_detail__title-title my-3 py-2">청원내용</h4>
+            <h4 class="post_detail__title-title my-3 py-2 h4-font">질문</h4>
             <div class="post_detail__body-title--button">
                 {% if request.user.is_superuser and not answer %}
                     <a href="{% url 'qna:answer_create' question.pk %}" class="btn btn-sm btn-primary">답변 등록</a>
@@ -67,7 +67,7 @@
 
         {% if answer %}
             <div class="post_detail__body-title border-bottom">
-                <h4 class="post_detail__title-title my-3 py-2">답변내용</h4>
+                <h4 class="post_detail__title-title my-3 py-2 h4-font">답변</h4>
                 <div class="post_detail__body-title--button">
                     {% if request.user.is_superuser %}
                         <a href="{% url 'qna:answer_modify' answer.id  %}" class="btn btn-sm btn btn-warning">수정</a>
