@@ -1,4 +1,4 @@
-# SMUNITY ![Python versions](https://img.shields.io/badge/Python-3.9-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/badge/release-1.4.2-red)
+# SMUNITY ![Python versions](https://img.shields.io/badge/Python-3.9-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/badge/release-1.5.0-red)
 #### 상명대학교 졸업요건 검사 사이트
 
 ![SMUNITY](https://github.com/smu-nity/SMUNITY/assets/63601183/f1e9be66-3894-42f7-a3a7-b730e8066a58)
