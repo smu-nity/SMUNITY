@@ -35,14 +35,11 @@ def major(dept, url):
     soup = bs(source, "html.parser")
     datas = soup.find_all('tr')[1:]
     for data in datas:
-        subject = data.find_all('td')[:4]
-        number = subject[3].text
-        try:
-            sub = Subject.objects.get(number=number)
-            Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text,
-                                 type=subject[2].text)
-        except:
-            print(number)
+        subject = data.find_all('td')
+        number, name = subject[3].text, subject[4].text.split('/')[1]
+        credit, type = int(float(subject[5].text)), subject[2].text
+        sub, _ = Subject.objects.get_or_create(number=number, defaults={'name': name, 'credit': credit, 'dept': dept.name, 'type': type})
+        Major.objects.create(department=dept, subject=sub, grade=subject[0].text, semester=subject[1].text, type=subject[2].text)
 
 
 # 학년도 업데이트 스크립트
@@ -143,85 +140,6 @@ def culture_s():
                 print(number)
 
 
-# 컴퓨터과학과 전공 과목 업데이트 스크립트
-def major_cs():
-    dept = Department.objects.get(name='컴퓨터과학전공')
-    subjects = [
-        {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HASW0001', 'HAEA9225', 'HAEA9237', 'HAFL7001']},
-        {'grade': '1학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HASW0002', 'HAEA0032', 'HAEA9226', 'HAFL0012']},
-        {'grade': '2학년', 'semester': '1학기', 'type': '1전선',
-         'numbers': ['HAEA0001', 'HAEA0017', 'HAEA0027', 'HAEA9236', 'HAEA9241', 'HAFL0002']},
-        {'grade': '2학년', 'semester': '2학기', 'type': '1전선',
-         'numbers': ['HAEA0002', 'HAEA0003', 'HAEA0010', 'HAEA9227', 'HAEZ0002', 'HAEZ0004']},
-        {'grade': '3학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAEA0005', 'HAEA9239', 'HAEA9243']},
-        {'grade': '3학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAEA0004', 'HAEA0008', 'HAEA0012', 'HAEZ0003']},
-        {'grade': '3학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAEA0013', 'HAEA9002', 'HAEA9213']},    # HAEA9244
-        {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAEA0011', 'HAEA0014', 'HAEA9228', 'HAGH0030']},
-        {'grade': '4학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAEA0020', 'HAEA9229', 'HAEA9240']},
-        {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAEA0026', 'HAEA9231']},
-    ]
-    for subject in subjects:
-        numbers = subject['numbers']
-        for number in numbers:
-            try:
-                sub = Subject.objects.get(number=number)
-                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
-            except:
-                print(number)
-
-
-# 경영학부 전공 과목 업데이트 스크립트
-def major_biz():
-    dept = Department.objects.get(name='경영학부')
-    subjects = [
-        {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAFB0002']},
-        {'grade': '1학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAFC0001']},
-        {'grade': '2학년', 'semester': '1학기', 'type': '1전선',
-         'numbers': ['HAAE0010', 'HAAE1122', 'HAAE2131', 'HAAE3211']},
-        {'grade': '2학년', 'semester': '2학기', 'type': '1전선',
-         'numbers': ['HAAE0006', 'HAAE9003']},
-        {'grade': '3학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAE6005', 'HAAE9226']},
-        {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAAE6008']},
-        {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAE9008', 'HAAE9213', 'HAAE9225']},
-    ]
-    for subject in subjects:
-        numbers = subject['numbers']
-        for number in numbers:
-            try:
-                sub = Subject.objects.get(number=number)
-                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
-            except:
-                print(number)
-
-
-# 글로벌경영학과 전공 과목 업데이트 스크립트
-def major_gbiz():
-    dept = Department.objects.get(name='글로벌경영학과')
-    subjects = [
-        {'grade': '1학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM9213', 'HAFB0004']},
-        {'grade': '1학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM0008', 'HAAM5003']},
-        {'grade': '2학년', 'semester': '1학기', 'type': '1전선',
-         'numbers': ['HAAM0013', 'HAAM5005', 'HAAM6003', 'HAAM9212', 'HAAM9219', 'HAAM9220', 'HAAM9221']},
-        {'grade': '2학년', 'semester': '2학기', 'type': '1전선',
-         'numbers': ['HAAM0009', 'HAAM0014', 'HAAM2031', 'HAAM9210', 'HAAM9214', 'HAAM9218', 'HAAM9222', 'HAAM9223', 'HAFU0028']},
-        {'grade': '3학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM3001', 'HAAM9003', 'HAAM5003']},
-        {'grade': '3학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAM0003']},    # 강소기업전략론
-        {'grade': '3학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM0001', 'HAAM0004', 'HAAM0021', 'HAAM6001', 'HAAM9201']},
-        {'grade': '3학년', 'semester': '2학기', 'type': '1전심', 'numbers': ['HAAM0007', 'HAAM7001', 'HAAM9004', 'HAAM0019']},
-        {'grade': '4학년', 'semester': '1학기', 'type': '1전선', 'numbers': ['HAAM0005', 'HAAM5009', 'HAAM7002', 'HAAM9211']},
-        {'grade': '4학년', 'semester': '1학기', 'type': '1전심', 'numbers': ['HAAM0012', 'HAAM6002', 'HAAM9006']},
-        {'grade': '4학년', 'semester': '2학기', 'type': '1전선', 'numbers': ['HAAM9005', 'HAAM9215', 'HAAM9216', 'HAAM9217']},
-    ]
-    for subject in subjects:
-        numbers = subject['numbers']
-        for number in numbers:
-            try:
-                sub = Subject.objects.get(number=number)
-                Major.objects.create(department=dept, subject=sub, grade=subject['grade'], semester=subject['semester'], type=subject['type'])
-            except:
-                print(number)
-
-
 # 전공 과목 업데이트 스크립트
 def majors():
     departments = Department.objects.all()
@@ -243,11 +161,9 @@ def subjects_all():
 
 
 if __name__ == '__main__':
-    subjects_all()
+    # subjects_all()
     # year()
     # departments()
-    # majors()
-    # major_biz()
-    # major_gbiz()
+    majors()
     # culture_e()
     # culture_s()

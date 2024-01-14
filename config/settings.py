@@ -151,6 +151,7 @@ CULTURES_DIC = [['사고와표현'], ['English', '영어', '수학', '미적분�
 DEPT_DIC = {'융합전자공학전공': '지능IOT융합전공', '지능·데이터융합학부': '핀테크전공'}
 CATEGORY_CHOICES = ((1, "학사"), (2, "등록/장학"), (3, "학생생활"), (4, "진로취업"), (5, "기타"))
 STATUS_CHOICES = ((1, "진행중"), (2, "답변대기"), (3, "답변완료"), (4, "만료"), (5, "반려"))
+DATA_UPLOAD_MAX_NUMBER_FIELDS = os.environ.get('UPLOAD_MAX', 5000)
 
 # 로깅설정
 LOGGING = {
