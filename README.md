@@ -1,4 +1,5 @@
-# SMUNITY ![Python versions](https://img.shields.io/badge/Python-3.9-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/badge/release-1.5.1-red)
+# SMUNITY ![Python versions](https://img.shields.io/badge/Python-3.9-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/badge/release-1.5.2-red)
+
 #### 상명대학교 졸업요건 검사 사이트
 
 ![SMUNITY](https://github.com/smu-nity/SMUNITY/assets/63601183/f1e9be66-3894-42f7-a3a7-b730e8066a58)
@@ -12,7 +13,7 @@
 * #### Backend
   <img src="https://img.shields.io/badge/Python-3.9-3776AB?style=round-square&logo=Python&logoColor=white"/>
   <img src="https://img.shields.io/badge/Django-4.1.5-092E20?style=round-square&logo=Django&logoColor=white"/>
-  
+
 * #### Frontend
   <img src="https://img.shields.io/badge/HTML-E34F26?style=round-square&logo=HTML5&logoColor=white"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=round-square&logo=JavaScript&logoColor=white"/>
