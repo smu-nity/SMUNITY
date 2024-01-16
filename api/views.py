@@ -12,3 +12,13 @@ def authenticate(request):
         res = status.HTTP_200_OK if result.is_auth else status.HTTP_401_UNAUTHORIZED
         return Response(result._asdict(), status=res)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def userinfo(request):
+    if 'username' and 'password' in request.data:
+        username, password = request.data['username'], request.data['password']
+        result = auth(username, password)
+        res = status.HTTP_200_OK if result.is_auth else status.HTTP_401_UNAUTHORIZED
+        return Response(result.body, status=res)
+    return Response(status=status.HTTP_400_BAD_REQUEST)

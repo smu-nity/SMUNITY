@@ -5,4 +5,5 @@ app_name = 'api'
 
 urlpatterns = [
     path('auth', views.authenticate, name='authenticate'),
+    path('userinfo', views.userinfo, name='userinfo'),
 ]
