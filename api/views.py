@@ -22,8 +22,9 @@ def courses(request):
     if serializer.is_valid():
         username, password = serializer.validated_data['username'], serializer.validated_data['password']
         result = completed_courses(username, password)
-        status_code = status.HTTP_200_OK if result.is_auth else status.HTTP_401_UNAUTHORIZED
-        return Response(filter_data(result.body), status=status_code)
+        if result.is_auth:
+            return Response(filter_data(result.body), status=status.HTTP_200_OK)
+        return Response(result.body, status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
