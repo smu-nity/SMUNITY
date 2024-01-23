@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import check_password
 from sangmyung_univ_auth import completed_courses
 
 from accounts.models import Profile, Department, Statistics
-from config.settings import CULTURES, CULTURES_DIC
+from config.settings import CULTURES_1, CULTURES_2, CULTURES_DIC1, CULTURES_DIC2
 from core.models import Course
 from graduations.models import Subject, Major
 import logging
@@ -156,10 +156,9 @@ def course_update_excel(request):
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
     courses = Course.objects.filter(user=request.user)
-    culture_b = CULTURES
-    culture_dic = CULTURES_DIC
-
-    cnt = 0
+    cnt, check = 0, int(profile.year.year) < 2020
+    culture_b = CULTURES_1 if check else CULTURES_2
+    culture_dic = CULTURES_DIC1 if check else CULTURES_DIC2
     for culture, dics in zip(culture_b, culture_dic):
         q = Q()
         for key in dics:
