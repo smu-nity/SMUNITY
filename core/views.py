@@ -155,6 +155,9 @@ def course_update_excel(request):
 @login_required
 def result(request):
     profile = get_object_or_404(Profile, user=request.user)
+    if not profile.year.all:
+        messages.error(request, '⚠️ 서비스에서 지원하지 않는 학번 입니다.')
+        return redirect('core:mypage')
     courses = Course.objects.filter(user=request.user)
     cnt, check = 0, int(profile.year.year) < 2020
     culture_b = CULTURES_1 if check else CULTURES_2
@@ -168,7 +171,6 @@ def result(request):
         culture['course'] = course
         if course:
             cnt += 1
-
     context = {
         'profile': profile, 'major_i': Major.objects.filter(department=profile.department, type='1전심').exclude(subject_id__in=courses.values_list('subject', flat=True)),
         'major_s': Major.objects.filter(department=profile.department, type='1전선').exclude(subject_id__in=courses.values_list('subject', flat=True)), 'culture_b': culture_b, 'culture_cnt': cnt,
