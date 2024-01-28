@@ -163,6 +163,7 @@ def result(request):
         q = Q()
         for key in dics:
             q |= Q(domain__contains=key)
+        q = q & Q(user=request.user)
         course = Course.objects.filter(q)
         culture['course'] = course
         if course:
