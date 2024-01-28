@@ -103,11 +103,11 @@ def departments():
 # 상명핵심역량교양 과목 업데이트 스크립트
 def culture_e():
     dic = {
-        '전문지식탐구역량': ['HALF9398', 'HALF9408', 'HALR1269'],   # HALF9425, HALF9426
-        '창의적문제해결역량': ['HALF9427', 'HALR1040', 'HALR1230'],  # HALF9428
-        '융복합역량': ['HALF9429', 'HALF9432', 'HALR1271'],  # HALF9430, HALF9431
-        '다양성존중역량': ['HALF9435'],    # HALF9433, HALF9434, HALF9436
-        '윤리실천역량': ['HALF9404', 'HALF9438', 'HALR1038']  # HALF9437
+        '전문지식탐구역량': ['HALF9398', 'HALF9408', 'HALF9425', 'HALR1269'],
+        '창의적문제해결역량': ['HALF9427', 'HALR1040', 'HALR1230', 'HALR1270'],
+        '융복합역량': ['HALF9429', 'HALF9431', 'HALF9432', 'HALR1271'],
+        '다양성존중역량': ['HALF9433', 'HALF9434', 'HALF9435', 'HALF9436'],
+        '윤리실천역량': ['HALF9404', 'HALF9437', 'HALF9438', 'HALR1038']
     }
     types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_E))
     for type in types:
@@ -123,11 +123,11 @@ def culture_e():
 # 균형교양 과목 업데이트 스크립트
 def culture_s():
     dic = {
-        '인문': ['HALF0102', 'HALF0122', 'HALF0202', 'HALF0302', 'HALF9013', 'HALF9014', 'HALF9015', 'HALF9302', 'HALF9305', 'HALF9338', 'HALF9358', 'HALF9374'],     # HALF9439
-        '사회': ['HALF4033', 'HALF5013', 'HALF9030', 'HALF9031', 'HALF9245', 'HALF9266', 'HALF9280', 'HALF9320', 'HALF9343', 'HALF9440', 'HALR1041', 'HALR1235'],     # HALF0447, HALF9037, HALF9326, HALF9379, HALF9421
-        '자연': ['HALF0502', 'HALF0537', 'HALF9041', 'HALF9239', 'HALF9252', 'HALF9362', 'HALF9403'],     # HALF9321, HALF9378
-        '공학': ['HALF6024', 'HALF9319', 'HALF9329', 'HALF9405', 'HALF9420', 'HALF9441'],
-        '예술': ['HALF0601', 'HALF6071', 'HALF6072', 'HALF7023', 'HALF9061', 'HALF9356']      # HALF0628
+        '인문': ['HALF0102', 'HALF0122', 'HALF0202', 'HALF0302', 'HALF9014', 'HALF9302', 'HALF9305', 'HALF9338', 'HALF9340', 'HALF9358', 'HALF9374', 'HALF9439'],
+        '사회': ['HALF0447', 'HALF4033', 'HALF5013', 'HALF9030', 'HALF9031', 'HALF9245', 'HALF9266', 'HALF9280', 'HALF9320', 'HALF9326', 'HALF9343', 'HALF9379', 'HALF9440', 'HALR1041'],
+        '자연': ['HALF0502', 'HALF0537', 'HALF9041', 'HALF9239', 'HALF9252', 'HALF9321', 'HALF9362', 'HALF9403'],
+        '공학': ['HALF9319', 'HALF9329', 'HALF9405', 'HALF9441'],
+        '예술': ['HALF0601', 'HALF0628', 'HALF6071', 'HALF6072', 'HALF7023', 'HALF9061', 'HALF9356']      # HALF0628
     }
     types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
     for type in types:
@@ -164,6 +164,6 @@ if __name__ == '__main__':
     # subjects_all()
     # year()
     # departments()
-    majors()
-    # culture_e()
-    # culture_s()
+    # majors()
+    culture_e()
+    culture_s()
