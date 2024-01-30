@@ -82,35 +82,37 @@
                 </div>
             </div>
             <!-- 전공심화 -->
-            <div class="resultbox">
-                <div class="result_name">
-                    <i class="fa-solid fa-pen"></i> &nbsp;전공심화
-                    <div class="recommend" onclick="info_in(this)" open="modal-major-i">추천 과목 보기</div>
-                </div>
-                <div class="result_container">
-                    <div class="result_content">
-                        <div class="result_content_number">{{ profile.year.major_i }}</div>
-                        <div class="result_content_info">총 기준 학점</div>
+            {% if profile.department.pk != 28 %}
+                <div class="resultbox">
+                    <div class="result_name">
+                        <i class="fa-solid fa-pen"></i> &nbsp;전공심화
+                        <div class="recommend" onclick="info_in(this)" open="modal-major-i">추천 과목 보기</div>
                     </div>
-                    <div class="result_content">
-                        <div class="result_content_number count" data-count="{{ subjects_major_i|zero_filter }}" style="border-right: 2px solid lightgray;"></div>
-                        <div class="result_content_info">총 이수 학점</div>
-                    </div>
-                    <div class="result_content">
-                        <div class="result_content_number count rednumber" data-count="{{ profile.year.major_i|sub:subjects_major_i }}"></div>
-                        <div class="result_content_info" >필요 학점</div>
-                    </div>
-                    <div class="result_content">
-                        <div class="pie-chart">
-                            <div class="pie-chart-color pie-major-i">
-                                <div class="pie-chart-inner">
-                                    <span class="center percent" percent="{{ subjects_major_i|div:profile.year.major_i }}"></span>
+                    <div class="result_container">
+                        <div class="result_content">
+                            <div class="result_content_number">{{ profile.year.major_i }}</div>
+                            <div class="result_content_info">총 기준 학점</div>
+                        </div>
+                        <div class="result_content">
+                            <div class="result_content_number count" data-count="{{ subjects_major_i|zero_filter }}" style="border-right: 2px solid lightgray;"></div>
+                            <div class="result_content_info">총 이수 학점</div>
+                        </div>
+                        <div class="result_content">
+                            <div class="result_content_number count rednumber" data-count="{{ profile.year.major_i|sub:subjects_major_i }}"></div>
+                            <div class="result_content_info" >필요 학점</div>
+                        </div>
+                        <div class="result_content">
+                            <div class="pie-chart">
+                                <div class="pie-chart-color pie-major-i">
+                                    <div class="pie-chart-inner">
+                                        <span class="center percent" percent="{{ subjects_major_i|div:profile.year.major_i }}"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
             <!-- 전공선택 -->
             <div class="resultbox">
                 <div class="result_name">
@@ -119,7 +121,7 @@
                 </div>
                 <div class="result_container">
                     <div class="result_content">
-                        <div class="result_content_number">{{ profile.year.major_s }}</div>
+                        <div class="result_content_number">{{ profile.credit_major_s }}</div>
                         <div class="result_content_info test">총 기준 학점</div>
                     </div>
                     <div class="result_content">
@@ -127,14 +129,14 @@
                         <div class="result_content_info">총 이수 학점</div>
                     </div>
                     <div class="result_content">
-                        <div class="result_content_number count rednumber" data-count="{{ profile.year.major_s|sub:subjects_major_s|zero_filter }}"></div>
+                        <div class="result_content_number count rednumber" data-count="{{ profile.credit_major_s|sub:subjects_major_s|zero_filter }}"></div>
                         <div class="result_content_info">필요 학점</div>
                     </div>
                     <div class="result_content">
                         <div class="pie-chart">
                             <div class="pie-chart-color pie-major-s">
                                 <div class="pie-chart-inner">
-                                    <span class="center percent" percent = "{{ subjects_major_s|div:profile.year.major_s }}"></span>
+                                    <span class="center percent" percent = "{{ subjects_major_s|div:profile.credit_major_s }}"></span>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +234,7 @@
             </div>
 
             <!-- 균형교양 -->
-            {% if profile.department.name != "융합경영학과" %}
+            {% if profile.department.pk != 28 %}
                 <div class="resultbox">
                     <div class="result_name">
                         <i class="fa-solid fa-book-journal-whills"></i> &nbsp;균형교양
@@ -355,10 +357,10 @@
                     </div>
                     {% endif %}
                     <div class="partdiv">
-                        {% if subjects_major_s|div:profile.year.major_s == 100 %}
+                        {% if subjects_major_s|div:profile.credit_major_s == 100 %}
                             <span style="color:#17a55e">기준 학점을 만족했습니다.</span>
                         {% else %}
-                            <span style="color:#d32f2f">{{ profile.year.major_s|sub:subjects_major_s }} 학점이 부족합니다.</span>
+                            <span style="color:#d32f2f">{{ profile.credit_major_s|sub:subjects_major_s }} 학점이 부족합니다.</span>
                         {% endif %}
                     </div>
                 </div>
@@ -480,8 +482,7 @@
             </div>
         </div>
         <!-- 균형교양 -->
-        {% if profile.department.name != "융합경영학과" %}
-            <div id="modal-culture-s" class="modal">
+        <div id="modal-culture-s" class="modal">
                 <div class="update_modal_content modal-scroll" style="max-height: 75%;">
                     <span class="close" id="close-culture-s" onclick="modal_close(this)" close="modal-culture-s">&times;</span>
                     <br>
@@ -543,7 +544,6 @@
                     </div>
                 </div>
             </div>
-        {% endif %}
     </div>
 {% endblock %}
 
@@ -554,7 +554,7 @@
         draw(Number({{ subjects_all|div:profile.year.all }}), '.pie-all', '#6188E8');
         draw(Number({{ subjects_all|div:profile.year.all }}), '.pie-all-mobile', '#6188E8');
         draw(Number({{ subjects_major_i|div:profile.year.major_i }}), '.pie-major-i', '#6188E8');
-        draw(Number({{ subjects_major_s|div:profile.year.major_s }}), '.pie-major-s', '#6188E8');
+        draw(Number({{ subjects_major_s|div:profile.credit_major_s }}), '.pie-major-s', '#6188E8');
         draw(Number({{ subjects_culture|div:profile.year.culture }}), '.pie-culture', '#6188E8');
         draw(Number({{ culture_cnt|div:profile.year.culture_cnt }}), '.pie-culture-b', '#6188E8');
         draw(Number({{ subjects_culture_e.cnt|div:2 }}), '.pie-culture-e', '#6188E8');
