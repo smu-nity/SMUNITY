@@ -88,6 +88,8 @@ class Profile(models.Model):    # 사용자 프로필
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context
 
+    def credit_major_s(self):
+        return self.year.major_s if self.department.pk != 28 else 60
 
 class LoginHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # 장고 유저
