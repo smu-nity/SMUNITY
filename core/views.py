@@ -67,13 +67,16 @@ def course_update(request):
             # 기이수과목 추가
             subjects = result.body
             for sub in subjects:
-                subject, _ = Subject.objects.get_or_create(number=sub['SBJ_NO'], defaults={'name': sub['SBJ_NM'], 'credit': sub['CDT'], 'dept': '커스텀', 'type': sub['CMP_DIV_NM']})
-                domain = sub['CULT_ARA_NM']
-                if domain == '*':
-                    domain = None
-                if sub['GRD_NM'] != 'F':
-                    if not Course.objects.filter(user=request.user, subject=subject):
-                        Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
+                try:
+                    subject, _ = Subject.objects.get_or_create(number=sub['SBJ_NO'], defaults={'name': sub['SBJ_NM'], 'credit': sub['CDT'], 'dept': '커스텀', 'type': sub['CMP_DIV_NM']})
+                    domain = sub['CULT_ARA_NM']
+                    if domain == '*':
+                        domain = None
+                    if sub['GRD_NM'] != 'F':
+                        if not Course.objects.filter(user=request.user, subject=subject):
+                            Course.objects.create(user=request.user, subject=subject, year=sub['SCH_YEAR'], semester=sub['SMT_NM'], credit=sub['CDT'], type=sub['CMP_DIV_NM'], domain=domain)
+                except:
+                    logger.error(f'[ERROR] {sub}')
             messages.error(request, '기이수과목이 업데이트 되었습니다.')
             return redirect('core:result')
         messages.error(request, '⚠️ 샘물 포털 ID/PW를 다시 확인하세요! (Caps Lock 확인)')
