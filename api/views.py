@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from sangmyung_univ_auth import auth, completed_courses
+from sangmyung_univ_auth import auth, completed_courses, auth_detail
 
 from api.serializers import UserSerializer
 
@@ -13,7 +13,7 @@ def authenticate(request):
 
 @api_view(['POST'])
 def userinfo(request):
-    return authenticate_user(request, response_body=False)
+    return authenticate_user(request, is_detail=True)
 
 
 @api_view(['POST'])
@@ -28,13 +28,14 @@ def courses(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def authenticate_user(request, response_body=True):
+def authenticate_user(request, is_detail=False):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         username, password = serializer.validated_data['username'], serializer.validated_data['password']
-        result = auth(username, password)
+        func = auth_detail if is_detail else auth
+        result = func(username, password)
         status_code = status.HTTP_200_OK if result.is_auth else status.HTTP_401_UNAUTHORIZED
-        return Response(result._asdict() if response_body else result.body, status=status_code)
+        return Response(result.body if is_detail else result._asdict(), status=status_code)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
