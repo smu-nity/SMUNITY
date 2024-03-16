@@ -78,12 +78,10 @@ class Profile(models.Model):    # 사용자 프로필
         types = SUBTYPE_CHOICES_1.copy() if year < 2024 else SUBTYPE_CHOICES_2.copy()
         dtype = '자연/공학' if year >= 2024 and dtype in ['자연', '공학'] else dtype
         types.remove(dtype)
+        base = Q(user=self.user) & Q(domain__contains='균형')
         for type in types:
             dtypes = type.split('/')
-            if len(dtypes) < 2:
-                subjects = Course.objects.filter(Q(user=self.user) & Q(domain__contains='균형') & Q(domain__contains=type))
-            else:
-                subjects = Course.objects.filter(Q(user=self.user) & Q(domain__contains='균형') & (Q(domain__contains=dtypes[0]) | Q(domain__contains=dtypes[1])))
+            subjects = Course.objects.filter(base & Q(domain__contains=type)) if len(dtypes) < 2 else Course.objects.filter(base & (Q(domain__contains=dtypes[0]) | Q(domain__contains=dtypes[1])))
             cultures.append({'type': type, 'subjects': subjects})
             if subjects:
                 cnt += 1
