@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from config.settings import SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
+from config.settings import SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E, SUBTYPE_CHOICES_1, SUBTYPE_CHOICES_2
 
 
 class Year(models.Model):   # 학년도 테이블
@@ -73,18 +73,24 @@ class Profile(models.Model):    # 사용자 프로필
     def subjects_culture_s(self):
         from core.models import Course
         cnt = 0
+        dtype, year = self.department.type,  int(self.year.year)
         cultures, subs = [], []
-        types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
-        types.remove(self.department.type)
-
+        types = SUBTYPE_CHOICES_1.copy() if year < 2024 else SUBTYPE_CHOICES_2.copy()
+        dtype = '자연/공학' if year >= 2024 and dtype in ['자연', '공학'] else dtype
+        types.remove(dtype)
         for type in types:
-            subjects = Course.objects.filter(Q(user=self.user)&Q(domain__contains=type)&Q(domain__contains='균형'))
+            dtypes = type.split('/')
+            if len(dtypes) < 2:
+                subjects = Course.objects.filter(Q(user=self.user) & Q(domain__contains='균형') & Q(domain__contains=type))
+            else:
+                subjects = Course.objects.filter(Q(user=self.user) & Q(domain__contains='균형') & (Q(domain__contains=dtypes[0]) | Q(domain__contains=dtypes[1])))
             cultures.append({'type': type, 'subjects': subjects})
             if subjects:
                 cnt += 1
             else:
                 from graduations.models import Culture
-                subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
+                cults = Culture.objects.filter(subdomain=type) if len(dtypes) < 2 else Culture.objects.filter(Q(subdomain__contains=dtypes[0]) | Q(subdomain__contains=dtypes[1]))
+                subs.append({'type': type, 'cultures': cults})
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context
 
