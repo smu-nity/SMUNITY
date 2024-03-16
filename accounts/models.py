@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Q
-from config.settings import SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E
+from config.settings import SUBTYPE_CHOICES_S, COLLEGE_CHOICES, SUBTYPE_CHOICES_E, SUBTYPE_CHOICES_1, SUBTYPE_CHOICES_2
 
 
 class Year(models.Model):   # 학년도 테이블
@@ -19,7 +19,7 @@ class Year(models.Model):   # 학년도 테이블
 class Department(models.Model):     # 학과 테이블
     college = models.CharField(max_length=20, choices=COLLEGE_CHOICES)  # 소속 단과대
     name = models.CharField(max_length=20)  # 학과 이름
-    type = models.CharField(max_length=2, choices=SUBTYPE_CHOICES_S)    # 균교 타입
+    type = models.CharField(max_length=3, choices=SUBTYPE_CHOICES_S)    # 균교 타입
     url = models.CharField(max_length=250, null=True, blank=True)       # 학과 교육과정 url
     def __str__(self):
         return f'[{self.college}] {self.name}'
@@ -73,18 +73,22 @@ class Profile(models.Model):    # 사용자 프로필
     def subjects_culture_s(self):
         from core.models import Course
         cnt = 0
+        dtype, year = self.department.type,  int(self.year.year)
         cultures, subs = [], []
-        types = list(map((lambda x: x[0]), SUBTYPE_CHOICES_S))
-        types.remove(self.department.type)
-
+        types = SUBTYPE_CHOICES_1.copy() if year < 2024 else SUBTYPE_CHOICES_2.copy()
+        dtype = '자연/공학' if year >= 2024 and dtype in ['자연', '공학'] else dtype
+        types.remove(dtype)
+        base = Q(user=self.user) & Q(domain__contains='균형')
         for type in types:
-            subjects = Course.objects.filter(Q(user=self.user)&Q(domain__contains=type)&Q(domain__contains='균형'))
+            dtypes = type.split('/')
+            subjects = Course.objects.filter(base & Q(domain__contains=type)) if len(dtypes) < 2 else Course.objects.filter(base & (Q(domain__contains=dtypes[0]) | Q(domain__contains=dtypes[1])))
             cultures.append({'type': type, 'subjects': subjects})
             if subjects:
                 cnt += 1
             else:
                 from graduations.models import Culture
-                subs.append({'type': type, 'cultures': Culture.objects.filter(subdomain=type)})
+                cults = Culture.objects.filter(subdomain=type) if len(dtypes) < 2 else Culture.objects.filter(Q(subdomain__contains=dtypes[0]) | Q(subdomain__contains=dtypes[1]))
+                subs.append({'type': type, 'cultures': cults})
         context = {'cnt': cnt, 'cultures': cultures, 'subjects': subs}
         return context
 
