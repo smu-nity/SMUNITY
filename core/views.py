@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Q, Sum
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
@@ -21,7 +22,7 @@ def home(request):
     dept_num, today = departments.count(), datetime.date.today()
     st, _ = Statistics.objects.get_or_create(date=today)
     visit_total = Statistics.objects.aggregate(Sum('visit_count'))['visit_count__sum']
-    user_num = format(Profile.objects.all().count(), ',')
+    user_num = format(User.objects.all().count(), ',')
     visit_total, visit_today = format(visit_total, ','), format(st.visit_count, ',')
     response = render(request, 'core/head.html', {'departments': departments, 'dept_num': dept_num, 'user_num': user_num, 'visit_total': visit_total, 'visit_today': visit_today})
     if request.COOKIES.get('is_visit') is None:
