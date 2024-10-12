@@ -194,3 +194,7 @@ def member_del(request):
 
 def team(request):
     return render(request,  'core/team.html')
+
+
+def statistics(request):
+    return render(request,  'core/statistics.html')

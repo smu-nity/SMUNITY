@@ -27,5 +27,6 @@ urlpatterns = [
     path('qna/', include('qna.urls')),
     path('api/', include('api.urls')),
     path('team/', views.team, name='team'),
+    path('statistics/', views.statistics, name='statistics'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
 ]
