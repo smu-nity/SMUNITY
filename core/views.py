@@ -32,10 +32,6 @@ def home(request):
     return response
 
 
-def team(request):
-    return render(request, 'core/team.html')
-
-
 @login_required
 def mypage(request):
     user = request.user
@@ -194,3 +190,7 @@ def member_del(request):
             return redirect('home')
     messages.error(request, '⚠️ 비밀번호가 일치하지 않습니다.')
     return redirect('core:mypage')
+
+
+def team(request):
+    return render(request,  'core/team.html')
