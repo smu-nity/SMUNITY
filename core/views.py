@@ -1,10 +1,12 @@
-import datetime
+from datetime import datetime, date
 import json
+from itertools import accumulate
+
 import pandas as pd
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, Count, F
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
 from sangmyung_univ_auth import completed_courses
@@ -19,7 +21,7 @@ logger = logging.getLogger('smunity')
 
 def home(request):
     departments = Department.objects.filter(url__isnull=False)
-    dept_num, today = departments.count(), datetime.date.today()
+    dept_num, today = departments.count(), date.today()
     st, _ = Statistics.objects.get_or_create(date=today)
     visit_total = Statistics.objects.aggregate(Sum('visit_count'))['visit_count__sum']
     user_num = format(User.objects.all().count(), ',')
@@ -196,5 +198,35 @@ def team(request):
     return render(request,  'core/team.html')
 
 
+def data_members():
+    user_counts = (
+        User.objects.values('date_joined__date')
+        .annotate(count=Count('id'))
+        .order_by('date_joined__date')
+    )
+    return [
+        [entry['date_joined__date'].strftime('%Y-%m-%d'), cumulative_count]
+        for entry, cumulative_count in zip(
+            user_counts, accumulate(entry['count'] for entry in user_counts)
+        )
+    ]
+
+
+def data_visitors():
+    stats = Statistics.objects.order_by('-id')[:7].values('date', 'visit_count')
+    return [
+        [datetime.strptime(stat['date'], '%Y-%m-%d').strftime('%m.%d'),
+         stat['visit_count'],
+         stat['visit_count']]
+        for stat in stats
+    ][::-1]
+
+
 def statistics(request):
-    return render(request,  'core/statistics.html')
+    context = {
+        "data_members": data_members(),
+        "data_visitors": data_visitors(),
+        "user_total": format(User.objects.all().count(), ','),
+        "visit_total": format(Statistics.objects.aggregate(Sum('visit_count'))['visit_count__sum'], ',')
+    }
+    return render(request,  'core/statistics.html', context)
