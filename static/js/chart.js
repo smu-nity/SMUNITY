@@ -22,6 +22,9 @@ const options = {
     vAxis: {
         minValue: 0
     },
+    hAxis: {
+        format: 'MMM yyyy',
+    },
     width: '100%',
     height: 400,
 };
